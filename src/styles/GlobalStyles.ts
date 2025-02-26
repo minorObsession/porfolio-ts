@@ -1,4 +1,5 @@
 import styled, { createGlobalStyle, css } from "styled-components";
+import { breakpoints } from "./breakpoints";
 
 const GlobalStyles = createGlobalStyle`
 
@@ -21,6 +22,12 @@ const GlobalStyles = createGlobalStyle`
   --border-radius-sm: 5px;
   --border-radius-md: 7px;
   --border-radius-lg: 9px;
+  --border-radius-xl: 12px;
+  --border-radius-2xl: 18px;
+  --border-radius-pill: 42%;
+
+
+  --box-shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.1);
 
 
 }
@@ -93,6 +100,77 @@ export const darkTheme = {
   text: "#F5F5F5",
   background: "#000000",
 };
+
+export const OverlayImageBox = styled.div<{
+  $isDarkMode: boolean;
+  $screenWidth: number;
+}>`
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+  min-width: 50%;
+  border-radius: var(--border-radius-2xl);
+
+  font-weight: 700;
+  background-color: ${({ $isDarkMode }) =>
+    $isDarkMode ? darkTheme.background : lightTheme.background};
+  color: ${({ $isDarkMode }) =>
+    $isDarkMode ? darkTheme.text : lightTheme.text};
+
+  & span {
+    flex-grow: 1;
+    justify-self: center;
+  }
+
+  ${({ $screenWidth }) =>
+    $screenWidth !== undefined &&
+    $screenWidth <= breakpoints.mobileLargeBreakpoint
+      ? css`
+          padding: 0.5rem 1rem;
+
+          font-size: 1rem;
+          letter-spacing: 0.8px;
+        `
+      : css`
+          padding: 1rem 1.5rem;
+
+          font-size: 1.6rem;
+          letter-spacing: 0.8px;
+        `}
+`;
+
+export const Tooltip = styled.span<{
+  $isDarkMode: boolean;
+  $screenWidth: number;
+}>`
+  position: absolute;
+
+  padding: 0.3rem 0.6rem;
+  font-size: 1rem;
+  white-space: nowrap;
+  border-radius: var(--border-radius-xl);
+  box-shadow: var(--box-shadow-sm);
+
+  background-color: ${({ $isDarkMode }) =>
+    $isDarkMode ? darkTheme.background : lightTheme.background};
+  color: ${({ $isDarkMode }) =>
+    $isDarkMode ? darkTheme.text : lightTheme.text};
+
+  ${({ $screenWidth }) =>
+    $screenWidth <= breakpoints.mobileLargeBreakpoint
+      ? css`
+          padding: 0.3rem;
+          top: -2.7rem;
+          left: -1.5rem;
+        `
+      : css`
+          padding: 1rem;
+          top: -5rem;
+          left: -3rem;
+        `}
+`;
 
 export default GlobalStyles;
 

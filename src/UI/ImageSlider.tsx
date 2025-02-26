@@ -75,7 +75,7 @@ function ImageSlider({ images }: ImagesType) {
   return (
     <SlideContainer
       onClick={() => setIsCardHovered(true)}
-      onMouseLeave={() => setIsCardHovered(false)}
+      // onMouseLeave={() => setIsCardHovered(false)}
     >
       <SliderButton
         onClick={prevSlide}
