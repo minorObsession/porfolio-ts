@@ -8,8 +8,6 @@ import { ScreenWidthType } from "../types/types";
 import { breakpoints } from "../styles/breakpoints";
 
 const StyledSidebar = styled.aside<ScreenWidthType>`
-  justify-self: center;
-  align-self: flex-end;
   font-size: 1.5rem;
   padding: 1rem;
 
@@ -25,12 +23,13 @@ const StyledSidebar = styled.aside<ScreenWidthType>`
       grid-row: 1;
       align-self: center;
       grid-column: 1/2;
-      max-width: 2rem;
+      max-width: 5rem;
       flex-direction: column;
     `}
 `;
 
 const P = styled.p<ScreenWidthType>`
+  pointer-events: none;
   white-space: nowrap;
 
   ${(props) =>
@@ -41,12 +40,12 @@ const P = styled.p<ScreenWidthType>`
     `}
 `;
 
+const openLink = (url: string) => {
+  window.open(url, "_blank", "noopener,noreferrer");
+};
+
 function Sidebar() {
   const screenWidth = useScreenWidthRem();
-
-  const openLink = (url: string) => {
-    window.open(url, "_blank", "noopener,noreferrer");
-  };
 
   return (
     <StyledSidebar $screenWidth={screenWidth}>

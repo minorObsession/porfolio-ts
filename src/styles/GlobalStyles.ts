@@ -1,23 +1,8 @@
 import styled, { createGlobalStyle, css } from "styled-components";
 
-export const lightTheme = {
-  text: "#1A1A1A",
-  background: "#FFFFFF",
-};
-
-export const darkTheme = {
-  text: "#F5F5F5",
-  background: "#000000",
-};
-
 const GlobalStyles = createGlobalStyle`
 
 :root {
-  --color-text-light: #1A1A1A;
-  --color-text-dark: #F5F5F5;
-  --color-background-light: #FFFFFF ;
-  --color-background-dark: #000000;
-
 
     /* Gray */
   --color-gray-0: #fff;
@@ -53,7 +38,7 @@ html {
   font-size: 62.5%;
 }
 
-body {
+body, #root{
   
   color: ${(props) => props.theme.text};
   background-color: ${(props) => props.theme.background};
@@ -65,6 +50,12 @@ body {
   transition: all 0.3s ease-in-out;
 
 }
+
+section {
+  padding: 1.5rem;
+
+}
+
 /* Hide scrollbar */
 ::-webkit-scrollbar {
   width: 0;
@@ -85,6 +76,16 @@ export const Heading = styled.h1`
       font-size: 3rem;
     `}
 `;
+
+export const lightTheme = {
+  text: "#1A1A1A",
+  background: "#FFFFFF",
+};
+
+export const darkTheme = {
+  text: "#F5F5F5",
+  background: "#000000",
+};
 
 export default GlobalStyles;
 
