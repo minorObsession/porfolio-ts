@@ -76,14 +76,15 @@ const StyledProjectsPage = styled.section<ScreenWidthType>`
 
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 3rem;
 
   ${(props) =>
     props.$screenWidth >= breakpoints.betweenMobAndTabBreakpoint &&
     css`
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 2rem;
+      /* gap: 4rem; */
+      /* padding: 4rem; */
     `};
 `;
 

@@ -56,6 +56,13 @@ section {
 
 }
 
+@media (min-width: 1024px) {
+  section {
+    padding: 1.5rem 3rem; /* Increase padding for large screens */
+  }
+}
+
+
 /* Hide scrollbar */
 ::-webkit-scrollbar {
   width: 0;

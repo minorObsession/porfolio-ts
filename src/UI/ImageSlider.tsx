@@ -50,7 +50,8 @@ const SlideImage = styled.img<SlideImageProps>`
   object-fit: cover;
   transition: opacity 0.5s ease;
 
-  filter: blur(${({ $isCardHovered }) => ($isCardHovered ? "0" : "1.5rem")});
+  filter: blur(${({ $isCardHovered }) => ($isCardHovered ? "0" : "1rem")})
+    grayscale(${({ $isCardHovered }) => ($isCardHovered ? "0" : "80%")});
   transition: filter 0.4s ease-in-out, opacity 0.4s ease-in-out,
     visibility 0s linear
       ${({ $isCardHovered }) => ($isCardHovered ? "0s" : "0.3s")};
@@ -60,6 +61,9 @@ const SlideContainer = styled.article`
   position: relative;
   overflow: hidden;
   height: 100%;
+  width: 100%;
+  min-height: 100%;
+
   border-radius: var(--border-radius-md);
   transition: all 0.8s ease-in-out;
 `;
@@ -71,7 +75,7 @@ function ImageSlider({ images }: ImagesType) {
   return (
     <SlideContainer
       onClick={() => setIsCardHovered(true)}
-      // onMouseLeave={() => setIsCardHovered(false)}
+      onMouseLeave={() => setIsCardHovered(false)}
     >
       <SliderButton
         onClick={prevSlide}

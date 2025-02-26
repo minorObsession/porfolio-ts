@@ -20,7 +20,7 @@ const StyledLandingPage = styled.section<ScreenWidthType>`
   ${(props) =>
     props.$screenWidth > breakpoints.tabletBreakpoint &&
     css`
-      grid-template-columns: 0.1fr 1fr 1fr;
+      grid-template-columns: 0.1fr 1fr 1fr 0.1fr 1fr 1fr;
       grid-template-rows: 1fr;
     `}
 `;
@@ -35,7 +35,7 @@ const PhotoBox = styled.article<ScreenWidthType>`
     css`
       width: 100%;
       grid-row: span 2;
-      grid-column: 3/4;
+      grid-column: 4 / 7;
     `}
 `;
 
@@ -48,7 +48,7 @@ const HeadingBox = styled.article<ScreenWidthType>`
     props.$screenWidth > breakpoints.tabletBreakpoint &&
     css`
       grid-row: 1 / span 2;
-      grid-column: 2/3;
+      grid-column: 2 / 4;
       width: 100%;
     `}
 `;
