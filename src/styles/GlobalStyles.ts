@@ -46,7 +46,6 @@ html {
 }
 
 body, #root{
-  
   color: ${(props) => props.theme.text};
   background-color: ${(props) => props.theme.background};
   
@@ -57,14 +56,21 @@ body, #root{
   transition: all 0.3s ease-in-out;
 
 }
-
 section {
+margin-bottom: 3rem;
+}
+
+section, footer{
   padding: 1.5rem;
 
 }
 
 @media (min-width: 1024px) {
-  section {
+section {
+margin-bottom: 5rem;
+}
+
+  section,footer {
     padding: 1.5rem 3rem; /* Increase padding for large screens */
   }
 }
@@ -78,17 +84,28 @@ section {
 }
 `;
 
-export const Heading = styled.h1`
+export const Heading = styled.h1<{ $screenWidth?: number; children: string }>`
+  text-align: center;
+
   ${(props) =>
     props.as === "h1" &&
     css`
       font-size: 4rem;
-      text-align: center;
     `}
   ${(props) =>
     props.as === "h2" &&
     css`
       font-size: 3rem;
+    `}
+  ${(props) =>
+    props.as === "h3" &&
+    css`
+      font-size: 2rem;
+    `}
+  ${(props) =>
+    props.as === "h4" &&
+    css`
+      font-size: 1rem;
     `}
 `;
 

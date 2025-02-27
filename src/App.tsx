@@ -6,11 +6,14 @@ import WebSkills from "./UI/WebSkills";
 import Projects from "./UI/Projects";
 import { useDarkMode } from "./contexts/DarkModeContext";
 import { useKeyPress } from "./hooks/useKeyPress";
+import ContactMe from "./UI/ContactMe";
+import { useScreenWidthRem } from "./hooks/useScreenWidthRem";
 
 const StyledApp = styled.div``;
 
 function App() {
   const { isDarkMode, setIsDarkMode } = useDarkMode();
+  const screenWidth = useScreenWidthRem();
 
   useKeyPress("KeyD", () => setIsDarkMode((s) => !s));
 
@@ -23,9 +26,10 @@ function App() {
         <Projects />
         {/* // ! skills section */}
         <WebSkills isDarkMode={isDarkMode} />
-        {/* // ! contact-me section */}
-
+        {/* // ! contact-me section - Footer */}
+        <ContactMe isDarkMode={isDarkMode} screenWidth={screenWidth} />
         {/* // ! footer */}
+        {/* <Footer /> */}
       </StyledApp>
     </ThemeProvider>
   );

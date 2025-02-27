@@ -5,8 +5,6 @@ import { Heading } from "../styles/GlobalStyles";
 import TechIcons from "./TechIcons";
 
 const StyledWebSkills = styled.section<{ $screenWidth: number }>`
-  background-color: pink;
-
   display: flex;
   flex-direction: column;
   gap: 1rem;
