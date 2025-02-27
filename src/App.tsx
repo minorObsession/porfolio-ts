@@ -10,7 +10,10 @@ import ContactMe from "./UI/ContactMe";
 import { useScreenWidthRem } from "./hooks/useScreenWidthRem";
 
 // * TOOO:
+// ! figure out how to put isDarkMode into a css variable so i'm not passing it around like a mad man
 // invert gitHub icon colors
+// invert arrow icon colors
+// hovering tech icons adjust
 
 const StyledApp = styled.div``;
 

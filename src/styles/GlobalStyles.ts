@@ -57,6 +57,7 @@ html {
 }
 
 body, #root{
+  will-change: background-color, color;
 
   color: ${(props) => props.theme.text};
   background-color: ${(props) => props.theme.background};
@@ -66,7 +67,7 @@ body, #root{
   min-width: 100vw;
   overflow-x: hidden;
 
-  transition: all 0.7s ease-in-out;
+  transition: all 0.3s ease-in-out;
 
 }
 
@@ -157,15 +158,18 @@ export const OverlayImageBox = styled.div<{
       letter-spacing: 0.8px;
     `}
 
-  background-color: ${({ $isDarkMode }) =>
-    $isDarkMode ? darkTheme.background : lightTheme.background};
-  color: ${({ $isDarkMode }) =>
-    $isDarkMode ? darkTheme.text : lightTheme.text};
+  ${({ theme }) =>
+    theme &&
+    css`
+      background-color: ${theme.background};
+      color: ${theme.text};
+    `}
 `;
 
 export const Tooltip = styled.span<{
   $isDarkMode: boolean;
   $screenWidth: number;
+  $isHoveringTechIcons?: boolean;
 }>`
   position: absolute;
 
@@ -175,10 +179,19 @@ export const Tooltip = styled.span<{
   border-radius: var(--border-radius-xl);
   box-shadow: var(--box-shadow-sm);
 
-  background-color: ${({ $isDarkMode }) =>
-    $isDarkMode ? darkTheme.background : lightTheme.background};
-  color: ${({ $isDarkMode }) =>
-    $isDarkMode ? darkTheme.text : lightTheme.text};
+  ${({ theme }) =>
+    theme &&
+    css`
+      background-color: ${theme.background};
+      color: ${theme.text};
+    `}
+
+  ${({ theme, $isHoveringTechIcons }) =>
+    $isHoveringTechIcons &&
+    css`
+      background-color: ${theme.text};
+      color: ${theme.background};
+    `}
 
   ${({ $screenWidth }) =>
     $screenWidth <= breakpoints.mobileLargeBreakpoint

@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { darkTheme, Heading, lightTheme } from "../styles/GlobalStyles";
+import { Heading } from "../styles/GlobalStyles";
 import { breakpoints } from "../styles/breakpoints";
 
 type ContactMeProps = {
@@ -13,8 +13,6 @@ const StyledContactMe = styled.footer<{
 }>`
   /* height: 20rem; */
 
-  background-color: ${({ $isDarkMode }) =>
-    $isDarkMode ? darkTheme.background : lightTheme.background};
   /* position: fixed; */
   bottom: 0;
 
@@ -32,6 +30,9 @@ const StyledContactMe = styled.footer<{
     css`
       flex-direction: row;
     `}
+
+  ${({ $isDarkMode }) =>
+    $isDarkMode ? css`darkTheme.background` : css`lightTheme.background`}
 `;
 
 const ContactForm = styled.form<{ $screenWidth: number }>`

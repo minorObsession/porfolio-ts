@@ -51,17 +51,14 @@ function TechIcons({ screenWidth, isDarkMode }: TechIconsProps) {
           {/* // ! Tooltip */}
 
           {hoveredIcon === iconObject.name && (
-            <StyledTooltip $screenWidth={screenWidth} $isDarkMode={isDarkMode}>
+            <StyledTooltip
+              $isHoveringTechIcons={true}
+              $screenWidth={screenWidth}
+              $isDarkMode={isDarkMode}
+            >
               {iconObject.name}
             </StyledTooltip>
           )}
-
-          {/* <TechIcon
-            key={iconObject}
-            tech={iconObject}
-            onHover={setHoveredIcon}
-            isHovered={hoveredIcon === iconObject}
-          /> */}
         </IconWrapper>
       ))}
     </IconsContainer>
