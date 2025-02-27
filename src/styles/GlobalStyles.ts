@@ -147,10 +147,10 @@ export const OverlayImageBox = styled.div<{
   border-radius: var(--border-radius-2xl);
 
   padding: 1rem 1.5rem;
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   letter-spacing: 1px;
 
-  font-weight: 700;
+  font-weight: 800;
 
   & span {
     flex-grow: 1;
@@ -162,15 +162,15 @@ export const OverlayImageBox = styled.div<{
     $screenWidth >= breakpoints.mobileLargeBreakpoint &&
     css`
       margin: 0.5rem auto;
-      padding: 0.6rem 1.2rem;
-      font-size: 1rem;
-      letter-spacing: 0.8px;
+      padding: 0.6rem 1.5rem;
+      /* font-size: 1rem; */
+      letter-spacing: 1.2px;
     `}
 
-  ${({ theme }) =>
+  ${({ theme, $isDarkMode }) =>
     theme &&
     css`
-      background-color: ${hexToRgba(theme.background, 0.5)};
+      background-color: ${hexToRgba(theme.background, $isDarkMode ? 0.5 : 0.7)};
       color: ${hexToRgba(theme.text)};
     `}
 `;
@@ -188,10 +188,10 @@ export const Tooltip = styled.span<{
   border-radius: var(--border-radius-xl);
   box-shadow: var(--box-shadow-sm);
 
-  ${({ theme }) =>
+  ${({ theme, $isDarkMode }) =>
     theme &&
     css`
-      background-color: ${hexToRgba(theme.background, 0.5)};
+      background-color: ${hexToRgba(theme.background, $isDarkMode ? 0.5 : 0.7)};
       color: ${hexToRgba(theme.text)};
     `}
 
@@ -217,12 +217,3 @@ export const Tooltip = styled.span<{
 `;
 
 export default GlobalStyles;
-
-// ! RESPONSIVE BREAKPOINTS
-// 320px (Mobile small) → 32rem
-// 480px (Mobile large) → 48rem
-// 768px (Tablet) → 76.8rem
-// 1024px (Tablet Landscape) → 102.4rem
-// 1280px (Small Desktop) → 128rem
-// 1440px (Desktop) → 144rem
-// 1920px (Large Desktop) → 192rem

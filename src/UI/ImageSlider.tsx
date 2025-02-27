@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useImageSlider } from "../hooks/useImageSlider";
 import { hexToRgba } from "../config/helpers";
+import { useDarkMode } from "../contexts/DarkModeContext";
 
 type ImagesType = {
   images: string[];
@@ -18,6 +19,7 @@ type SliderButtonProps = {
   $direction: "left" | "right";
   $isCardHovered: boolean;
   onClick: () => void;
+  $isDarkMode: boolean;
 };
 
 const SlideContainer = styled.div`
@@ -52,7 +54,8 @@ const SliderButton = styled.button<SliderButtonProps>`
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background-color: ${({ theme }) => hexToRgba(theme.background, 0.6)};
+  background-color: ${({ theme, $isDarkMode }) =>
+    hexToRgba(theme.background, $isDarkMode ? 0.5 : 0.7)};
   color: ${({ theme }) => hexToRgba(theme.text)};
   border: none;
   border-radius: 50%;
@@ -76,6 +79,7 @@ const SliderButton = styled.button<SliderButtonProps>`
 
 function ImageSlider({ images, isCardHovered }: ImagesType) {
   const { currImageIndex, nextSlide, prevSlide } = useImageSlider(images);
+  const { isDarkMode } = useDarkMode();
 
   return (
     <SlideContainer>
@@ -83,6 +87,7 @@ function ImageSlider({ images, isCardHovered }: ImagesType) {
         onClick={prevSlide}
         $isCardHovered={isCardHovered}
         $direction="left"
+        $isDarkMode={isDarkMode}
       >
         &larr;
       </SliderButton>
@@ -95,6 +100,7 @@ function ImageSlider({ images, isCardHovered }: ImagesType) {
         onClick={nextSlide}
         $isCardHovered={isCardHovered}
         $direction="right"
+        $isDarkMode={isDarkMode}
       >
         &rarr;
       </SliderButton>

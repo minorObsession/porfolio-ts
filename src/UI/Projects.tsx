@@ -3,6 +3,7 @@ import ProjectCard from "./ProjectCard";
 import { useScreenWidthRem } from "../hooks/useScreenWidthRem";
 import { ScreenWidthType } from "../types/types";
 import { breakpoints } from "../styles/breakpoints";
+import { Heading } from "../styles/GlobalStyles";
 
 const projects = [
   {
@@ -73,12 +74,13 @@ const projects = [
 const StyledProjectsPage = styled.section<ScreenWidthType>`
   display: flex;
   flex-direction: column;
-  gap: 3rem;
+  gap: 6rem;
 
   ${(props) =>
     props.$screenWidth >= breakpoints.betweenMobAndTabBreakpoint &&
     css`
       display: grid;
+      gap: 3rem;
       grid-template-columns: 1fr 1fr;
       grid-template-rows: 1fr 1fr;
       /* gap: 4rem; */
@@ -90,11 +92,14 @@ function Projects() {
   const screenWidth = useScreenWidthRem();
 
   return (
-    <StyledProjectsPage $screenWidth={screenWidth}>
-      {projects.map((project) => (
-        <ProjectCard project={project} key={project.title} />
-      ))}
-    </StyledProjectsPage>
+    <div style={{ marginTop: "6rem" }}>
+      <Heading as="h1">React projects</Heading>
+      <StyledProjectsPage $screenWidth={screenWidth}>
+        {projects.map((project) => (
+          <ProjectCard project={project} key={project.title} />
+        ))}
+      </StyledProjectsPage>
+    </div>
   );
 }
 

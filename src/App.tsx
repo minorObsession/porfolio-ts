@@ -10,10 +10,10 @@ import ContactMe from "./UI/ContactMe";
 import { useScreenWidthRem } from "./hooks/useScreenWidthRem";
 
 // * TOOO:
-// ! figure out how to put isDarkMode into a css variable so i'm not passing it around like a mad man
-// invert arrow icon colors
+//  figure out how to put isDarkMode into a css variable so i'm not passing it around like a mad man
 // hovering tech icons adjust
-// ! WILD OASIS DEPLOY LINK
+// ! little fix - large screen sidebar rotated a bit off
+// ! move hamburger menu icon and create the actual menu overlay
 
 const StyledApp = styled.div``;
 
