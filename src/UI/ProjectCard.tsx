@@ -32,7 +32,7 @@ const StyledProjectCard = styled.article<StyledProjectCard>`
   ${({ $screenWidth }) =>
     $screenWidth <= breakpoints.mobileLargeBreakpoint
       ? css`
-          max-height: 20rem;
+          max-height: 25rem;
           min-height: auto;
         `
       : css`

@@ -71,9 +71,6 @@ const projects = [
 ];
 
 const StyledProjectsPage = styled.section<ScreenWidthType>`
-  width: 100vw;
-  height: 100vh;
-
   display: flex;
   flex-direction: column;
   gap: 3rem;
@@ -83,6 +80,7 @@ const StyledProjectsPage = styled.section<ScreenWidthType>`
     css`
       display: grid;
       grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
       /* gap: 4rem; */
       /* padding: 4rem; */
     `};

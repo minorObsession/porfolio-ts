@@ -5,11 +5,14 @@ import LandingPage from "./UI/LandingPage";
 import WebSkills from "./UI/WebSkills";
 import Projects from "./UI/Projects";
 import { useDarkMode } from "./contexts/DarkModeContext";
+import { useKeyPress } from "./hooks/useKeyPress";
 
 const StyledApp = styled.div``;
 
 function App() {
-  const { isDarkMode } = useDarkMode();
+  const { isDarkMode, setIsDarkMode } = useDarkMode();
+
+  useKeyPress("KeyD", () => setIsDarkMode((s) => !s));
 
   return (
     <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
@@ -19,7 +22,7 @@ function App() {
         <LandingPage />
         <Projects />
         {/* // ! skills section */}
-        <WebSkills />
+        <WebSkills isDarkMode={isDarkMode} />
         {/* // ! contact-me section */}
 
         {/* // ! footer */}

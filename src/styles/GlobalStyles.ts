@@ -83,6 +83,7 @@ export const Heading = styled.h1`
     props.as === "h1" &&
     css`
       font-size: 4rem;
+      text-align: center;
     `}
   ${(props) =>
     props.as === "h2" &&
@@ -105,7 +106,7 @@ export const OverlayImageBox = styled.div<{
   $isDarkMode: boolean;
   $screenWidth: number;
 }>`
-  position: relative;
+  /* position: relative; */
   display: inline-flex;
   align-items: center;
   justify-content: space-between;
@@ -128,16 +129,15 @@ export const OverlayImageBox = styled.div<{
     $screenWidth !== undefined &&
     $screenWidth <= breakpoints.mobileLargeBreakpoint
       ? css`
-          padding: 0.5rem 1rem;
-
+          margin: 0.5rem auto;
+          padding: 0.6rem 1.2rem;
           font-size: 1rem;
           letter-spacing: 0.8px;
         `
       : css`
           padding: 1rem 1.5rem;
-
           font-size: 1.6rem;
-          letter-spacing: 0.8px;
+          letter-spacing: 1px;
         `}
 `;
 
@@ -161,8 +161,8 @@ export const Tooltip = styled.span<{
   ${({ $screenWidth }) =>
     $screenWidth <= breakpoints.mobileLargeBreakpoint
       ? css`
-          padding: 0.3rem;
-          top: -2.7rem;
+          padding: 0.5rem;
+          top: -3.2rem;
           left: -1.5rem;
         `
       : css`
