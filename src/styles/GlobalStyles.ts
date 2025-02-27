@@ -90,6 +90,14 @@ section {
   }
 }
 
+input:focus,
+textarea:focus,
+button:focus {
+  outline: 2px solid #3178c6;
+  border-color: #3178c6;
+  box-shadow: 0 0 4px rgba(49, 120, 198, 0.5);
+}
+
 
 /* Hide scrollbar */
 ::-webkit-scrollbar {
@@ -110,17 +118,17 @@ export const Heading = styled.h1<{ $screenWidth?: number; children: string }>`
   ${(props) =>
     props.as === "h2" &&
     css`
-      font-size: 3rem;
+      font-size: 3.5rem;
     `}
   ${(props) =>
     props.as === "h3" &&
     css`
-      font-size: 2rem;
+      font-size: 3rem;
     `}
   ${(props) =>
     props.as === "h4" &&
     css`
-      font-size: 1rem;
+      font-size: 1.5rem;
     `}
 `;
 

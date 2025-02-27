@@ -4,10 +4,11 @@ import styled, { css } from "styled-components";
 import { FaLinkedin } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
 import { FaFacebook } from "react-icons/fa";
-import { ScreenWidthType } from "../types/types";
 import { breakpoints } from "../styles/breakpoints";
 
-const StyledSidebar = styled.aside<ScreenWidthType>`
+type SidebarType = { $screenWidth: number; $rotated?: boolean };
+
+const StyledSidebar = styled.aside<SidebarType>`
   font-size: 1.5rem;
   padding: 1rem;
 
@@ -17,8 +18,9 @@ const StyledSidebar = styled.aside<ScreenWidthType>`
   align-items: center;
   gap: 1rem;
 
-  ${(props) =>
-    props.$screenWidth > breakpoints.tabletBreakpoint &&
+  ${({ $screenWidth, $rotated }) =>
+    $screenWidth > breakpoints.tabletBreakpoint &&
+    $rotated === true &&
     css`
       grid-row: 1;
       align-self: center;
@@ -28,14 +30,18 @@ const StyledSidebar = styled.aside<ScreenWidthType>`
       padding-left: 0rem;
       transform: translateX(-1.5rem);
     `}
+
+  ${({ $screenWidth, $rotated }) =>
+    $screenWidth > breakpoints.tabletBreakpoint && $rotated === false && css``}
 `;
 
-const P = styled.p<ScreenWidthType>`
+const P = styled.p<SidebarType>`
   pointer-events: none;
   white-space: nowrap;
 
   ${(props) =>
     props.$screenWidth > breakpoints.tabletBreakpoint &&
+    props.$rotated === true &&
     css`
       padding: 6rem;
       transform: rotate(-90deg);
@@ -46,13 +52,22 @@ const openLink = (url: string) => {
   window.open(url, "_blank", "noopener,noreferrer");
 };
 
-function Sidebar() {
+type SidebarProps = {
+  rotated?: boolean;
+};
+
+function Sidebar({ rotated = false }: SidebarProps) {
   const screenWidth = useScreenWidthRem();
 
   return (
-    <StyledSidebar $screenWidth={screenWidth}>
+    <StyledSidebar $screenWidth={screenWidth} $rotated={rotated}>
+      {screenWidth > breakpoints.tabletBreakpoint && !rotated && (
+        <P $screenWidth={screenWidth} $rotated={rotated} />
+      )}
       {screenWidth <= breakpoints.tabletBreakpoint && (
-        <P $screenWidth={screenWidth}>connect with me &rarr; </P>
+        <P $screenWidth={screenWidth} $rotated={rotated}>
+          connect with me &rarr;{" "}
+        </P>
       )}
       <FaLinkedin
         onClick={() => openLink("https://www.linkedin.com/in/bogdanterzic95/")}
@@ -68,8 +83,10 @@ function Sidebar() {
         onClick={() => openLink("https://www.facebook.com/terzinjoo")}
         style={{ cursor: "pointer" }}
       />
-      {screenWidth > breakpoints.tabletBreakpoint && (
-        <P $screenWidth={screenWidth}>connect with me &nbsp; &rarr; </P>
+      {screenWidth > breakpoints.tabletBreakpoint && rotated && (
+        <P $screenWidth={screenWidth} $rotated={rotated}>
+          connect with me &nbsp; &rarr;{" "}
+        </P>
       )}
     </StyledSidebar>
   );

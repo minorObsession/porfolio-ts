@@ -103,7 +103,7 @@ function LandingPage() {
         <Heading as="h1">I&apos;m a React developer</Heading>
         <Heading as="h2">I love crafting UIs </Heading>
       </HeadingBox>
-      <Sidebar />
+      <Sidebar rotated={true} />
     </StyledLandingPage>
   );
 }

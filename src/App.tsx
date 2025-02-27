@@ -14,6 +14,8 @@ import { useScreenWidthRem } from "./hooks/useScreenWidthRem";
 // invert gitHub icon colors
 // invert arrow icon colors
 // hovering tech icons adjust
+// ! padding in Landing page
+// ! increase padding in WebSkills
 
 const StyledApp = styled.div``;
 

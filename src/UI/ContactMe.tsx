@@ -1,6 +1,7 @@
 import styled, { css } from "styled-components";
 import { Heading } from "../styles/GlobalStyles";
 import { breakpoints } from "../styles/breakpoints";
+import Sidebar from "./Sidebar";
 
 type ContactMeProps = {
   isDarkMode: boolean;
@@ -11,74 +12,108 @@ const StyledContactMe = styled.footer<{
   $isDarkMode: boolean;
   $screenWidth: number;
 }>`
-  /* height: 20rem; */
-
-  /* position: fixed; */
   bottom: 0;
-
   width: 100%;
-
   display: flex;
-  flex-direction: column;
 
-  gap: 1.5rem;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
+  gap: 1.5rem;
 
   ${({ $screenWidth }) =>
     $screenWidth >= breakpoints.mobileLargeBreakpoint &&
     css`
       flex-direction: row;
+      align-items: stretch;
     `}
 
   ${({ $isDarkMode }) =>
     $isDarkMode ? css`darkTheme.background` : css`lightTheme.background`}
 `;
 
-const ContactForm = styled.form<{ $screenWidth: number }>`
-  display: grid;
-  gap: 2rem 0.5rem;
-  grid-template-columns: 0.7fr 1fr;
-  align-items: center;
-  justify-items: center;
+const HeadingAndSidebarBox = styled.div<{ $screenWidth: number }>`
+  flex-grow: 2.5;
+
+  display: flex;
   flex-direction: column;
-  gap: 1rem 0;
-
-  ${({ $screenWidth }) =>
-    $screenWidth >= breakpoints.mobileLargeBreakpoint && css``}
-`;
-
-const ContactMeHeading = styled(Heading)`
-  white-space: nowrap;
-  align-self: center;
+  align-items: center;
+  justify-content: space-between;
 
   ${({ $screenWidth }) =>
     $screenWidth !== undefined &&
     $screenWidth >= breakpoints.mobileLargeBreakpoint &&
     css`
-      justify-self: ${({ as }) => (as === "h4" ? "flex-end" : "center")};
-      align-self: ${({ as }) => (as === "h2" ? "flex-start" : "center")};
+      align-items: flex-end;
     `}
 `;
 
-const FormInput = styled.input<{ $messageInput?: boolean }>`
-  line-height: 2.5rem;
-  padding: 0 1rem;
+const ContactForm = styled.form<{ $screenWidth: number }>`
+  display: grid;
+  align-items: center;
+  grid-template-columns: 0.7fr 1fr;
+  grid-template-rows: auto auto auto; /* Ensure each row can adjust */
+  flex-grow: 1;
 
-  border-radius: var(--border-radius-xl);
+  padding: 1rem;
 
-  ${($messageInput) =>
-    $messageInput &&
+  /* flex-direction: column; */
+  gap: 1rem 0;
+
+  ${({ $screenWidth }) =>
+    $screenWidth >= breakpoints.mobileLargeBreakpoint &&
     css`
-      /* height: ; */
+      gap: 1.5rem 0.5rem;
+      padding: 0 2rem;
     `}
+`;
+
+const ContactMeHeading = styled(Heading)<{ $isMessage?: boolean }>`
+  white-space: nowrap;
+
+  ${({ $screenWidth }) =>
+    $screenWidth !== undefined &&
+    $screenWidth >= breakpoints.mobileLargeBreakpoint &&
+    css`
+      text-align: right;
+    `}
+
+  ${({ as }) =>
+    as === "h4" &&
+    css`
+      text-align: right;
+      margin-right: 1.5rem;
+    `}
+
+      ${({ $isMessage }) =>
+    $isMessage &&
+    css`
+      align-self: flex-start;
+      margin-top: 0.5rem;
+    `}
+`;
+
+const FormInput = styled.input`
+  line-height: 2em;
+  padding: 0 1rem;
+  text-align: start;
+
+  border-radius: var(--border-radius-md);
+`;
+
+const FormMessageInput = styled.textarea`
+  line-height: 3em;
+  padding: 0 1rem;
+  border-radius: var(--border-radius-md);
 `;
 
 function FormRow({ label }: { label: string }) {
   return (
     <>
-      <ContactMeHeading as="h4">{label}</ContactMeHeading>
-      <FormInput $messageInput={label === "Message"} />
+      <ContactMeHeading $isMessage={label === "Message"} as="h4">
+        {label}
+      </ContactMeHeading>
+      {label === "Message" ? <FormMessageInput /> : <FormInput />}
     </>
   );
 }
@@ -86,9 +121,12 @@ function FormRow({ label }: { label: string }) {
 function ContactMe({ isDarkMode, screenWidth }: ContactMeProps) {
   return (
     <StyledContactMe $screenWidth={screenWidth} $isDarkMode={isDarkMode}>
-      <ContactMeHeading $screenWidth={screenWidth} as="h2">
-        Get in touch
-      </ContactMeHeading>
+      <HeadingAndSidebarBox $screenWidth={screenWidth}>
+        <ContactMeHeading $screenWidth={screenWidth} as="h2">
+          Let's chat!
+        </ContactMeHeading>
+        <Sidebar />
+      </HeadingAndSidebarBox>
       <ContactForm $screenWidth={screenWidth}>
         <FormRow label="Name" />
         <FormRow label="Email" />
