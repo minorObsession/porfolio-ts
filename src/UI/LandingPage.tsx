@@ -2,7 +2,6 @@ import styled, { css } from "styled-components";
 import Sidebar from "./Sidebar";
 import { FaSun, FaMoon } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
-
 import { darkTheme, Heading, lightTheme } from "../styles/GlobalStyles";
 import { useScreenWidthRem } from "../hooks/useScreenWidthRem";
 import { ScreenWidthType } from "../types/types";
@@ -23,7 +22,8 @@ const StyledLandingPage = styled.section<ScreenWidthType>`
     css`
       grid-template-columns: 0.1fr 1fr 1fr 0.1fr 1fr 1fr;
       grid-template-rows: 1fr;
-      padding: 0.5rem 1.5rem;
+      /* padding: 0.5rem 1.5rem; */
+      padding: 0.8rem 1.5rem 3rem 1.5rem;
     `}
 `;
 
@@ -103,7 +103,7 @@ function LandingPage() {
         <Heading as="h1">I&apos;m a React developer</Heading>
         <Heading as="h2">I love crafting UIs </Heading>
       </HeadingBox>
-      <Sidebar rotated={true} />
+      <Sidebar rotated={screenWidth > breakpoints.tabletBreakpoint && true} />
     </StyledLandingPage>
   );
 }

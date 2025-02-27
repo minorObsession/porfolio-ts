@@ -11,11 +11,9 @@ import { useScreenWidthRem } from "./hooks/useScreenWidthRem";
 
 // * TOOO:
 // ! figure out how to put isDarkMode into a css variable so i'm not passing it around like a mad man
-// invert gitHub icon colors
 // invert arrow icon colors
 // hovering tech icons adjust
-// ! padding in Landing page
-// ! increase padding in WebSkills
+// ! WILD OASIS DEPLOY LINK
 
 const StyledApp = styled.div``;
 

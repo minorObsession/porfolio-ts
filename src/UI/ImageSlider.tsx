@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { useImageSlider } from "../hooks/useImageSlider";
+import { hexToRgba } from "../config/helpers";
 
 type ImagesType = {
   images: string[];
@@ -51,8 +52,8 @@ const SliderButton = styled.button<SliderButtonProps>`
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background-color: rgba(0, 0, 0, 0.5);
-  color: white;
+  background-color: ${({ theme }) => hexToRgba(theme.background, 0.6)};
+  color: ${({ theme }) => hexToRgba(theme.text)};
   border: none;
   border-radius: 50%;
   width: 4rem;

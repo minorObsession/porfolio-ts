@@ -75,7 +75,7 @@ function ProjectCard({ project }: ProjectCardProps) {
   const screenWidth = useScreenWidthRem();
   const { isDarkMode } = useDarkMode();
 
-  const [isCardHovered, setIsCardHovered] = useState(false);
+  const [isCardHovered, setIsCardHovered] = useState(true);
 
   return (
     <StyledProjectCard

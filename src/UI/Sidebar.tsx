@@ -54,40 +54,57 @@ const openLink = (url: string) => {
 
 type SidebarProps = {
   rotated?: boolean;
+  inFooter?: boolean;
 };
 
-function Sidebar({ rotated = false }: SidebarProps) {
-  const screenWidth = useScreenWidthRem();
+function Sidebar({ rotated = false, inFooter = false }: SidebarProps) {
+  const getPContent = () => {
+    if (screenWidth > breakpoints.tabletBreakpoint && !rotated)
+      return <P $screenWidth={screenWidth} $rotated={rotated} />;
+    if (screenWidth <= breakpoints.tabletBreakpoint && inFooter)
+      return (
+        <P $screenWidth={screenWidth} $rotated={rotated}>
+          connect &rarr;
+        </P>
+      );
+    if (screenWidth <= breakpoints.tabletBreakpoint && !inFooter)
+      return (
+        <P $screenWidth={screenWidth} $rotated={rotated}>
+          connect with me &rarr;
+        </P>
+      );
+    if (screenWidth > breakpoints.tabletBreakpoint && rotated)
+      return (
+        <P $screenWidth={screenWidth} $rotated={rotated}>
+          connect with me &nbsp; &rarr;
+        </P>
+      );
+    return null;
+  };
 
+  const screenWidth = useScreenWidthRem();
+  const pContent = getPContent();
+  console.log(pContent);
   return (
     <StyledSidebar $screenWidth={screenWidth} $rotated={rotated}>
-      {screenWidth > breakpoints.tabletBreakpoint && !rotated && (
-        <P $screenWidth={screenWidth} $rotated={rotated} />
-      )}
-      {screenWidth <= breakpoints.tabletBreakpoint && (
-        <P $screenWidth={screenWidth} $rotated={rotated}>
-          connect with me &rarr;{" "}
-        </P>
-      )}
-      <FaLinkedin
-        onClick={() => openLink("https://www.linkedin.com/in/bogdanterzic95/")}
-        style={{ cursor: "pointer" }}
-      />
+      {!pContent?.props.$rotated && pContent}
 
-      <FaGithub
-        onClick={() => openLink("https://github.com/minorObsession")}
-        style={{ cursor: "pointer" }}
-      />
+      {[
+        {
+          icon: FaLinkedin,
+          link: "https://www.linkedin.com/in/bogdanterzic95/",
+        },
+        { icon: FaGithub, link: "https://github.com/minorObsession" },
+        { icon: FaFacebook, link: "https://www.facebook.com/terzinjoo" },
+      ].map(({ icon: Icon, link }, index) => (
+        <Icon
+          key={index}
+          onClick={() => openLink(link)}
+          style={{ cursor: "pointer" }}
+        />
+      ))}
 
-      <FaFacebook
-        onClick={() => openLink("https://www.facebook.com/terzinjoo")}
-        style={{ cursor: "pointer" }}
-      />
-      {screenWidth > breakpoints.tabletBreakpoint && rotated && (
-        <P $screenWidth={screenWidth} $rotated={rotated}>
-          connect with me &nbsp; &rarr;{" "}
-        </P>
-      )}
+      {pContent?.props.$rotated && pContent}
     </StyledSidebar>
   );
 }

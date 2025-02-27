@@ -1,5 +1,6 @@
 import styled, { createGlobalStyle, css } from "styled-components";
 import { breakpoints } from "./breakpoints";
+import { hexToRgba } from "../config/helpers";
 
 export const lightTheme = {
   text: "#1A1A1A",
@@ -169,8 +170,8 @@ export const OverlayImageBox = styled.div<{
   ${({ theme }) =>
     theme &&
     css`
-      background-color: ${theme.background};
-      color: ${theme.text};
+      background-color: ${hexToRgba(theme.background, 0.5)};
+      color: ${hexToRgba(theme.text)};
     `}
 `;
 
@@ -190,8 +191,8 @@ export const Tooltip = styled.span<{
   ${({ theme }) =>
     theme &&
     css`
-      background-color: ${theme.background};
-      color: ${theme.text};
+      background-color: ${hexToRgba(theme.background, 0.5)};
+      color: ${hexToRgba(theme.text)};
     `}
 
   ${({ theme, $isHoveringTechIcons }) =>

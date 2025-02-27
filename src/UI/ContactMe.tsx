@@ -22,7 +22,7 @@ const StyledContactMe = styled.footer<{
   gap: 1.5rem;
 
   ${({ $screenWidth }) =>
-    $screenWidth >= breakpoints.mobileLargeBreakpoint &&
+    $screenWidth >= breakpoints.betweenMobAndTabBreakpoint &&
     css`
       flex-direction: row;
       align-items: stretch;
@@ -33,7 +33,7 @@ const StyledContactMe = styled.footer<{
 `;
 
 const HeadingAndSidebarBox = styled.div<{ $screenWidth: number }>`
-  flex-grow: 2.5;
+  flex-grow: 1;
 
   display: flex;
   flex-direction: column;
@@ -52,7 +52,7 @@ const ContactForm = styled.form<{ $screenWidth: number }>`
   display: grid;
   align-items: center;
   grid-template-columns: 0.7fr 1fr;
-  grid-template-rows: auto auto auto; /* Ensure each row can adjust */
+
   flex-grow: 1;
 
   padding: 1rem;
@@ -61,7 +61,20 @@ const ContactForm = styled.form<{ $screenWidth: number }>`
   gap: 1rem 0;
 
   ${({ $screenWidth }) =>
-    $screenWidth >= breakpoints.mobileLargeBreakpoint &&
+    $screenWidth > breakpoints.smallMobileBreakpoint &&
+    $screenWidth < breakpoints.mobileLargeBreakpoint &&
+    css`
+      grid-template-columns: 1.3fr 2.7fr;
+    `}
+  ${({ $screenWidth }) =>
+    $screenWidth > breakpoints.mobileLargeBreakpoint &&
+    $screenWidth < breakpoints.betweenMobAndTabBreakpoint &&
+    css`
+      grid-template-columns: 1fr 2.7fr;
+    `}
+
+  ${({ $screenWidth }) =>
+    $screenWidth > breakpoints.mobileLargeBreakpoint &&
     css`
       gap: 1.5rem 0.5rem;
       padding: 0 2rem;
@@ -119,13 +132,14 @@ function FormRow({ label }: { label: string }) {
 }
 
 function ContactMe({ isDarkMode, screenWidth }: ContactMeProps) {
+  console.log(screenWidth);
   return (
     <StyledContactMe $screenWidth={screenWidth} $isDarkMode={isDarkMode}>
       <HeadingAndSidebarBox $screenWidth={screenWidth}>
         <ContactMeHeading $screenWidth={screenWidth} as="h2">
           Let's chat!
         </ContactMeHeading>
-        <Sidebar />
+        <Sidebar inFooter={true} />
       </HeadingAndSidebarBox>
       <ContactForm $screenWidth={screenWidth}>
         <FormRow label="Name" />

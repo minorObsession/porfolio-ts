@@ -7,7 +7,7 @@ import TechIcons from "./TechIcons";
 const StyledWebSkills = styled.section<{ $screenWidth: number }>`
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 3rem;
 `;
 
 type WebSkillsProps = {

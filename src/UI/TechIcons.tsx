@@ -17,6 +17,8 @@ const IconsContainer = styled.div`
   flex-wrap: wrap;
   position: relative;
   flex-grow: 0;
+
+  padding: 0 2rem;
 `;
 
 const IconWrapper = styled.span<{ $isDarkMode: boolean }>`
@@ -47,7 +49,11 @@ function TechIcons({ screenWidth, isDarkMode }: TechIconsProps) {
           onMouseLeave={() => setHoveredIcon(null)}
           $isDarkMode={isDarkMode}
         >
-          <Icon icon={iconObject.icon} color={iconObject.color} />
+          <Icon
+            icon={iconObject.icon}
+            color={iconObject.color}
+            isIconGitHub={iconObject.name === "GitHub"}
+          />
           {/* // ! Tooltip */}
 
           {hoveredIcon === iconObject.name && (
