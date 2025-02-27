@@ -12,6 +12,7 @@ import { useDarkMode } from "../contexts/DarkModeContext";
 const StyledLandingPage = styled.section<ScreenWidthType>`
   width: 100vw;
   height: 100vh;
+  padding: 0.8rem 1.5rem;
 
   display: grid;
   grid-template-columns: 1fr;
@@ -22,6 +23,7 @@ const StyledLandingPage = styled.section<ScreenWidthType>`
     css`
       grid-template-columns: 0.1fr 1fr 1fr 0.1fr 1fr 1fr;
       grid-template-rows: 1fr;
+      padding: 0.5rem 1.5rem;
     `}
 `;
 
@@ -58,12 +60,12 @@ const UtilityDiv = styled.div<{ $isDarkMode: boolean }>`
   right: 0;
   top: 0;
   width: fit-content;
-  padding: 0.7rem 1.8rem;
+  padding: 1rem 1.8rem;
 
   display: flex;
-  gap: 1.5rem;
+  gap: 2rem;
 
-  border-radius: var(--border-radius-tiny);
+  /* border-radius: var(--border-radius-xl); */
 
   transition: all 0.3s ease-in-out;
 

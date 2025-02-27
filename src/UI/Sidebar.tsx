@@ -25,6 +25,8 @@ const StyledSidebar = styled.aside<ScreenWidthType>`
       grid-column: 1/2;
       max-width: 5rem;
       flex-direction: column;
+      padding-left: 0rem;
+      transform: translateX(-1.5rem);
     `}
 `;
 

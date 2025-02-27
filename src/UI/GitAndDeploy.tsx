@@ -45,7 +45,7 @@ const HoverIcon = ({
   screenWidth,
   size = 20,
 }: HoverIconProps) => {
-  const [isHovered, setIsHovered] = useState(true);
+  const [isHovered, setIsHovered] = useState(false);
 
   return (
     <a

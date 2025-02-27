@@ -1,9 +1,10 @@
 import styled from "styled-components";
 import { useImageSlider } from "../hooks/useImageSlider";
-import { useState } from "react";
 
 type ImagesType = {
   images: string[];
+  isCardHovered: boolean;
+  setIsCardHovered: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 type SlideImageProps = {
@@ -18,7 +19,7 @@ type SliderButtonProps = {
   onClick: () => void;
 };
 
-const SlideContainer = styled.article`
+const SlideContainer = styled.div`
   overflow: hidden;
 
   display: flex;
@@ -41,7 +42,7 @@ const SlideImage = styled.img<SlideImageProps>`
 
   filter: blur(${({ $isCardHovered }) => ($isCardHovered ? "0" : "1rem")})
     grayscale(${({ $isCardHovered }) => ($isCardHovered ? "0" : "80%")});
-  transition: filter 0.4s ease-in-out, opacity 0.4s ease-in-out,
+  transition: filter 0.7s ease-in-out, opacity 0.7s ease-in-out,
     visibility 0s linear
       ${({ $isCardHovered }) => ($isCardHovered ? "0s" : "0.3s")};
 `;
@@ -67,20 +68,16 @@ const SliderButton = styled.button<SliderButtonProps>`
     $direction === "left" ? "left: 1.5rem;" : "right: 1.5rem;"};
 
   filter: blur(${({ $isCardHovered }) => ($isCardHovered ? "0" : "1.5rem")});
-  transition: filter 0.4s ease-in-out, opacity 0.4s ease-in-out,
+  transition: filter 0.7s ease-in-out, opacity 0.7s ease-in-out,
     visibility 0s linear
-      ${({ $isCardHovered }) => ($isCardHovered ? "0s" : "0.3s")};
+      ${({ $isCardHovered }) => ($isCardHovered ? "0s" : "0.7s")};
 `;
 
-function ImageSlider({ images }: ImagesType) {
+function ImageSlider({ images, isCardHovered }: ImagesType) {
   const { currImageIndex, nextSlide, prevSlide } = useImageSlider(images);
-  const [isCardHovered, setIsCardHovered] = useState(true);
 
   return (
-    <SlideContainer
-      onClick={() => setIsCardHovered(true)}
-      // onMouseLeave={() => setIsCardHovered(false)}
-    >
+    <SlideContainer>
       <SliderButton
         onClick={prevSlide}
         $isCardHovered={isCardHovered}

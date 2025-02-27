@@ -9,6 +9,9 @@ import { useKeyPress } from "./hooks/useKeyPress";
 import ContactMe from "./UI/ContactMe";
 import { useScreenWidthRem } from "./hooks/useScreenWidthRem";
 
+// * TOOO:
+// invert gitHub icon colors
+
 const StyledApp = styled.div``;
 
 function App() {

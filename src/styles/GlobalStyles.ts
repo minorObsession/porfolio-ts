@@ -1,6 +1,16 @@
 import styled, { createGlobalStyle, css } from "styled-components";
 import { breakpoints } from "./breakpoints";
 
+export const lightTheme = {
+  text: "#1A1A1A",
+  background: "#FFFFFF",
+};
+
+export const darkTheme = {
+  text: "#F5F5F5",
+  background: "#000000",
+};
+
 const GlobalStyles = createGlobalStyle`
 
 :root {
@@ -27,6 +37,7 @@ const GlobalStyles = createGlobalStyle`
   --border-radius-pill: 42%;
 
 
+
   --box-shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.1);
 
 
@@ -46,32 +57,35 @@ html {
 }
 
 body, #root{
+
   color: ${(props) => props.theme.text};
   background-color: ${(props) => props.theme.background};
+  --border-b-1: 1px solid ${(props) => props.theme.text}; 
   
   min-height: 100vh;
   min-width: 100vw;
   overflow-x: hidden;
 
-  transition: all 0.3s ease-in-out;
+  transition: all 0.7s ease-in-out;
 
 }
+
 section {
-margin-bottom: 3rem;
+/* margin-bottom: 3rem; */
+border-bottom: var(--border-b-1)
 }
 
-section, footer{
-  padding: 1.5rem;
-
+section, footer {
+  padding: 3rem 1.5rem;
 }
+
 
 @media (min-width: 1024px) {
 section {
-margin-bottom: 5rem;
+/* margin-bottom: 5rem; */
 }
-
-  section,footer {
-    padding: 1.5rem 3rem; /* Increase padding for large screens */
+  section:not(:first-child),footer {
+    padding: 5.5rem 5rem; 
   }
 }
 
@@ -109,19 +123,10 @@ export const Heading = styled.h1<{ $screenWidth?: number; children: string }>`
     `}
 `;
 
-export const lightTheme = {
-  text: "#1A1A1A",
-  background: "#FFFFFF",
-};
-
-export const darkTheme = {
-  text: "#F5F5F5",
-  background: "#000000",
-};
-
 export const OverlayImageBox = styled.div<{
   $isDarkMode: boolean;
   $screenWidth: number;
+  $isCardHovered?: boolean;
 }>`
   /* position: relative; */
   display: inline-flex;
@@ -131,11 +136,11 @@ export const OverlayImageBox = styled.div<{
   min-width: 50%;
   border-radius: var(--border-radius-2xl);
 
+  padding: 1rem 1.5rem;
+  font-size: 1.6rem;
+  letter-spacing: 1px;
+
   font-weight: 700;
-  background-color: ${({ $isDarkMode }) =>
-    $isDarkMode ? darkTheme.background : lightTheme.background};
-  color: ${({ $isDarkMode }) =>
-    $isDarkMode ? darkTheme.text : lightTheme.text};
 
   & span {
     flex-grow: 1;
@@ -144,18 +149,18 @@ export const OverlayImageBox = styled.div<{
 
   ${({ $screenWidth }) =>
     $screenWidth !== undefined &&
-    $screenWidth <= breakpoints.mobileLargeBreakpoint
-      ? css`
-          margin: 0.5rem auto;
-          padding: 0.6rem 1.2rem;
-          font-size: 1rem;
-          letter-spacing: 0.8px;
-        `
-      : css`
-          padding: 1rem 1.5rem;
-          font-size: 1.6rem;
-          letter-spacing: 1px;
-        `}
+    $screenWidth >= breakpoints.mobileLargeBreakpoint &&
+    css`
+      margin: 0.5rem auto;
+      padding: 0.6rem 1.2rem;
+      font-size: 1rem;
+      letter-spacing: 0.8px;
+    `}
+
+  background-color: ${({ $isDarkMode }) =>
+    $isDarkMode ? darkTheme.background : lightTheme.background};
+  color: ${({ $isDarkMode }) =>
+    $isDarkMode ? darkTheme.text : lightTheme.text};
 `;
 
 export const Tooltip = styled.span<{
