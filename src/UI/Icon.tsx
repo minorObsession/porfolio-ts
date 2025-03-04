@@ -1,12 +1,6 @@
 import styled from "styled-components";
 
-type IconProps = {
-  icon: React.ElementType;
-  color: string;
-  isIconGitHub?: boolean;
-};
-
-const IconStyled = styled.span<{ $color: string; $isIconGitHub: boolean }>`
+const StyledIcon = styled.span<{ $color: string; $isIconGitHub: boolean }>`
   svg {
     fill: ${({ $color, $isIconGitHub, theme }) =>
       $isIconGitHub ? `${theme.text}` : $color};
@@ -15,11 +9,17 @@ const IconStyled = styled.span<{ $color: string; $isIconGitHub: boolean }>`
   }
 `;
 
+type IconProps = {
+  icon: React.ElementType;
+  color: string;
+  isIconGitHub?: boolean;
+};
+
 function Icon({ icon: Icon, color, isIconGitHub = false }: IconProps) {
   return (
-    <IconStyled $color={color} $isIconGitHub={isIconGitHub}>
+    <StyledIcon $color={color} $isIconGitHub={isIconGitHub}>
       <Icon />
-    </IconStyled>
+    </StyledIcon>
   );
 }
 

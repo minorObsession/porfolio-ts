@@ -29,7 +29,13 @@ const SectionsList = styled.ul`
   margin-left: 20%;
 `;
 
-const sectionsNames = ["Projects", "Web Skills", "Contact me", "Experience"];
+const sectionsNames = [
+  "Projects",
+  "Web Skills",
+  "Contact me",
+  "Experience",
+  "Certificates",
+];
 
 type DropdownMenuProps = {
   isDropdownOpen: boolean;

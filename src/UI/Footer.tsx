@@ -13,7 +13,6 @@ function Footer() {
           href="https://linkedin.com/in/yourprofile"
           target="_blank"
           rel="noopener noreferrer"
-          className="mx-2"
         >
           <img
             src="/icons/linkedin.png"
@@ -25,13 +24,8 @@ function Footer() {
           href="https://github.com/yourprofile"
           target="_blank"
           rel="noopener noreferrer"
-          className="mx-2"
         >
-          <img
-            src="/icons/github.png"
-            alt="GitHub"
-            className="w-6 h-6 inline"
-          />
+          <img src="/icons/github.png" alt="GitHub" />
         </a>
       </div>
     </StyledFooter>

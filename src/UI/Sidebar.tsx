@@ -28,7 +28,7 @@ const StyledSidebar = styled.aside<SidebarType>`
       max-width: 5rem;
       flex-direction: column;
       padding-left: 0rem;
-      transform: translateX(-1.5rem);
+      /* transform: translateX(-1rem); */
     `}
 
   ${({ $screenWidth, $rotated }) =>
