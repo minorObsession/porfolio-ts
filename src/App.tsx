@@ -11,6 +11,7 @@ import ContactMe from "./UI/ContactMe";
 import { useScreenWidthRem } from "./hooks/useScreenWidthRem";
 
 import Experience from "./UI/Experience";
+import Certificates from "./UI/Certificates";
 
 // prettier-ignore
 // * TOOO:
@@ -39,6 +40,7 @@ function App() {
         <Projects id="projects" />
         {/* // ! skills section */}
         <Experience screenWidth={screenWidth} id="experience" />
+        <Certificates screenWidth={screenWidth} id="certificates" />
         <WebSkills isDarkMode={isDarkMode} id="web-skills" />
         {/* // ! contact-me section - Footer */}
         <ContactMe

@@ -76,6 +76,9 @@ const StyledProjectsPage = styled.section<ScreenWidthType>`
   flex-direction: column;
   gap: 6rem;
 
+  /* // ! MATCH SIDE PADDING FROM LANDING PAGE*/
+  padding: 3rem 1.5rem !important;
+
   ${(props) =>
     props.$screenWidth >= breakpoints.betweenMobAndTabBreakpoint &&
     css`
@@ -83,6 +86,8 @@ const StyledProjectsPage = styled.section<ScreenWidthType>`
       /* gap: 6rem; */
       grid-template-columns: 1fr 1fr;
       grid-template-rows: auto 1fr 1fr;
+      /* padding: 5.5rem 1.5rem !important; */
+
       /* gap: 4rem; */
       /* padding: 4rem; */
     `};
