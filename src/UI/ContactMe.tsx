@@ -18,14 +18,15 @@ const StyledContactMe = styled.footer<{
 
   display: flex;
   flex-direction: column;
+  /* justify-content: center; */
   align-items: center;
-  justify-content: space-around;
   gap: 1.5rem;
 
   ${({ $screenWidth }) =>
     $screenWidth >= breakpoints.betweenMobAndTabBreakpoint &&
     css`
       flex-direction: row;
+      justify-content: space-around;
       align-items: stretch;
     `}
 
@@ -52,7 +53,7 @@ const HeadingAndSidebarBox = styled.div<{ $screenWidth: number }>`
 const ContactForm = styled.form<{ $screenWidth: number }>`
   display: grid;
   align-items: center;
-  grid-template-columns: 0.7fr 1fr;
+  grid-template-columns: 0.7fr 1.4fr;
 
   flex-grow: 1;
 
@@ -65,20 +66,21 @@ const ContactForm = styled.form<{ $screenWidth: number }>`
     $screenWidth > breakpoints.smallMobileBreakpoint &&
     $screenWidth < breakpoints.mobileLargeBreakpoint &&
     css`
-      grid-template-columns: 1.3fr 2.7fr;
+      grid-template-columns: 1fr 2.7fr;
     `}
   ${({ $screenWidth }) =>
     $screenWidth > breakpoints.mobileLargeBreakpoint &&
     $screenWidth < breakpoints.betweenMobAndTabBreakpoint &&
     css`
-      grid-template-columns: 1fr 2.7fr;
+      /* grid-template-columns: 1fr 2.7fr; */
     `}
 
   ${({ $screenWidth }) =>
     $screenWidth > breakpoints.mobileLargeBreakpoint &&
     css`
+      /* justify-self: center !importants; */
       gap: 1.5rem 0.5rem;
-      padding: 0 2rem;
+      padding: 0 5rem;
     `}
 `;
 

@@ -24,17 +24,26 @@ const StyledDropdownMenu = styled.section`
 
 const SectionsList = styled.ul`
   list-style-type: circle;
+
   display: flex;
   flex-direction: column;
+
   margin-left: 20%;
+`;
+
+const SectionListItem = styled.li`
+  &:hover {
+    cursor: pointer;
+    color: red;
+  }
 `;
 
 const sectionsNames = [
   "Projects",
   "Web Skills",
-  "Contact me",
   "Experience",
   "Certificates",
+  "Contact me",
 ];
 
 type DropdownMenuProps = {
@@ -47,6 +56,7 @@ type DropdownMenuProps = {
 // height transitions
 // fix utility div dark mode switch off
 //
+
 const scrollToSection = (sectionId: string) => {
   const section = document.getElementById(sectionId);
   if (!section) return;
@@ -83,12 +93,12 @@ DropdownMenuProps) {
       {/* <Sidebar rotated={true} inDropdown={true} /> */}
       <SectionsList>
         {sectionsNames.map((sectionName) => (
-          <li
+          <SectionListItem
             key={sectionName}
             onClick={() => handleScrollToSection(sectionName)}
           >
             {sectionName}
-          </li>
+          </SectionListItem>
         ))}
       </SectionsList>
     </StyledDropdownMenu>
