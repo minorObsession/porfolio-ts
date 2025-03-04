@@ -4,15 +4,22 @@ import { ThemeProvider } from "styled-components";
 import LandingPage from "./UI/LandingPage";
 import WebSkills from "./UI/WebSkills";
 import Projects from "./UI/Projects";
+
 import { useDarkMode } from "./contexts/DarkModeContext";
 import { useKeyPress } from "./hooks/useKeyPress";
 import ContactMe from "./UI/ContactMe";
 import { useScreenWidthRem } from "./hooks/useScreenWidthRem";
 
+import Experience from "./UI/Experience";
+
+// prettier-ignore
 // * TOOO:
 //  figure out how to put isDarkMode into a css variable so i'm not passing it around like a mad man
 // hovering tech icons adjust
-// ! little fix - large screen sidebar rotated a bit off
+// !  large screen:
+//  sidebar rotated a bit off
+//  social icons too small
+// footer too small
 // ! move hamburger menu icon and create the actual menu overlay
 
 const StyledApp = styled.div``;
@@ -29,13 +36,16 @@ function App() {
       <StyledApp>
         {/* // ! landing page */}
         <LandingPage />
-        <Projects />
+        <Projects id="projects" />
         {/* // ! skills section */}
-        <WebSkills isDarkMode={isDarkMode} />
+        <Experience screenWidth={screenWidth} id="experience" />
+        <WebSkills isDarkMode={isDarkMode} id="web-skills" />
         {/* // ! contact-me section - Footer */}
-        <ContactMe isDarkMode={isDarkMode} screenWidth={screenWidth} />
-        {/* // ! footer */}
-        {/* <Footer /> */}
+        <ContactMe
+          isDarkMode={isDarkMode}
+          screenWidth={screenWidth}
+          id="contact-me"
+        />
       </StyledApp>
     </ThemeProvider>
   );

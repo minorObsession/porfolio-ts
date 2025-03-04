@@ -6,6 +6,7 @@ import Sidebar from "./Sidebar";
 type ContactMeProps = {
   isDarkMode: boolean;
   screenWidth: number;
+  id: string;
 };
 
 const StyledContactMe = styled.footer<{
@@ -14,8 +15,8 @@ const StyledContactMe = styled.footer<{
 }>`
   bottom: 0;
   width: 100%;
-  display: flex;
 
+  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
@@ -131,10 +132,13 @@ function FormRow({ label }: { label: string }) {
   );
 }
 
-function ContactMe({ isDarkMode, screenWidth }: ContactMeProps) {
-  console.log(screenWidth);
+function ContactMe({ isDarkMode, screenWidth, id }: ContactMeProps) {
   return (
-    <StyledContactMe $screenWidth={screenWidth} $isDarkMode={isDarkMode}>
+    <StyledContactMe
+      $screenWidth={screenWidth}
+      $isDarkMode={isDarkMode}
+      id={id}
+    >
       <HeadingAndSidebarBox $screenWidth={screenWidth}>
         <ContactMeHeading $screenWidth={screenWidth} as="h2">
           Let's chat!

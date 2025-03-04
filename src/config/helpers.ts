@@ -23,3 +23,14 @@ export function hexToRgba(hex: string, opacity = 1) {
   // Return the RGBA value with the customizable opacity
   return `rgba(${r}, ${g}, ${b}, ${opacity})`;
 }
+
+export function isDefined<T>(value?: T): value is T {
+  return value !== null && value !== undefined;
+}
+
+// It's very useful when I have a list of items where some of those items might be undefined:
+
+// ! usage
+// list.filter(isDefined).forEach(item => {
+//   // `item` is now correctly inferred to not be undefined or null
+// })

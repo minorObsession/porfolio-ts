@@ -82,7 +82,7 @@ section, footer {
 }
 
 
-@media (min-width: 1024px) {
+@media (min-width: 620px) {
 section {
 /* margin-bottom: 5rem; */
 }
@@ -119,12 +119,12 @@ export const Heading = styled.h1<{ $screenWidth?: number; children: string }>`
   ${(props) =>
     props.as === "h2" &&
     css`
-      font-size: 3.5rem;
+      font-size: 3rem;
     `}
   ${(props) =>
     props.as === "h3" &&
     css`
-      font-size: 3rem;
+      font-size: 2rem;
     `}
   ${(props) =>
     props.as === "h4" &&

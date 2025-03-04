@@ -2,11 +2,14 @@ import styled, { css } from "styled-components";
 import Sidebar from "./Sidebar";
 import { FaSun, FaMoon } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { darkTheme, Heading, lightTheme } from "../styles/GlobalStyles";
+import { Heading } from "../styles/GlobalStyles";
 import { useScreenWidthRem } from "../hooks/useScreenWidthRem";
 import { ScreenWidthType } from "../types/types";
 import { breakpoints } from "../styles/breakpoints";
 import { useDarkMode } from "../contexts/DarkModeContext";
+import DropdownMenu from "./DropdownMenu";
+import { useDropdown } from "../contexts/DropdownContext";
+import { useKeyPress } from "../hooks/useKeyPress";
 
 const StyledLandingPage = styled.section<ScreenWidthType>`
   width: 100vw;
@@ -23,13 +26,13 @@ const StyledLandingPage = styled.section<ScreenWidthType>`
       grid-template-columns: 0.1fr 1fr 1fr 0.1fr 1fr 1fr;
       grid-template-rows: 1fr;
       /* padding: 0.5rem 1.5rem; */
-      padding: 0.8rem 1.5rem 3rem 1.5rem;
+      padding: 1.1rem 1.5rem 3rem 1.5rem;
     `}
 `;
 
 const PhotoBox = styled.article<ScreenWidthType>`
   background-color: red;
-  position: relative;
+  /* position: relative; */
   border-radius: var(--border-radius-md);
 
   ${(props) =>
@@ -42,6 +45,8 @@ const PhotoBox = styled.article<ScreenWidthType>`
 `;
 
 const HeadingBox = styled.article<ScreenWidthType>`
+  /* position: relative; */
+
   grid-row: 2/3;
   text-align: center;
   align-self: center;
@@ -55,56 +60,69 @@ const HeadingBox = styled.article<ScreenWidthType>`
     `}
 `;
 
-const UtilityDiv = styled.div<{ $isDarkMode: boolean }>`
+const UtilityDiv = styled.div<{
+  $isDarkMode: boolean;
+  $side: "left" | "right";
+}>`
+  ${({ $side }) => ($side === "left" ? "left: 1.3rem;" : "right: 1.3rem;")}
   position: absolute;
-  right: 0;
-  top: 0;
-  width: fit-content;
-  padding: 1rem 1.8rem;
-
+  top: 0.3rem;
   display: flex;
-  gap: 2rem;
 
-  /* border-radius: var(--border-radius-xl); */
+  /* width: calc(); */
+  padding: 1rem;
 
   transition: all 0.3s ease-in-out;
 
-  ${(props) =>
-    props.$isDarkMode
-      ? css`
-          background-color: ${darkTheme.background};
-        `
-      : css`
-          background-color: ${lightTheme.background};
-        `}
+  ${({ theme }) =>
+    theme &&
+    css`
+      /* background-color: "blue"; */
+      background-color: ${theme.background};
+    `}
 `;
 
 const StyledIcon = styled.div`
   font-size: 2rem;
+  cursor: pointer;
 `;
 
 function LandingPage() {
   const screenWidth = useScreenWidthRem();
   const { isDarkMode, setIsDarkMode } = useDarkMode();
+  const { isDropdownOpen, setIsDropdownOpen } = useDropdown();
+  useKeyPress("KeyQ", () => setIsDropdownOpen((s) => !s));
 
   return (
-    <StyledLandingPage $screenWidth={screenWidth}>
-      <PhotoBox $screenWidth={screenWidth}>
-        <UtilityDiv $isDarkMode={isDarkMode}>
-          {/* Conditionally render FaSun or FaMoon */}
+    <>
+      <DropdownMenu
+        screenWidth={screenWidth}
+        isDropdownOpen={isDropdownOpen}
+        setIsDropdownOpen={setIsDropdownOpen}
+      />
+      <StyledLandingPage $screenWidth={screenWidth}>
+        <UtilityDiv $isDarkMode={isDarkMode} $side="left">
           <StyledIcon
-            as={isDarkMode ? FaSun : FaMoon}
-            onClick={() => setIsDarkMode((s) => !s)}
+            as={GiHamburgerMenu}
+            onClick={() => setIsDropdownOpen((s) => !s)}
           />
-          <StyledIcon as={GiHamburgerMenu} />
         </UtilityDiv>
-      </PhotoBox>
-      <HeadingBox $screenWidth={screenWidth}>
-        <Heading as="h1">I&apos;m a React developer</Heading>
-        <Heading as="h2">I love crafting UIs </Heading>
-      </HeadingBox>
-      <Sidebar rotated={screenWidth > breakpoints.tabletBreakpoint && true} />
-    </StyledLandingPage>
+        <PhotoBox $screenWidth={screenWidth}>
+          <UtilityDiv $isDarkMode={isDarkMode} $side="right">
+            {/* Conditionally render FaSun or FaMoon */}
+            <StyledIcon
+              as={isDarkMode ? FaSun : FaMoon}
+              onClick={() => setIsDarkMode((s) => !s)}
+            />
+          </UtilityDiv>
+        </PhotoBox>
+        <HeadingBox $screenWidth={screenWidth}>
+          <Heading as="h1">I&apos;m a React developer</Heading>
+          <Heading as="h2">I love crafting UIs </Heading>
+        </HeadingBox>
+        <Sidebar rotated={screenWidth > breakpoints.tabletBreakpoint && true} />
+      </StyledLandingPage>
+    </>
   );
 }
 

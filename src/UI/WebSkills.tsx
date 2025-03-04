@@ -12,13 +12,14 @@ const StyledWebSkills = styled.section<{ $screenWidth: number }>`
 
 type WebSkillsProps = {
   isDarkMode: boolean;
+  id: string;
 };
 
-function WebSkills({ isDarkMode }: WebSkillsProps) {
+function WebSkills({ isDarkMode, id }: WebSkillsProps) {
   const screenWidth = useScreenWidthRem();
 
   return (
-    <StyledWebSkills $screenWidth={screenWidth}>
+    <StyledWebSkills $screenWidth={screenWidth} id={id}>
       <Heading as="h1">Web Skills and technologies</Heading>
       <TechIcons isDarkMode={isDarkMode} screenWidth={screenWidth} />
     </StyledWebSkills>

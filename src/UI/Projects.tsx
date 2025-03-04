@@ -80,26 +80,34 @@ const StyledProjectsPage = styled.section<ScreenWidthType>`
     props.$screenWidth >= breakpoints.betweenMobAndTabBreakpoint &&
     css`
       display: grid;
-      gap: 3rem;
+      /* gap: 6rem; */
       grid-template-columns: 1fr 1fr;
-      grid-template-rows: 1fr 1fr;
+      grid-template-rows: auto 1fr 1fr;
       /* gap: 4rem; */
       /* padding: 4rem; */
     `};
 `;
 
-function Projects() {
+// const;
+
+function Projects({ id }: { id: string }) {
   const screenWidth = useScreenWidthRem();
 
   return (
-    <div style={{ marginTop: "6rem" }}>
-      <Heading as="h1">React projects</Heading>
-      <StyledProjectsPage $screenWidth={screenWidth}>
-        {projects.map((project) => (
-          <ProjectCard project={project} key={project.title} />
-        ))}
-      </StyledProjectsPage>
-    </div>
+    <StyledProjectsPage $screenWidth={screenWidth} id={id}>
+      <Heading
+        as="h1"
+        style={{
+          // marginTop: "6rem",
+          gridColumn: "1 / -1",
+        }}
+      >
+        React projects
+      </Heading>
+      {projects.map((project) => (
+        <ProjectCard project={project} key={project.title} />
+      ))}
+    </StyledProjectsPage>
   );
 }
 

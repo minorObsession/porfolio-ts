@@ -55,9 +55,16 @@ const openLink = (url: string) => {
 type SidebarProps = {
   rotated?: boolean;
   inFooter?: boolean;
+  inDropdown?: boolean;
 };
 
-function Sidebar({ rotated = false, inFooter = false }: SidebarProps) {
+function Sidebar({
+  rotated = false,
+  inFooter = false,
+  inDropdown = false,
+}: SidebarProps) {
+  console.log(rotated, inDropdown);
+  const screenWidth = useScreenWidthRem();
   const getPContent = () => {
     if (screenWidth > breakpoints.tabletBreakpoint && !rotated)
       return <P $screenWidth={screenWidth} $rotated={rotated} />;
@@ -73,7 +80,10 @@ function Sidebar({ rotated = false, inFooter = false }: SidebarProps) {
           connect with me &rarr;
         </P>
       );
-    if (screenWidth > breakpoints.tabletBreakpoint && rotated)
+    if (
+      (screenWidth > breakpoints.tabletBreakpoint && rotated) ||
+      (rotated && inDropdown)
+    )
       return (
         <P $screenWidth={screenWidth} $rotated={rotated}>
           connect with me &nbsp; &rarr;
@@ -81,8 +91,6 @@ function Sidebar({ rotated = false, inFooter = false }: SidebarProps) {
       );
     return null;
   };
-
-  const screenWidth = useScreenWidthRem();
   const pContent = getPContent();
   console.log(pContent);
   return (
