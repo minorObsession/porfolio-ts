@@ -1,10 +1,12 @@
 import styled, { css } from "styled-components";
+import { motion } from "framer-motion";
 import { useDisableScrollBasedOnCondition } from "../hooks/useDisableScrollingWhenElementActive";
+import { useEffect } from "react";
 
-const StyledDropdownMenu = styled.section<{ $isDropdownOpen: boolean }>`
+const StyledDropdownMenu = styled(motion.section)`
   width: 100%;
-  /* height: 100vh; */
-  max-height: 0;
+  height: 0;
+  z-index: 999;
 
   ${({ theme }) =>
     theme &&
@@ -12,24 +14,19 @@ const StyledDropdownMenu = styled.section<{ $isDropdownOpen: boolean }>`
       background-color: ${theme.background};
       color: ${theme.text};
     `}
-  z-index: 999;
 
   display: flex;
   justify-content: center;
   align-items: center;
 
   font-size: 3rem;
-
-  max-height: ${({ $isDropdownOpen }) => ($isDropdownOpen ? "100vh" : "0")};
-  transition: max-height 0.7s ease-in-out;
+  overflow: hidden;
 `;
 
 const SectionsList = styled.ul`
   list-style-type: circle;
-
   display: flex;
   flex-direction: column;
-
   margin-left: 20%;
 `;
 
@@ -50,14 +47,9 @@ const sectionsNames = [
 
 type DropdownMenuProps = {
   isDropdownOpen: boolean;
-  screenWidth: number;
   setIsDropdownOpen: (value: boolean) => void;
+  screenWidth: number;
 };
-
-// TODO:
-// height transitions
-// fix utility div dark mode switch off
-//
 
 const scrollToSection = (sectionId: string) => {
   const section = document.getElementById(sectionId);
@@ -69,8 +61,7 @@ const scrollToSection = (sectionId: string) => {
 function DropdownMenu({
   isDropdownOpen,
   setIsDropdownOpen,
-}: // screenWidth,
-DropdownMenuProps) {
+}: DropdownMenuProps) {
   const handleScrollToSection = (sectionName: string) => {
     const targetSection = sectionName.toLowerCase().replace(" ", "-");
 
@@ -82,17 +73,32 @@ DropdownMenuProps) {
 
     setTimeout(() => {
       setIsDropdownOpen(false);
-    }, 1000);
+    }, 10);
   };
 
   useDisableScrollBasedOnCondition(isDropdownOpen);
 
-  if (!isDropdownOpen) return null;
+  useEffect(() => {
+    if (isDropdownOpen) {
+      document.body.style.overflow = "fixed";
+    } else {
+      document.body.style.overflow = "";
+    }
+  }, [isDropdownOpen]);
+  // if (!isDropdownOpen) return null;
 
   return (
-    <StyledDropdownMenu $isDropdownOpen={isDropdownOpen}>
-      {/* // ! add sidebar  */}
-      {/* <Sidebar rotated={true} inDropdown={true} /> */}
+    <StyledDropdownMenu
+      initial={{ height: 0 }}
+      animate={{ height: isDropdownOpen ? "100vh" : 0 }}
+      exit={{ height: 0 }}
+      transition={{
+        type: "spring",
+        stiffness: 120,
+        damping: 20,
+        mass: 1,
+      }}
+    >
       <SectionsList>
         {sectionsNames.map((sectionName) => (
           <SectionListItem

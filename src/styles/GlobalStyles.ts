@@ -72,13 +72,13 @@ body, #root{
 
 }
 
-section {
+section:not(:first-child) {
 /* margin-bottom: 3rem; */
 border-bottom: var(--border-b-1)
 }
 
 section, footer {
-  padding: 3rem 1.5rem;
+  /* padding: 3rem 1.5rem; */
 }
 
 
@@ -87,7 +87,7 @@ section {
 /* margin-bottom: 5rem; */
 }
   section:not(:first-child),footer {
-    padding: 5.5rem 5rem; 
+    /* padding: 5.5rem 5rem;  */
   }
 }
 
