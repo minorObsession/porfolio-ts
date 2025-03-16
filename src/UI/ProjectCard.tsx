@@ -114,10 +114,15 @@ function ProjectCard({ project }: ProjectCardProps) {
       />
     </StyledProjectCard>
   ) : (
+    // ! large screens
     <>
       {project.index % 2 === 0 ? (
         <>
-          <ProjectInfoLargeScreen project={project} />
+          <ProjectInfoLargeScreen
+            project={project}
+            isDarkMode={isDarkMode}
+            screenWidth={screenWidth}
+          />
           <StyledProjectCard
             onClick={() => setIsCardHovered(true)}
             onMouseLeave={() => setIsCardHovered(false)}
@@ -179,7 +184,11 @@ function ProjectCard({ project }: ProjectCardProps) {
               setIsCardHovered={setIsCardHovered}
             />
           </StyledProjectCard>
-          <ProjectInfoLargeScreen project={project} />
+          <ProjectInfoLargeScreen
+            project={project}
+            isDarkMode={isDarkMode}
+            screenWidth={screenWidth}
+          />
         </>
       )}
     </>

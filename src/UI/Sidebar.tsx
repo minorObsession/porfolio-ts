@@ -63,8 +63,8 @@ function Sidebar({
   inFooter = false,
   inDropdown = false,
 }: SidebarProps) {
-  console.log(rotated, inDropdown);
   const screenWidth = useScreenWidthRem();
+
   const getPContent = () => {
     if (screenWidth > breakpoints.tabletBreakpoint && !rotated)
       return <P $screenWidth={screenWidth} $rotated={rotated} />;
@@ -92,7 +92,6 @@ function Sidebar({
     return null;
   };
   const pContent = getPContent();
-  console.log(pContent);
   return (
     <StyledSidebar $screenWidth={screenWidth} $rotated={rotated}>
       {!pContent?.props.$rotated && pContent}

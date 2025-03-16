@@ -4,7 +4,7 @@ const FeaturesContainer = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  padding-left: 1.5rem; /* Ensures bullet points align properly */
+  padding-left: 2rem;
 `;
 
 const FeatureItem = styled.li`
@@ -14,12 +14,12 @@ const FeatureItem = styled.li`
 `;
 
 const FeatureTitle = styled.h4`
-  font-size: 1.3rem;
+  font-size: 1.5rem;
   font-weight: bold;
 `;
 
 const FeatureDescription = styled.p`
-  font-size: 1.1rem;
+  font-size: 1.3rem;
 `;
 
 type FeaturesProps = {

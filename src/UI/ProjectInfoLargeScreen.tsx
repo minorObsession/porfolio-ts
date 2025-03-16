@@ -1,49 +1,48 @@
 import styled from "styled-components";
 import { Heading } from "../styles/GlobalStyles";
-import { allIcons } from "../config/icons";
-import Icon from "./Icon";
 import { ProjectCardProps } from "./ProjectCard";
 import ProjectFeatures from "./ProjectFeatures";
+import TechIcons from "./TechIcons";
 
 const StyledProjectInfoLargeScreen = styled.div`
   display: flex;
-  gap: 2rem;
+  gap: 2.5rem;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding: 1rem;
 `;
 
-const IconContainer = styled.div`
+const ProjectInfoTitle = styled(Heading)``;
+const IconsBox = styled.div`
   display: flex;
-  flex-direction: row;
-  gap: 3rem;
+  flex-direction: column;
+  gap: 1rem;
 `;
 
-const ProjectInfoTitle = styled(Heading)`
-  margin-bottom: 1rem;
-`;
-
-function ProjectInfoLargeScreen({ project }: ProjectCardProps) {
+function ProjectInfoLargeScreen({
+  project,
+  screenWidth,
+  isDarkMode,
+}: ProjectCardProps & { screenWidth: number; isDarkMode: boolean }) {
   return (
     <StyledProjectInfoLargeScreen>
       <ProjectInfoTitle as="h2">{project.title}</ProjectInfoTitle>
       <Heading as="h3">{project.description}</Heading>
-      {/* // !CREATE FEATURES ELEMENT */}
+
+      {/* Features Section */}
       <ProjectFeatures features={project.features} />
-      <Heading as="h3">Core technologies</Heading>
-      <IconContainer>
-        {project.techStack.map((tech) => {
-          const matchingIcon = allIcons.find((icon) => icon.name === tech);
-          return matchingIcon ? (
-            <Icon
-              key={matchingIcon.id}
-              icon={matchingIcon.icon}
-              color={matchingIcon.color}
-              isIconGitHub={matchingIcon.name === "GitHub"}
-            />
-          ) : null;
-        })}
-      </IconContainer>
+
+      <IconsBox>
+        <Heading as="h3">Core technologies</Heading>
+
+        {/* Tech Icons with Tooltip */}
+        <TechIcons
+          screenWidth={screenWidth}
+          isDarkMode={isDarkMode}
+          iconsArray={project.techStack}
+        />
+      </IconsBox>
     </StyledProjectInfoLargeScreen>
   );
 }

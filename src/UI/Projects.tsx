@@ -146,7 +146,7 @@ const StyledProjectsPage = styled.section<ScreenWidthType>`
       grid-template-rows: auto 1fr 1fr;
       /* padding: 5.5rem 1.5rem !important; */
 
-      /* gap: 4rem; */
+      gap: 3rem;
       /* padding: 4rem; */
     `};
   ${(props) =>
@@ -157,6 +157,8 @@ const StyledProjectsPage = styled.section<ScreenWidthType>`
       grid-template-columns: 1fr 1fr;
       grid-template-rows: auto 1fr 1fr;
       /* padding: 5.5rem 1.5rem !important; */
+      column-gap: 4rem;
+      row-gap: 10rem;
 
       /* gap: 4rem; */
       /* padding: 4rem; */

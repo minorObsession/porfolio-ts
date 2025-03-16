@@ -1,7 +1,10 @@
 import styled, { css } from "styled-components";
-import { Heading } from "../styles/GlobalStyles";
 import { breakpoints } from "../styles/breakpoints";
 import Sidebar from "./Sidebar";
+import React, { useState } from "react";
+import emailjs from "emailjs-com";
+import FormRow from "./FormRow";
+import { Heading } from "../styles/GlobalStyles";
 
 type ContactMeProps = {
   isDarkMode: boolean;
@@ -84,6 +87,21 @@ const ContactForm = styled.form<{ $screenWidth: number }>`
     `}
 `;
 
+const SubmitBtn = styled.button`
+  /* max-width: 70%; */
+  justify-self: right;
+  padding: 0.8rem 1.9rem;
+`;
+
+const StatusDiv = styled.div`
+  justify-self: center;
+  grid-column: 2;
+`;
+
+const Status = styled.p<{ isError: boolean }>`
+  color: ${({ isError }) => (isError ? "red" : "green")};
+`;
+
 const ContactMeHeading = styled(Heading)<{ $isMessage?: boolean }>`
   white-space: nowrap;
   padding-right: 1rem;
@@ -110,32 +128,54 @@ const ContactMeHeading = styled(Heading)<{ $isMessage?: boolean }>`
     `}
 `;
 
-const FormInput = styled.input`
-  line-height: 2em;
-  padding: 0 1rem;
-  text-align: start;
-
-  border-radius: var(--border-radius-md);
-`;
-
-const FormMessageInput = styled.textarea`
-  line-height: 3em;
-  padding: 0 1rem;
-  border-radius: var(--border-radius-md);
-`;
-
-function FormRow({ label }: { label: string }) {
-  return (
-    <>
-      <ContactMeHeading $isMessage={label === "Message"} as="h4">
-        {label}
-      </ContactMeHeading>
-      {label === "Message" ? <FormMessageInput /> : <FormInput />}
-    </>
-  );
-}
-
 function ContactMe({ isDarkMode, screenWidth, id }: ContactMeProps) {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+  const [status, setStatus] = useState<string | null>(null);
+  const [isError, setIsError] = useState<boolean>(false);
+
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    // Check if all fields are filled
+    if (!formData.name || !formData.email || !formData.message) {
+      setStatus("Please fill in all fields");
+      setIsError(true);
+      return;
+    }
+
+    emailjs
+      .sendForm(
+        "gmail_js",
+        "template_w4drmqo",
+        e.target as HTMLFormElement,
+        "7551KGxzY2t-xc_sc"
+      )
+      .then(
+        () => {
+          setStatus("Message sent successfully!");
+          setFormData({ name: "", email: "", message: "" });
+          setIsError(false);
+        },
+        () => {
+          setStatus("Error sending message. Please try again.");
+          setIsError(true);
+        }
+      );
+  };
+
   return (
     <StyledContactMe
       $screenWidth={screenWidth}
@@ -148,10 +188,29 @@ function ContactMe({ isDarkMode, screenWidth, id }: ContactMeProps) {
         </ContactMeHeading>
         <Sidebar inFooter={true} />
       </HeadingAndSidebarBox>
-      <ContactForm $screenWidth={screenWidth}>
-        <FormRow label="Name" />
-        <FormRow label="Email" />
-        <FormRow label="Message" />
+      <ContactForm $screenWidth={screenWidth} onSubmit={handleSubmit}>
+        <FormRow
+          label="Name"
+          value={formData.name}
+          onChange={handleInputChange}
+        />
+        <FormRow
+          label="Email"
+          value={formData.email}
+          onChange={handleInputChange}
+        />
+        <FormRow
+          label="Message"
+          value={formData.message}
+          onChange={handleInputChange}
+        />
+        <br />
+        <SubmitBtn type="submit">Send Message</SubmitBtn>
+        {status && (
+          <StatusDiv>
+            <Status isError={isError}>{status}</Status>
+          </StatusDiv>
+        )}
       </ContactForm>
     </StyledContactMe>
   );

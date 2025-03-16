@@ -211,8 +211,8 @@ export const Tooltip = styled.span<{
         `
       : css`
           padding: 1rem;
-          top: -5rem;
-          left: -3rem;
+          top: -4rem;
+          left: -1rem;
         `}
 `;
 

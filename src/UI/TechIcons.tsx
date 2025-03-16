@@ -1,12 +1,13 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { allIcons } from "../config/icons";
-import { darkTheme, lightTheme, Tooltip } from "../styles/GlobalStyles";
+import { Tooltip } from "../styles/GlobalStyles";
 import Icon from "./Icon";
 
 type TechIconsProps = {
   screenWidth: number;
   isDarkMode: boolean;
+  iconsArray?: string[];
 };
 
 const IconsContainer = styled.div`
@@ -17,7 +18,6 @@ const IconsContainer = styled.div`
   flex-wrap: wrap;
   position: relative;
   flex-grow: 0;
-
   padding: 0 2rem;
 `;
 
@@ -25,24 +25,25 @@ const IconWrapper = styled.span<{ $isDarkMode: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
-
   padding: 0.5rem;
   border-radius: 50%;
   transform: scale(1.5);
   position: relative;
-
-  /* background-color: ${({ $isDarkMode }) =>
-    $isDarkMode ? darkTheme.background : lightTheme.background}; */
 `;
 
 const StyledTooltip = styled(Tooltip)``;
 
-function TechIcons({ screenWidth, isDarkMode }: TechIconsProps) {
+function TechIcons({ screenWidth, isDarkMode, iconsArray }: TechIconsProps) {
   const [hoveredIcon, setHoveredIcon] = useState<string | null>(null);
+
+  // ! If iconsArray is provided as a string array, filter matching icons from allIcons
+  const filteredIcons = iconsArray
+    ? allIcons.filter((icon) => iconsArray.includes(icon.name))
+    : allIcons;
 
   return (
     <IconsContainer>
-      {allIcons.map((iconObject) => (
+      {filteredIcons.map((iconObject) => (
         <IconWrapper
           key={iconObject.id}
           onMouseEnter={() => setHoveredIcon(iconObject.name)}
@@ -54,7 +55,7 @@ function TechIcons({ screenWidth, isDarkMode }: TechIconsProps) {
             color={iconObject.color}
             isIconGitHub={iconObject.name === "GitHub"}
           />
-          {/* // ! Tooltip */}
+          {/* Tooltip */}
           {hoveredIcon === iconObject.name && (
             <StyledTooltip
               $isHoveringTechIcons={true}
