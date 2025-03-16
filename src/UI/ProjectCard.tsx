@@ -6,6 +6,7 @@ import GitAndDeploy from "./GitAndDeploy";
 import { useDarkMode } from "../contexts/DarkModeContext";
 import { OverlayImageBox } from "../styles/GlobalStyles";
 import { useState } from "react";
+import ProjectInfoLargeScreen from "./ProjectInfoLargeScreen";
 
 type Project = {
   title: string;
@@ -14,9 +15,11 @@ type Project = {
   gitHub: string;
   deploy: string;
   techStack: string[];
+  index: number;
+  features: Map<string, string>;
 };
 
-type ProjectCardProps = {
+export type ProjectCardProps = {
   project: Project;
 };
 
@@ -42,6 +45,11 @@ const StyledProjectCard = styled.article<StyledProjectCard>`
           max-height: 40rem;
           /* min-height: 100%; */
         `}
+  ${({ $screenWidth }) =>
+    $screenWidth >= breakpoints.tabletLandscapeBreakpoint &&
+    css`
+      min-height: 100%;
+    `}
 `;
 
 const ProjectInfoBox = styled.div<StyledProjectCard>`
@@ -74,10 +82,11 @@ function ProjectCard({ project }: ProjectCardProps) {
   // ! PASS THESE 2 WITH PROPS!!!
   const screenWidth = useScreenWidthRem();
   const { isDarkMode } = useDarkMode();
-
   const [isCardHovered, setIsCardHovered] = useState(true);
 
-  return (
+  // ! small screens
+
+  return screenWidth < breakpoints.tabletLandscapeBreakpoint ? (
     <StyledProjectCard
       onClick={() => setIsCardHovered(true)}
       onMouseLeave={() => setIsCardHovered(false)}
@@ -104,6 +113,76 @@ function ProjectCard({ project }: ProjectCardProps) {
         setIsCardHovered={setIsCardHovered}
       />
     </StyledProjectCard>
+  ) : (
+    <>
+      {project.index % 2 === 0 ? (
+        <>
+          <ProjectInfoLargeScreen project={project} />
+          <StyledProjectCard
+            onClick={() => setIsCardHovered(true)}
+            onMouseLeave={() => setIsCardHovered(false)}
+            $screenWidth={screenWidth}
+          >
+            <ProjectInfoBox
+              $isCardHovered={isCardHovered}
+              $screenWidth={screenWidth}
+            >
+              <NameAndDescription
+                $isCardHovered={isCardHovered}
+                $screenWidth={screenWidth}
+                $isDarkMode={isDarkMode}
+              >
+                <span>{project.title}</span>
+              </NameAndDescription>
+              <GitAndDeploy
+                screenWidth={screenWidth}
+                gitHubLink={project.gitHub}
+                deployedLink={project.deploy}
+                isDarkMode={isDarkMode}
+              />
+            </ProjectInfoBox>
+            <ImageSlider
+              images={project.previewImages}
+              isCardHovered={isCardHovered}
+              setIsCardHovered={setIsCardHovered}
+            />
+          </StyledProjectCard>
+        </>
+      ) : (
+        <>
+          <StyledProjectCard
+            onClick={() => setIsCardHovered(true)}
+            onMouseLeave={() => setIsCardHovered(false)}
+            $screenWidth={screenWidth}
+          >
+            <ProjectInfoBox
+              $isCardHovered={isCardHovered}
+              $screenWidth={screenWidth}
+            >
+              <NameAndDescription
+                $isCardHovered={isCardHovered}
+                $screenWidth={screenWidth}
+                $isDarkMode={isDarkMode}
+              >
+                <span>{project.title}</span>
+              </NameAndDescription>
+              <GitAndDeploy
+                screenWidth={screenWidth}
+                gitHubLink={project.gitHub}
+                deployedLink={project.deploy}
+                isDarkMode={isDarkMode}
+              />
+            </ProjectInfoBox>
+            <ImageSlider
+              images={project.previewImages}
+              isCardHovered={isCardHovered}
+              setIsCardHovered={setIsCardHovered}
+            />
+          </StyledProjectCard>
+          <ProjectInfoLargeScreen project={project} />
+        </>
+      )}
+    </>
   );
 }
 

@@ -86,6 +86,7 @@ const ContactForm = styled.form<{ $screenWidth: number }>`
 
 const ContactMeHeading = styled(Heading)<{ $isMessage?: boolean }>`
   white-space: nowrap;
+  padding-right: 1rem;
 
   ${({ $screenWidth }) =>
     $screenWidth !== undefined &&

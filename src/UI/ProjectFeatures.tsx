@@ -1,0 +1,42 @@
+import styled from "styled-components";
+
+const FeaturesContainer = styled.ul`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-left: 1.5rem; /* Ensures bullet points align properly */
+`;
+
+const FeatureItem = styled.li`
+  list-style-type: disc; /* Ensures bullet points */
+  padding-left: 0.5rem;
+  line-height: 1.6;
+`;
+
+const FeatureTitle = styled.h4`
+  font-size: 1.3rem;
+  font-weight: bold;
+`;
+
+const FeatureDescription = styled.p`
+  font-size: 1.1rem;
+`;
+
+type FeaturesProps = {
+  features: Map<string, string>;
+};
+
+function ProjectFeatures({ features }: FeaturesProps) {
+  return (
+    <FeaturesContainer>
+      {[...features.entries()].map(([title, description]) => (
+        <FeatureItem key={title}>
+          <FeatureTitle>{title}</FeatureTitle>
+          <FeatureDescription>{description}</FeatureDescription>
+        </FeatureItem>
+      ))}
+    </FeaturesContainer>
+  );
+}
+
+export default ProjectFeatures;

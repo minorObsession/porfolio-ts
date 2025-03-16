@@ -1,11 +1,10 @@
 import styled, { css } from "styled-components";
 import { useDisableScrollBasedOnCondition } from "../hooks/useDisableScrollingWhenElementActive";
-// import Sidebar from "./Sidebar";
-// import { breakpoints } from "../styles/breakpoints";
 
-const StyledDropdownMenu = styled.section`
-  height: 100vh;
-  width: 100vw;
+const StyledDropdownMenu = styled.section<{ $isDropdownOpen: boolean }>`
+  width: 100%;
+  /* height: 100vh; */
+  max-height: 0;
 
   ${({ theme }) =>
     theme &&
@@ -20,6 +19,9 @@ const StyledDropdownMenu = styled.section`
   align-items: center;
 
   font-size: 3rem;
+
+  max-height: ${({ $isDropdownOpen }) => ($isDropdownOpen ? "100vh" : "0")};
+  transition: max-height 0.7s ease-in-out;
 `;
 
 const SectionsList = styled.ul`
@@ -88,7 +90,7 @@ DropdownMenuProps) {
   if (!isDropdownOpen) return null;
 
   return (
-    <StyledDropdownMenu>
+    <StyledDropdownMenu $isDropdownOpen={isDropdownOpen}>
       {/* // ! add sidebar  */}
       {/* <Sidebar rotated={true} inDropdown={true} /> */}
       <SectionsList>

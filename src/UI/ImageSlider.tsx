@@ -1,7 +1,9 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { useImageSlider } from "../hooks/useImageSlider";
 import { hexToRgba } from "../config/helpers";
 import { useDarkMode } from "../contexts/DarkModeContext";
+import { useScreenWidthRem } from "../hooks/useScreenWidthRem";
+import { breakpoints } from "../styles/breakpoints";
 
 type ImagesType = {
   images: string[];
@@ -22,7 +24,7 @@ type SliderButtonProps = {
   $isDarkMode: boolean;
 };
 
-const SlideContainer = styled.div`
+const SlideContainer = styled.div<{ $screenWidth: number }>`
   overflow: hidden;
 
   display: flex;
@@ -34,6 +36,12 @@ const SlideContainer = styled.div`
 
   border-radius: var(--border-radius-md);
   transition: all 0.8s ease-in-out;
+
+  ${({ $screenWidth }) =>
+    $screenWidth >= breakpoints.tabletLandscapeBreakpoint &&
+    css`
+      /* max-width: 50%; */
+    `}
 `;
 
 const SlideImage = styled.img<SlideImageProps>`
@@ -80,9 +88,10 @@ const SliderButton = styled.button<SliderButtonProps>`
 function ImageSlider({ images, isCardHovered }: ImagesType) {
   const { currImageIndex, nextSlide, prevSlide } = useImageSlider(images);
   const { isDarkMode } = useDarkMode();
+  const screenWidth = useScreenWidthRem();
 
   return (
-    <SlideContainer>
+    <SlideContainer $screenWidth={screenWidth}>
       <SliderButton
         onClick={prevSlide}
         $isCardHovered={isCardHovered}

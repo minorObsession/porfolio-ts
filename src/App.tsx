@@ -1,4 +1,4 @@
-import styled from "styled-components";
+// import styled from "styled-components";
 import GlobalStyles, { darkTheme, lightTheme } from "./styles/GlobalStyles";
 import { ThemeProvider } from "styled-components";
 import LandingPage from "./UI/LandingPage";
@@ -23,8 +23,8 @@ import Certificates from "./UI/Certificates";
 // footer too small
 // ! move hamburger menu icon and create the actual menu overlay
 
-const StyledApp = styled.div``;
-
+// const StyledApp = styled.div``;
+// console.log(process.env)
 function App() {
   const { isDarkMode, setIsDarkMode } = useDarkMode();
   const screenWidth = useScreenWidthRem();
@@ -34,7 +34,7 @@ function App() {
   return (
     <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
       <GlobalStyles />
-      <StyledApp>
+      <>
         {/* // ! landing page */}
         <LandingPage />
         <Projects id="projects" />
@@ -48,7 +48,7 @@ function App() {
           screenWidth={screenWidth}
           id="contact-me"
         />
-      </StyledApp>
+      </>
     </ThemeProvider>
   );
 }

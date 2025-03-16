@@ -18,8 +18,8 @@ import {
 } from "react-icons/si";
 
 export const allIcons = [
-  { id: "icon-001", icon: FaHtml5, name: "HTML5", color: "#E34F26" },
-  { id: "icon-002", icon: FaCss3Alt, name: "CSS3", color: "#1572B6" },
+  { id: "icon-001", icon: FaHtml5, name: "HTML", color: "#E34F26" },
+  { id: "icon-002", icon: FaCss3Alt, name: "CSS", color: "#1572B6" },
   { id: "icon-003", icon: FaJs, name: "JavaScript", color: "#F7DF1E" },
   { id: "icon-004", icon: FaReact, name: "React", color: "#61DAFB" },
   { id: "icon-005", icon: FaGit, name: "Git", color: "#F05032" },
