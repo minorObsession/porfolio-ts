@@ -2,6 +2,9 @@ import { useState } from "react";
 
 export function useImageSlider(imagesArray: string[]) {
   const [currImageIndex, setCurrImageIndex] = useState(0);
+  const [slideDirection, setSlideDirection] = useState<"left" | "right">(
+    "right"
+  );
   const maxSlide = imagesArray.length - 1;
 
   const goToImageNum = (imageIndex: number) => {
@@ -11,12 +14,14 @@ export function useImageSlider(imagesArray: string[]) {
   const nextSlide = () => {
     if (currImageIndex === maxSlide) goToImageNum(0);
     else goToImageNum(currImageIndex + 1);
+    setSlideDirection("right");
   };
 
   const prevSlide = () => {
     if (currImageIndex === 0) goToImageNum(maxSlide);
     else goToImageNum(currImageIndex - 1);
+    setSlideDirection("left");
   };
 
-  return { currImageIndex, nextSlide, prevSlide };
+  return { currImageIndex, nextSlide, prevSlide, slideDirection };
 }

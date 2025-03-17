@@ -4,6 +4,7 @@ import { hexToRgba } from "../config/helpers";
 import { useDarkMode } from "../contexts/DarkModeContext";
 import { useScreenWidthRem } from "../hooks/useScreenWidthRem";
 import { breakpoints } from "../styles/breakpoints";
+import { motion } from "motion/react";
 
 type ImagesType = {
   images: string[];
@@ -15,6 +16,7 @@ type SlideImageProps = {
   src: string;
   alt?: string;
   $isCardHovered: boolean;
+  // $$direction: 'left" | "right"';
 };
 
 type SliderButtonProps = {
@@ -44,12 +46,11 @@ const SlideContainer = styled.div<{ $screenWidth: number }>`
     `}
 `;
 
-const SlideImage = styled.img<SlideImageProps>`
+const SlideImage = styled(motion.img)<SlideImageProps>`
   width: 100%;
   height: 100%;
 
   object-fit: cover;
-  transition: opacity 0.5s ease;
 
   filter: blur(${({ $isCardHovered }) => ($isCardHovered ? "0" : "1rem")})
     grayscale(${({ $isCardHovered }) => ($isCardHovered ? "0" : "80%")});
@@ -86,7 +87,8 @@ const SliderButton = styled.button<SliderButtonProps>`
 `;
 
 function ImageSlider({ images, isCardHovered }: ImagesType) {
-  const { currImageIndex, nextSlide, prevSlide } = useImageSlider(images);
+  const { currImageIndex, nextSlide, prevSlide, slideDirection } =
+    useImageSlider(images);
   const { isDarkMode } = useDarkMode();
   const screenWidth = useScreenWidthRem();
 
@@ -101,9 +103,31 @@ function ImageSlider({ images, isCardHovered }: ImagesType) {
         &larr;
       </SliderButton>
       <SlideImage
-        // ! GET THE ALT TO WORK
+        key={currImageIndex} // Key ensures re-render when image changes
         src={images[currImageIndex]}
+        alt={`Slide image ${currImageIndex + 1}`}
         $isCardHovered={isCardHovered}
+        initial={{
+          x: slideDirection === "right" ? "100%" : "-100%",
+          opacity: 0,
+          scale: 0.8,
+        }}
+        animate={{
+          x: 0,
+          opacity: 1,
+          scale: 1,
+        }}
+        exit={{
+          x: slideDirection === "right" ? "100%" : "-100%",
+          opacity: 0,
+          scale: 1.1,
+        }}
+        transition={{
+          type: "spring",
+          stiffness: 150,
+          damping: 25,
+          duration: 0.8,
+        }}
       />
       <SliderButton
         onClick={nextSlide}

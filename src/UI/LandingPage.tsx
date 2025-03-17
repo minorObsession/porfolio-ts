@@ -35,7 +35,6 @@ const StyledLandingPage = styled.section<ScreenWidthType>`
 
 const PhotoBox = styled.article<ScreenWidthType>`
   background-color: red;
-  /* position: relative; */
   border-radius: var(--border-radius-md);
 
   ${(props) =>
@@ -74,6 +73,7 @@ const UtilityDiv = styled.div<{
 
   /* width: calc(); */
   padding: 1rem;
+  z-index: 200;
 
   transition: all 0.3s ease-in-out;
 
@@ -92,7 +92,6 @@ const StyledIcon = styled(motion.div)<{ as: IconType }>`
       scale: 1.2;
       font-weight: bolder;
     `}
-
   font-size: 2rem;
   cursor: pointer;
 `;
@@ -103,29 +102,29 @@ function LandingPage() {
   const { isDropdownOpen, setIsDropdownOpen } = useDropdown();
   useKeyPress("KeyQ", () => setIsDropdownOpen((s) => !s));
 
+  // ! THE UTILITY DIV DISSAPEARS BELLOW!!!!!!!
   return (
     <>
+      <UtilityDiv $isDarkMode={isDarkMode} $side="left">
+        <StyledIcon
+          as={isDropdownOpen ? RiCloseLargeFill : GiHamburgerMenu}
+          onClick={() => setIsDropdownOpen((s) => !s)}
+        />
+      </UtilityDiv>
+      <UtilityDiv $isDarkMode={isDarkMode} $side="right">
+        {/* Conditionally render FaSun or FaMoon */}
+        <StyledIcon
+          as={isDarkMode ? FaSun : FaMoon}
+          onClick={() => setIsDarkMode((s) => !s)}
+        />
+      </UtilityDiv>
       <DropdownMenu
         screenWidth={screenWidth}
         isDropdownOpen={isDropdownOpen}
         setIsDropdownOpen={setIsDropdownOpen}
       />
       <StyledLandingPage $screenWidth={screenWidth}>
-        <UtilityDiv $isDarkMode={isDarkMode} $side="left">
-          <StyledIcon
-            as={isDropdownOpen ? RiCloseLargeFill : GiHamburgerMenu}
-            onClick={() => setIsDropdownOpen((s) => !s)}
-          />
-        </UtilityDiv>
-        <PhotoBox $screenWidth={screenWidth}>
-          <UtilityDiv $isDarkMode={isDarkMode} $side="right">
-            {/* Conditionally render FaSun or FaMoon */}
-            <StyledIcon
-              as={isDarkMode ? FaSun : FaMoon}
-              onClick={() => setIsDarkMode((s) => !s)}
-            />
-          </UtilityDiv>
-        </PhotoBox>
+        <PhotoBox $screenWidth={screenWidth}></PhotoBox>
         <HeadingBox $screenWidth={screenWidth}>
           <Heading as="h1">I&apos;m a React developer</Heading>
           <Heading as="h2">I love crafting UIs </Heading>

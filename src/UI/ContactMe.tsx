@@ -41,6 +41,7 @@ const HeadingAndSidebarBox = styled.div<{ $screenWidth: number }>`
   flex-grow: 1;
 
   display: flex;
+  gap: 1rem;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
@@ -80,10 +81,27 @@ const ContactForm = styled.form<{ $screenWidth: number }>`
 
   ${({ $screenWidth }) =>
     $screenWidth > breakpoints.mobileLargeBreakpoint &&
+    $screenWidth < breakpoints.tabletLandscapeBreakpoint &&
     css`
       /* justify-self: center !importants; */
       gap: 1.5rem 0.5rem;
-      padding: 0 5rem;
+      padding: 0 8rem;
+    `}
+
+  ${({ $screenWidth }) =>
+    $screenWidth >= breakpoints.tabletLandscapeBreakpoint &&
+    css`
+      /* grid-template-columns: 1.5fr 2fr; */
+
+      gap: 1.8rem 0.8rem;
+      padding: 0 12rem;
+    `}
+
+
+  ${({ $screenWidth }) =>
+    $screenWidth >= breakpoints.desktopBreakpoint &&
+    css`
+      padding: 0 18rem;
     `}
 `;
 
@@ -184,7 +202,7 @@ function ContactMe({ isDarkMode, screenWidth, id }: ContactMeProps) {
     >
       <HeadingAndSidebarBox $screenWidth={screenWidth}>
         <ContactMeHeading $screenWidth={screenWidth} as="h2">
-          Let's chat!
+          Get in touch
         </ContactMeHeading>
         <Sidebar inFooter={true} />
       </HeadingAndSidebarBox>

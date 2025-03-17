@@ -5,11 +5,6 @@ import { breakpoints } from "../styles/breakpoints";
 const StyledExperience = styled.section`
   display: grid;
 
-  /* // ! NEXT 2 LINES MAKE THE BORDER LOOK SICK */
-  /* margin: 0 auto;
-  max-width: 80%; */
-  /* // ! ABOVE */
-
   row-gap: 3rem;
   align-items: center;
   justify-items: center;

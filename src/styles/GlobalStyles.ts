@@ -39,10 +39,29 @@ const GlobalStyles = createGlobalStyle`
 
 
 
-  --box-shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --box-shadow-sm-light: 1px 5px 6px rgba(0, 0, 0, 0.15);  /* Light theme shadow */
+  --box-shadow-sm-dark: 1px 5px 6px rgba(255, 255, 255, 0.3);  /* Dark theme shadow */
 
 
+
+  --box-shadow-light: 6px 8px 35px rgba(0, 0, 0, 0.2);
+  --box-shadow-dark: 6px 8px 15px rgba(255, 255, 255, 0.3);
+
+  /* Default box shadow (will change based on theme) */
+  --box-shadow: var(--box-shadow-light);
 }
+
+.light-theme {
+  --box-shadow: var(--box-shadow-light);
+  --box-shadow-sm: var(--box-shadow-sm-light)
+}
+
+.dark-theme {
+  --box-shadow: var(--box-shadow-dark);
+  --box-shadow-sm: var(--box-shadow-sm-dark)
+}
+
+
 
 *,
 *::before,
@@ -72,20 +91,27 @@ body, #root{
 
 }
 
-section {
+section:not(#projects) {
 /* margin-bottom: 3rem; */
 border-bottom: var(--border-b-1)
 }
 
+#experience {
+  border-top: var(--border-b-1)
+
+}
+
 section, footer {
-  /* padding: 3rem 1.5rem; */
+  padding: 3rem 1.5rem;
     opacity: 0;
   transition: opacity 0.8s ease-in-out, transform 0.6s ease-in-out;
 
 }
 
-section:not(:first-of-type) {
+section:not(:first-of-type):not(#projects) {
     transform: translateY(10rem);
+      margin: 0 auto;
+  max-width: 85%;
 }
 
 @media (min-width: 620px) {
@@ -120,7 +146,7 @@ export const Heading = styled.h1<{ $screenWidth?: number; children: string }>`
   ${(props) =>
     props.as === "h1" &&
     css`
-      font-size: 4rem;
+      font-size: 3.5rem;
     `}
   ${(props) =>
     props.as === "h2" &&

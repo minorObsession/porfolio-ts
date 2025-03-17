@@ -1,9 +1,10 @@
 import styled from "styled-components";
+import { Heading } from "../styles/GlobalStyles";
 
 const FeaturesContainer = styled.ul`
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  /* gap: 1rem; */
   padding-left: 2rem;
 `;
 
@@ -16,10 +17,21 @@ const FeatureItem = styled.li`
 const FeatureTitle = styled.h4`
   font-size: 1.5rem;
   font-weight: bold;
+  flex: 0 1 10%;
 `;
 
 const FeatureDescription = styled.p`
   font-size: 1.3rem;
+
+  /* height: min-content; */
+  flex: 0 1 10%;
+`;
+
+const ProjectFeaturesHeading = styled(Heading)`
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
+  margin-bottom: 1.5rem;
 `;
 
 type FeaturesProps = {
@@ -29,6 +41,7 @@ type FeaturesProps = {
 function ProjectFeatures({ features }: FeaturesProps) {
   return (
     <FeaturesContainer>
+      <ProjectFeaturesHeading as="h3">Main features</ProjectFeaturesHeading>
       {[...features.entries()].map(([title, description]) => (
         <FeatureItem key={title}>
           <FeatureTitle>{title}</FeatureTitle>

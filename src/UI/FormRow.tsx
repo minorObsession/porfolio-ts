@@ -45,8 +45,8 @@ const FormInput = styled.input`
 `;
 
 const FormMessageInput = styled.textarea`
-  line-height: 3em;
-  padding: 0 1rem;
+  line-height: 2em;
+  padding: 0.5rem 1rem 3rem 1rem;
   border-radius: var(--border-radius-md);
 `;
 

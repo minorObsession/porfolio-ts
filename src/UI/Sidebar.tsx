@@ -68,12 +68,7 @@ function Sidebar({
   const getPContent = () => {
     if (screenWidth > breakpoints.tabletBreakpoint && !rotated)
       return <P $screenWidth={screenWidth} $rotated={rotated} />;
-    if (screenWidth <= breakpoints.tabletBreakpoint && inFooter)
-      return (
-        <P $screenWidth={screenWidth} $rotated={rotated}>
-          connect &rarr;
-        </P>
-      );
+
     if (screenWidth <= breakpoints.tabletBreakpoint && !inFooter)
       return (
         <P $screenWidth={screenWidth} $rotated={rotated}>

@@ -6,14 +6,27 @@ import TechIcons from "./TechIcons";
 
 const StyledProjectInfoLargeScreen = styled.div`
   display: flex;
-  gap: 2.5rem;
+  gap: 2rem;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
   padding: 1rem;
+
+  box-shadow: var(--box-shadow-sm);
+  border-radius: var(--border-radius-md);
+  border: none; /* Remove any existing border */
 `;
 
-const ProjectInfoTitle = styled(Heading)``;
+const ProjectInfoTitle = styled(Heading)`
+  line-height: 2;
+  font-weight: 800;
+`;
+
+const ProjectInfoDescription = styled(Heading)`
+  flex-grow: 0;
+  font-style: italic;
+`;
+
 const IconsBox = styled.div`
   display: flex;
   flex-direction: column;
@@ -27,8 +40,12 @@ function ProjectInfoLargeScreen({
 }: ProjectCardProps & { screenWidth: number; isDarkMode: boolean }) {
   return (
     <StyledProjectInfoLargeScreen>
-      <ProjectInfoTitle as="h2">{project.title}</ProjectInfoTitle>
-      <Heading as="h3">{project.description}</Heading>
+      <div>
+        <ProjectInfoTitle as="h2">{project.title}</ProjectInfoTitle>
+        <ProjectInfoDescription as="h3">
+          {project.description}
+        </ProjectInfoDescription>
+      </div>
 
       {/* Features Section */}
       <ProjectFeatures features={project.features} />
