@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { useDisableScrollBasedOnCondition } from "../hooks/useDisableScrollingWhenElementActive";
 import { useEffect } from "react";
 
-const StyledDropdownMenu = styled(motion.section)`
+const StyledDropdownMenu = styled(motion.menu)`
   width: 100%;
   height: 0;
   z-index: 999;
@@ -71,9 +71,7 @@ function DropdownMenu({
 
     scrollToSection(targetSection);
 
-    setTimeout(() => {
-      setIsDropdownOpen(false);
-    }, 10);
+    setIsDropdownOpen(false);
   };
 
   useDisableScrollBasedOnCondition(isDropdownOpen);

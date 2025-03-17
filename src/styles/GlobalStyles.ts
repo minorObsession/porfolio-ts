@@ -72,22 +72,28 @@ body, #root{
 
 }
 
-section:not(:first-child) {
+section {
 /* margin-bottom: 3rem; */
 border-bottom: var(--border-b-1)
 }
 
 section, footer {
   /* padding: 3rem 1.5rem; */
+    opacity: 0;
+  transition: opacity 0.8s ease-in-out, transform 0.6s ease-in-out;
+
 }
 
+section:not(:first-of-type) {
+    transform: translateY(10rem);
+}
 
 @media (min-width: 620px) {
 section {
 /* margin-bottom: 5rem; */
 }
-  section:not(:first-child),footer {
-    /* padding: 5.5rem 5rem;  */
+  section,footer {
+    padding: 5.5rem 5rem; 
   }
 }
 

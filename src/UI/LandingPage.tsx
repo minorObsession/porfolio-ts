@@ -2,6 +2,7 @@ import styled, { css } from "styled-components";
 import Sidebar from "./Sidebar";
 import { FaSun, FaMoon } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { RiCloseLargeFill } from "react-icons/ri";
 import { Heading } from "../styles/GlobalStyles";
 import { useScreenWidthRem } from "../hooks/useScreenWidthRem";
 import { ScreenWidthType } from "../types/types";
@@ -10,6 +11,8 @@ import { useDarkMode } from "../contexts/DarkModeContext";
 import DropdownMenu from "./DropdownMenu";
 import { useDropdown } from "../contexts/DropdownContext";
 import { useKeyPress } from "../hooks/useKeyPress";
+import { IconType } from "react-icons";
+import { motion } from "motion/react";
 
 const StyledLandingPage = styled.section<ScreenWidthType>`
   width: 100vw;
@@ -82,7 +85,14 @@ const UtilityDiv = styled.div<{
     `}
 `;
 
-const StyledIcon = styled.div`
+const StyledIcon = styled(motion.div)<{ as: IconType }>`
+  ${({ as }) =>
+    as === RiCloseLargeFill &&
+    css`
+      scale: 1.2;
+      font-weight: bolder;
+    `}
+
   font-size: 2rem;
   cursor: pointer;
 `;
@@ -103,7 +113,7 @@ function LandingPage() {
       <StyledLandingPage $screenWidth={screenWidth}>
         <UtilityDiv $isDarkMode={isDarkMode} $side="left">
           <StyledIcon
-            as={GiHamburgerMenu}
+            as={isDropdownOpen ? RiCloseLargeFill : GiHamburgerMenu}
             onClick={() => setIsDropdownOpen((s) => !s)}
           />
         </UtilityDiv>

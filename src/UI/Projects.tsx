@@ -134,9 +134,6 @@ const StyledProjectsPage = styled.section<ScreenWidthType>`
   flex-direction: column;
   gap: 6rem;
 
-  /* // ! MATCH SIDE PADDING FROM LANDING PAGE*/
-  padding: 3rem 1.5rem !important;
-
   ${(props) =>
     props.$screenWidth >= breakpoints.betweenMobAndTabBreakpoint &&
     css`

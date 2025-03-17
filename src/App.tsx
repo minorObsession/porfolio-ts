@@ -12,22 +12,50 @@ import { useScreenWidthRem } from "./hooks/useScreenWidthRem";
 
 import Experience from "./UI/Experience";
 import Certificates from "./UI/Certificates";
+import { useEffect } from "react";
 
 // prettier-ignore
 // * TOOO:
 //  figure out how to put isDarkMode into a css variable so i'm not passing it around like a mad man
 // hovering tech icons adjust
-// !  large screen:
-//  sidebar rotated a bit off
-//  social icons too small
-// footer too small
-// ! move hamburger menu icon and create the actual menu overlay
 
-// const StyledApp = styled.div``;
-// console.log(process.env)
 function App() {
   const { isDarkMode, setIsDarkMode } = useDarkMode();
   const screenWidth = useScreenWidthRem();
+
+  useEffect(()=> {
+    const allSections = [
+      ...document.querySelectorAll("section"),
+      document.querySelector("footer"),
+    ].filter((el):el is HTMLElement => el!==null);
+
+
+    const options = {
+      root: null,
+      rootMargin: "20px",
+      threshold: 0.1,
+    };
+
+    const callback:IntersectionObserverCallback = (entries) => {
+      entries.forEach((entry) => {
+        if  ( entry.isIntersecting ) {
+        const target = entry.target as HTMLElement;
+          target.style.opacity = '1';
+          target.style.transform = 'translateY(0)'
+        } 
+      });
+    };
+
+    const observer = new IntersectionObserver(callback, options);
+
+  allSections.forEach(section=>observer.observe(section))
+
+return () => {
+  allSections.forEach(s=> observer.unobserve(s))
+observer.disconnect()
+} 
+
+  },[])
 
   useKeyPress("KeyD", () => setIsDarkMode((s) => !s));
 
