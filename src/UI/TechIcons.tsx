@@ -55,6 +55,7 @@ function TechIcons({ screenWidth, isDarkMode, iconsArray }: TechIconsProps) {
             color={iconObject.color}
             isIconGitHub={iconObject.name === "GitHub"}
           />
+
           {/* Tooltip */}
           {hoveredIcon === iconObject.name && (
             <StyledTooltip

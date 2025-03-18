@@ -16,6 +16,7 @@ import {
   SiTestinglibrary,
   SiTypescript,
 } from "react-icons/si";
+import zustanSvg from "../../public/zz.svg";
 
 export const allIcons = [
   { id: "icon-001", icon: FaHtml5, name: "HTML", color: "#E34F26" },
@@ -27,6 +28,12 @@ export const allIcons = [
   { id: "icon-007", icon: SiTypescript, name: "TypeScript", color: "#3178C6" },
   { id: "icon-008", icon: SiRedux, name: "Redux", color: "#764ABC" },
   { id: "icon-009", icon: SiReactquery, name: "React Query", color: "#FF4154" },
+  {
+    id: "icon-015",
+    icon: zustanSvg,
+    name: "Zustand",
+    color: "",
+  },
   {
     id: "icon-010",
     icon: SiTailwindcss,

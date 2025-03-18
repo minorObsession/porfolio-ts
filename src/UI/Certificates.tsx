@@ -1,6 +1,8 @@
 import styled, { css } from "styled-components";
 import { breakpoints } from "../styles/breakpoints";
 import { Heading } from "../styles/GlobalStyles";
+import chinguSVG from "../../public/chingu-icon.svg";
+import { BsMeta } from "react-icons/bs";
 
 const metaCertificates = [
   {
@@ -54,14 +56,28 @@ const StyledCertificates = styled.section<{ $screenWidth: number }>`
   align-items: center;
   justify-content: center;
   gap: 2rem;
+  margin: 0 auto;
+
+  ${({ $screenWidth }) => $screenWidth > breakpoints.tabletBreakpoint && css``}
 `;
 
-const CertificateList = styled.ul`
-  width: 100%;
+const CertificateList = styled.ul<{ $screenWidth: number }>`
+  width: 80vw;
   display: flex;
+  gap: 0.6rem;
   flex-direction: column;
-  text-align: left;
   padding: 1rem 3rem;
+
+  ${({ $screenWidth }) =>
+    $screenWidth > breakpoints.tabletBreakpoint &&
+    css`
+      width: 70vw;
+    `}
+  ${({ $screenWidth }) =>
+    $screenWidth > breakpoints.tabletLandscapeBreakpoint &&
+    css`
+      width: 80vw;
+    `}
 `;
 
 const CertificateLink = styled.a<{ $screenWidth: number }>`
@@ -71,7 +87,7 @@ const CertificateLink = styled.a<{ $screenWidth: number }>`
   ${({ $screenWidth }) =>
     $screenWidth > breakpoints.tabletBreakpoint &&
     css`
-      /* // ! change layout ; */
+      /* // ! change layout */
       grid-row: 2;
       grid-column: 2;
       text-align: left;
@@ -79,6 +95,42 @@ const CertificateLink = styled.a<{ $screenWidth: number }>`
 
       font-size: 1.8rem;
     `}
+`;
+
+const CertTitleAndIcon = styled.div<{ $screenWidth: number }>`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: center;
+
+  ${({ $screenWidth }) =>
+    $screenWidth > breakpoints.tabletBreakpoint &&
+    css`
+      gap: 2rem;
+    `}
+`;
+
+const CertificateIcon = styled.img`
+  justify-self: end;
+  width: 4rem;
+`;
+
+const StyledCertContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 2rem;
+  width: 100%;
+
+  margin-top: 2rem;
+`;
+
+const CertTitle = styled(Heading)`
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 
 // Component Props
@@ -94,11 +146,20 @@ function Certificates({ screenWidth, id }: CertificatesProps) {
 
   const renderCertificates = (
     title: string,
-    certificates: { name: string; url: string }[]
+    certificates: { name: string; url: string }[],
+    iconImg?: string
   ) => (
-    <>
-      <Heading as={headingSize}>{title}</Heading>
-      <CertificateList>
+    <StyledCertContainer>
+      <CertTitleAndIcon $screenWidth={screenWidth}>
+        {iconImg ? (
+          <CertificateIcon src={iconImg} />
+        ) : (
+          <BsMeta size="4rem" fill="#0082fb" />
+        )}
+        <CertTitle as={headingSize}>{title}</CertTitle>
+      </CertTitleAndIcon>
+
+      <CertificateList $screenWidth={screenWidth}>
         {certificates.map((cert) => (
           <li key={cert.name}>
             <CertificateLink
@@ -112,7 +173,7 @@ function Certificates({ screenWidth, id }: CertificatesProps) {
           </li>
         ))}
       </CertificateList>
-    </>
+    </StyledCertContainer>
   );
 
   return (
@@ -122,7 +183,7 @@ function Certificates({ screenWidth, id }: CertificatesProps) {
         "Meta Front-End Developer Certificate",
         metaCertificates
       )}
-      {renderCertificates("Chingu Certificates", chinguCertificates)}
+      {renderCertificates("Chingu Certificates", chinguCertificates, chinguSVG)}
     </StyledCertificates>
   );
 }

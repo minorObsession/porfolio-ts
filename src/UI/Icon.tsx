@@ -10,15 +10,19 @@ const StyledIcon = styled.span<{ $color: string; $isIconGitHub: boolean }>`
 `;
 
 type IconProps = {
-  icon: React.ElementType;
+  icon: React.ElementType | string;
   color: string;
   isIconGitHub?: boolean;
 };
 
 function Icon({ icon: Icon, color, isIconGitHub = false }: IconProps) {
+  console.log(Icon);
   return (
     <StyledIcon $color={color} $isIconGitHub={isIconGitHub}>
-      <Icon />
+      {typeof Icon === "function" && <Icon />}
+      {typeof Icon === "string" && (
+        <img src={Icon} style={{ width: "2.5rem" }} />
+      )}
     </StyledIcon>
   );
 }
