@@ -14,9 +14,9 @@ import Certificates from "./UI/Certificates";
 import { useFadeInAllSections } from "./hooks/useFadeInAllSections";
 
 // TODO:
-// utility div buttons on top of the menu dissapearing when dropdown is open
+
 // ! SPLIT WEB SKILLS INTO MULTIPLE PARTS
-// ! CENTER (SMALL SCREEN) AND SPLIT certifications INTO 2 COLUMNS (LARGE SCREENS)
+// ! CERTIFICATES SECITON to contain more info
 // ! MAKE PROJECTS GRID A BIT MORE INTERESTING
 // ! useKeyPress (left-right) to change photos
 

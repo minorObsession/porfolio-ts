@@ -16,7 +16,6 @@ type IconProps = {
 };
 
 function Icon({ icon: Icon, color, isIconGitHub = false }: IconProps) {
-  console.log(Icon);
   return (
     <StyledIcon $color={color} $isIconGitHub={isIconGitHub}>
       {typeof Icon === "function" && <Icon />}

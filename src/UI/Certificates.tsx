@@ -109,6 +109,11 @@ const CertTitleAndIcon = styled.div<{ $screenWidth: number }>`
     css`
       gap: 2rem;
     `}
+  ${({ $screenWidth }) =>
+    $screenWidth > breakpoints.smallDesktopBreakpoint &&
+    css`
+      gap: 3rem;
+    `}
 `;
 
 const CertificateIcon = styled.img`

@@ -175,7 +175,7 @@ function Projects({ id }: { id: string }) {
           gridColumn: "1 / -1",
         }}
       >
-        React projects
+        Projects Portfolio
       </Heading>
       {projects.map((project, i) => (
         <ProjectCard project={{ ...project, index: i }} key={project.title} />

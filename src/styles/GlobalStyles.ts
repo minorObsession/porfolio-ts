@@ -147,6 +147,7 @@ export const Heading = styled.h1<{ $screenWidth?: number; children: string }>`
     props.as === "h1" &&
     css`
       font-size: 3.5rem;
+      font-weight: 800;
     `}
   ${(props) =>
     props.as === "h2" &&
