@@ -135,7 +135,6 @@ const projects = [
 ];
 
 const StyledProjectsPage = styled.section<ScreenWidthType>`
-  /* gap: 6rem; */
   display: flex;
   flex-direction: column;
 
@@ -143,40 +142,32 @@ const StyledProjectsPage = styled.section<ScreenWidthType>`
     props.$screenWidth >= breakpoints.tabletBreakpoint &&
     css`
       display: grid;
-      /* gap: 6rem; */
+
       grid-template-columns: 1fr 1fr;
       grid-template-rows: auto 1fr 1fr;
-      /* padding: 5.5rem 1.5rem !important; */
+
       column-gap: 4rem;
       row-gap: 10rem;
-
-      /* gap: 4rem; */
-      /* padding: 4rem; */
     `};
 `;
-
-// const;
 
 function Projects({ id }: { id: string }) {
   const screenWidth = useScreenWidthRem();
 
   return (
-    <>
+    <StyledProjectsPage $screenWidth={screenWidth} id={id}>
       <Heading
         as="h1"
         style={{
           gridColumn: "1 / -1",
-          paddingTop: "5rem",
         }}
       >
         Portfolio Projects
       </Heading>
-      <StyledProjectsPage $screenWidth={screenWidth} id={id}>
-        {projects.map((project, i) => (
-          <ProjectCard project={{ ...project, index: i }} key={project.title} />
-        ))}
-      </StyledProjectsPage>
-    </>
+      {projects.map((project, i) => (
+        <ProjectCard project={{ ...project, index: i }} key={project.title} />
+      ))}
+    </StyledProjectsPage>
   );
 }
 

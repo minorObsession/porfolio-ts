@@ -6,8 +6,7 @@ import GitAndDeploy from "./GitAndDeploy";
 import { useDarkMode } from "../contexts/DarkModeContext";
 import { OverlayImageBox } from "../styles/GlobalStyles";
 import { useState } from "react";
-import ProjectInfoLargeScreen from "./ProjectInfoSmallScreen";
-import ProjectInfoSmallScreen from "./ProjectInfoSmallScreen";
+import ProjectInfo from "./ProjectInfo";
 
 type Project = {
   title: string;
@@ -100,7 +99,7 @@ function ProjectCard({ project }: ProjectCardProps) {
 
   return screenWidth < breakpoints.tabletBreakpoint ? (
     <ProjectCardContainer>
-      <ProjectInfoSmallScreen
+      <ProjectInfo
         project={project}
         isDarkMode={isDarkMode}
         screenWidth={screenWidth}
@@ -140,7 +139,7 @@ function ProjectCard({ project }: ProjectCardProps) {
     <>
       {project.index % 2 === 0 ? (
         <>
-          <ProjectInfoLargeScreen
+          <ProjectInfo
             project={project}
             isDarkMode={isDarkMode}
             screenWidth={screenWidth}
@@ -206,7 +205,7 @@ function ProjectCard({ project }: ProjectCardProps) {
               setIsCardHovered={setIsCardHovered}
             />
           </StyledProjectCard>
-          <ProjectInfoLargeScreen
+          <ProjectInfo
             project={project}
             isDarkMode={isDarkMode}
             screenWidth={screenWidth}

@@ -4,14 +4,14 @@ import { ProjectCardProps } from "./ProjectCard";
 import ProjectFeatures from "./ProjectFeatures";
 import TechIcons from "./TechIcons";
 
-const StyledProjectInfoSmallScreen = styled.div`
+const StyledProjectInfo = styled.div`
   display: flex;
   gap: 1.5rem;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  padding: 0.8rem;
-  margin-top: 2rem;
+  padding: 1.6rem;
+  /* margin-top: 2rem; */
 
   box-shadow: var(--box-shadow-sm);
   border-radius: var(--border-radius-md);
@@ -34,13 +34,13 @@ const IconsBox = styled.div`
   gap: 1rem;
 `;
 
-function ProjectInfoSmallScreen({
+function ProjectInfo({
   project,
   screenWidth,
   isDarkMode,
 }: ProjectCardProps & { screenWidth: number; isDarkMode: boolean }) {
   return (
-    <StyledProjectInfoSmallScreen>
+    <StyledProjectInfo>
       <div>
         <ProjectInfoTitle as="h2">{project.title}</ProjectInfoTitle>
         <ProjectInfoDescription as="h4">
@@ -61,8 +61,8 @@ function ProjectInfoSmallScreen({
           iconsArray={project.techStack}
         />
       </IconsBox>
-    </StyledProjectInfoSmallScreen>
+    </StyledProjectInfo>
   );
 }
 
-export default ProjectInfoSmallScreen;
+export default ProjectInfo;

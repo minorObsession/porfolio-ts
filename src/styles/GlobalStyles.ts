@@ -100,11 +100,10 @@ border-bottom: var(--border-b-1)
   border-top: var(--border-b-1)
 
 }
-
+/* 
 #projects,#experience,#certificates,#web-skills,#contact-me { 
-    scroll-margin-top: 100rem;
-
-}
+    scroll-margin-top: 5rem; 
+} */
 
 section, footer {
   padding: 3rem 1.5rem;
@@ -147,6 +146,8 @@ button:focus {
 
 export const Heading = styled.h1<{ $screenWidth?: number; children: string }>`
   text-align: center;
+
+  transition: all 0.5s ease-in-out;
 
   ${(props) =>
     props.as === "h1" &&

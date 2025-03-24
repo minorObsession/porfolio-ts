@@ -1,11 +1,15 @@
 import styled, { css } from "styled-components";
-import { motion } from "framer-motion";
+import { motion, LayoutGroup } from "framer-motion";
 import { useDisableScrollBasedOnCondition } from "../hooks/useDisableScrollingWhenElementActive";
 import { useEffect } from "react";
 
 const StyledDropdownMenu = styled(motion.menu)`
+  position: fixed; // Prevents layout shifts
+  left: 0;
+  right: 0;
   width: 100%;
-  height: 0;
+  max-height: 100vh; // Consistent max height
+  overflow: hidden;
   z-index: 999;
 
   ${({ theme }) =>
@@ -18,19 +22,18 @@ const StyledDropdownMenu = styled(motion.menu)`
   display: flex;
   justify-content: center;
   align-items: center;
-
   font-size: 3rem;
-  overflow: hidden;
 `;
 
-const SectionsList = styled.ul`
+const SectionsList = styled(motion.ul)`
   list-style-type: circle;
   display: flex;
   flex-direction: column;
   margin-left: 20%;
+  width: 100%; // Ensures consistent width
 `;
 
-const SectionListItem = styled.li`
+const SectionListItem = styled(motion.li)`
   &:hover {
     cursor: pointer;
     color: red;
@@ -48,7 +51,6 @@ const sectionsNames = [
 type DropdownMenuProps = {
   isDropdownOpen: boolean;
   setIsDropdownOpen: (value: boolean) => void;
-  screenWidth: number;
 };
 
 const scrollToSection = (sectionId: string) => {
@@ -78,36 +80,53 @@ function DropdownMenu({
 
   useEffect(() => {
     if (isDropdownOpen) {
-      document.body.style.overflow = "fixed";
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = "";
+      document.body.style.overflow = "auto";
     }
   }, [isDropdownOpen]);
-  // if (!isDropdownOpen) return null;
 
   return (
-    <StyledDropdownMenu
-      initial={{ height: 0 }}
-      animate={{ height: isDropdownOpen ? "100vh" : 0 }}
-      exit={{ height: 0 }}
-      transition={{
-        type: "spring",
-        stiffness: 120,
-        damping: 20,
-        mass: 1,
-      }}
-    >
-      <SectionsList>
-        {sectionsNames.map((sectionName) => (
-          <SectionListItem
-            key={sectionName}
-            onClick={() => handleScrollToSection(sectionName)}
-          >
-            {sectionName}
-          </SectionListItem>
-        ))}
-      </SectionsList>
-    </StyledDropdownMenu>
+    <LayoutGroup>
+      <StyledDropdownMenu
+        layout
+        layoutRoot
+        initial={{
+          height: 0,
+          opacity: 0,
+        }}
+        animate={{
+          height: isDropdownOpen ? "100vh" : 0,
+          opacity: isDropdownOpen ? 1 : 0,
+        }}
+        exit={{
+          height: 0,
+          opacity: 0,
+        }}
+        transition={{
+          type: "tween",
+          duration: 0.3,
+        }}
+      >
+        <SectionsList
+          initial={{ opacity: 0 }}
+          animate={{ opacity: isDropdownOpen ? 1 : 0 }}
+          transition={{ delay: 0.2 }}
+        >
+          {sectionsNames.map((sectionName) => (
+            <SectionListItem
+              key={sectionName}
+              layout
+              onClick={() => handleScrollToSection(sectionName)}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 1.01 }}
+            >
+              {sectionName}
+            </SectionListItem>
+          ))}
+        </SectionsList>
+      </StyledDropdownMenu>
+    </LayoutGroup>
   );
 }
 
