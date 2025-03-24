@@ -13,10 +13,11 @@ import { useDropdown } from "../contexts/DropdownContext";
 import { useKeyPress } from "../hooks/useKeyPress";
 import { IconType } from "react-icons";
 import { motion } from "motion/react";
+import bogdan from "../../public/bogdan-p.jpg";
 
 const StyledLandingPage = styled.section<ScreenWidthType>`
   width: 100vw;
-  height: 100vh;
+  max-height: clamp(85vh, 100vh, 100vh);
   padding: 0.8rem 1.5rem;
 
   display: grid;
@@ -34,15 +35,37 @@ const StyledLandingPage = styled.section<ScreenWidthType>`
 `;
 
 const PhotoBox = styled.article<ScreenWidthType>`
-  background-color: red;
+  /* background-color: red; */
   border-radius: var(--border-radius-md);
 
   ${(props) =>
     props.$screenWidth > breakpoints.tabletBreakpoint &&
     css`
       width: 100%;
+
       grid-row: span 2;
       grid-column: 4 / 7;
+    `}
+`;
+
+const Image = styled.img<ScreenWidthType>`
+  width: 100%;
+  max-height: clamp(30vh, 50vh, 100vh);
+
+  object-fit: cover;
+  object-position: middle;
+
+  ${(props) =>
+    props.$screenWidth > breakpoints.tabletBreakpoint &&
+    css`
+      max-height: 100%;
+      object-position: top;
+    `}
+  ${(props) =>
+    props.$screenWidth > breakpoints.tabletLandscapeBreakpoint &&
+    css`
+      /* max-height: 100%; */
+      /* object-position: middle; */
     `}
 `;
 
@@ -102,9 +125,9 @@ function LandingPage() {
   const { isDropdownOpen, setIsDropdownOpen } = useDropdown();
   useKeyPress("KeyQ", () => setIsDropdownOpen((s) => !s));
 
-  // ! THE UTILITY DIV DISSAPEARS BELLOW!!!!!!!
   return (
     <>
+      {/* // ! dropdown section */}
       <UtilityDiv $isDarkMode={isDarkMode} $side="left">
         <StyledIcon
           as={isDropdownOpen ? RiCloseLargeFill : GiHamburgerMenu}
@@ -123,8 +146,11 @@ function LandingPage() {
         isDropdownOpen={isDropdownOpen}
         setIsDropdownOpen={setIsDropdownOpen}
       />
+      {/* // ! actual landing page */}
       <StyledLandingPage $screenWidth={screenWidth}>
-        <PhotoBox $screenWidth={screenWidth}></PhotoBox>
+        <PhotoBox $screenWidth={screenWidth}>
+          <Image $screenWidth={screenWidth} src={bogdan} />
+        </PhotoBox>
         <HeadingBox $screenWidth={screenWidth}>
           <Heading as="h1">I&apos;m a React developer</Heading>
           <Heading as="h2">I love crafting UIs </Heading>
