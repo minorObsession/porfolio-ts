@@ -62,10 +62,13 @@ const projects = [
       "Redux",
     ],
     features: new Map([
-      ["Admin account", "Add or edit products details, review existing orders"],
+      [
+        "Admin - custmizable menu",
+        "Adding or editing products detail and images, viewing existing orders",
+      ],
       [
         "Customer account",
-        "Intuitive product ordering and accessing frequently asked questions",
+        "Intuitive food ordering and accessing frequently asked questions",
       ],
       [
         "Responsive design",
@@ -112,11 +115,11 @@ const projects = [
     techStack: ["JavaScript", "HTML", "CSS"],
     features: new Map([
       [
-        "Los Angeles Residents",
+        "LA Residents appointment booking",
         "Solar evaluation appointment booking through an easy-to-use interface",
       ],
       [
-        "City Employees",
+        "City Employees appointment management",
         "Appointment management interface to easily review and manage visits effectively",
       ],
       [
@@ -158,19 +161,22 @@ function Projects({ id }: { id: string }) {
   const screenWidth = useScreenWidthRem();
 
   return (
-    <StyledProjectsPage $screenWidth={screenWidth} id={id}>
+    <>
       <Heading
         as="h1"
         style={{
           gridColumn: "1 / -1",
+          paddingTop: "5rem",
         }}
       >
-        Projects Portfolio
+        Portfolio Projects
       </Heading>
-      {projects.map((project, i) => (
-        <ProjectCard project={{ ...project, index: i }} key={project.title} />
-      ))}
-    </StyledProjectsPage>
+      <StyledProjectsPage $screenWidth={screenWidth} id={id}>
+        {projects.map((project, i) => (
+          <ProjectCard project={{ ...project, index: i }} key={project.title} />
+        ))}
+      </StyledProjectsPage>
+    </>
   );
 }
 

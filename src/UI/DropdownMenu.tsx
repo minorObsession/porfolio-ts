@@ -39,9 +39,9 @@ const SectionListItem = styled.li`
 
 const sectionsNames = [
   "Projects",
-  "Web Skills",
   "Experience",
   "Certificates",
+  "Web Skills",
   "Contact me",
 ];
 
@@ -55,7 +55,7 @@ const scrollToSection = (sectionId: string) => {
   const section = document.getElementById(sectionId);
   if (!section) return;
 
-  section.scrollIntoView({ behavior: "smooth" });
+  section.scrollIntoView({ block: "start", behavior: "smooth" });
 };
 
 function DropdownMenu({

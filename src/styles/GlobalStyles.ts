@@ -101,6 +101,11 @@ border-bottom: var(--border-b-1)
 
 }
 
+#projects,#experience,#certificates,#web-skills,#contact-me { 
+    scroll-margin-top: 100rem;
+
+}
+
 section, footer {
   padding: 3rem 1.5rem;
     opacity: 0;
