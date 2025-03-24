@@ -40,6 +40,8 @@ const projects = [
       ],
     ]),
   },
+
+  // ! ooovaj
   {
     title: "Food Fusion",
     description:
@@ -60,13 +62,13 @@ const projects = [
       "Redux",
     ],
     features: new Map([
-      ["Admin account", "Add and edit products, manage existing orders"],
+      ["Admin account", "Add or edit products details, review existing orders"],
       [
-        "Admin account",
+        "Customer account",
         "Intuitive product ordering and accessing frequently asked questions",
       ],
       [
-        "RecResponsive design",
+        "Responsive design",
         "Styled components library media queries + CSS best practices to look and feel smooth on mobile, tablet and desktop screens",
       ],
     ]),
@@ -130,24 +132,12 @@ const projects = [
 ];
 
 const StyledProjectsPage = styled.section<ScreenWidthType>`
+  /* gap: 6rem; */
   display: flex;
   flex-direction: column;
-  gap: 6rem;
 
   ${(props) =>
-    props.$screenWidth >= breakpoints.betweenMobAndTabBreakpoint &&
-    css`
-      display: grid;
-      /* gap: 6rem; */
-      grid-template-columns: 1fr 1fr;
-      grid-template-rows: auto 1fr 1fr;
-      /* padding: 5.5rem 1.5rem !important; */
-
-      gap: 3rem;
-      /* padding: 4rem; */
-    `};
-  ${(props) =>
-    props.$screenWidth >= breakpoints.tabletLandscapeBreakpoint &&
+    props.$screenWidth >= breakpoints.tabletBreakpoint &&
     css`
       display: grid;
       /* gap: 6rem; */

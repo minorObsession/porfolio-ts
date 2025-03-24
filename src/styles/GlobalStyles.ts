@@ -114,7 +114,7 @@ section:not(:first-of-type):not(#projects) {
   max-width: 85%;
 }
 
-@media (min-width: 620px) {
+@media (min-width: 900px) {
 section {
 /* margin-bottom: 5rem; */
 }

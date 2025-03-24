@@ -17,7 +17,9 @@ import bogdan from "../../public/bogdan-p.jpg";
 
 const StyledLandingPage = styled.section<ScreenWidthType>`
   width: 100vw;
-  max-height: clamp(85vh, 100vh, 100vh);
+  max-height: 100vh;
+
+  /* max-height: clamp(85vh, 100vh, 100vh); */
   padding: 0.8rem 1.5rem;
 
   display: grid;
@@ -30,7 +32,7 @@ const StyledLandingPage = styled.section<ScreenWidthType>`
       grid-template-columns: 0.1fr 1fr 1fr 0.1fr 1fr 1fr;
       grid-template-rows: 1fr;
       /* padding: 0.5rem 1.5rem; */
-      padding: 1.1rem 1.5rem 3rem 1.5rem;
+      padding: 1.5rem;
     `}
 `;
 
@@ -53,7 +55,7 @@ const Image = styled.img<ScreenWidthType>`
   max-height: clamp(30vh, 50vh, 100vh);
 
   object-fit: cover;
-  object-position: middle;
+  object-position: 15%;
 
   ${(props) =>
     props.$screenWidth > breakpoints.tabletBreakpoint &&
@@ -66,6 +68,12 @@ const Image = styled.img<ScreenWidthType>`
     css`
       /* max-height: 100%; */
       /* object-position: middle; */
+    `}
+  ${(props) =>
+    props.$screenWidth > breakpoints.desktopBreakpoint &&
+    css`
+      /* image to zoom out */
+      object-position: middle;
     `}
 `;
 
@@ -89,13 +97,13 @@ const UtilityDiv = styled.div<{
   $isDarkMode: boolean;
   $side: "left" | "right";
 }>`
-  ${({ $side }) => ($side === "left" ? "left: 1.3rem;" : "right: 1.3rem;")}
+  ${({ $side }) => ($side === "left" ? "left: 0.5rem;" : "right: 0.5rem;")}
   position: absolute;
-  top: 0.3rem;
+  top: 0.5rem;
   display: flex;
 
   /* width: calc(); */
-  padding: 1rem;
+  padding: 1.5rem;
   z-index: 200;
 
   transition: all 0.3s ease-in-out;

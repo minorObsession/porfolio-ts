@@ -1,10 +1,12 @@
 import styled from "styled-components";
 import { Heading } from "../styles/GlobalStyles";
+import { useScreenWidthRem } from "../hooks/useScreenWidthRem";
+import { breakpoints } from "../styles/breakpoints";
 
 const FeaturesContainer = styled.ul`
   display: flex;
   flex-direction: column;
-  /* gap: 1rem; */
+  gap: 0.5rem;
   padding-left: 2rem;
 `;
 
@@ -28,8 +30,6 @@ const FeatureDescription = styled.p`
 `;
 
 const ProjectFeaturesHeading = styled(Heading)`
-  text-decoration: underline;
-  text-underline-offset: 4px;
   text-decoration-thickness: 2px;
   margin-bottom: 1.5rem;
 `;
@@ -39,13 +39,16 @@ type FeaturesProps = {
 };
 
 function ProjectFeatures({ features }: FeaturesProps) {
+  const screenWidth = useScreenWidthRem();
   return (
     <FeaturesContainer>
       <ProjectFeaturesHeading as="h3">Main features</ProjectFeaturesHeading>
       {[...features.entries()].map(([title, description]) => (
         <FeatureItem key={title}>
           <FeatureTitle>{title}</FeatureTitle>
-          <FeatureDescription>{description}</FeatureDescription>
+          {screenWidth > breakpoints.tabletLandscapeBreakpoint && (
+            <FeatureDescription>{description}</FeatureDescription>
+          )}
         </FeatureItem>
       ))}
     </FeaturesContainer>
