@@ -91,7 +91,7 @@ body, #root{
 
 }
 
-section:not(#projects) {
+section:not(:first-of-type):not(#projects) {
 /* margin-bottom: 3rem; */
 border-bottom: var(--border-b-1)
 }
@@ -100,10 +100,10 @@ border-bottom: var(--border-b-1)
   border-top: var(--border-b-1)
 
 }
-/* 
+
 #projects,#experience,#certificates,#web-skills,#contact-me { 
-    scroll-margin-top: 5rem; 
-} */
+    scroll-margin-top: 2rem; 
+} 
 
 section, footer {
   padding: 3rem 1.5rem;

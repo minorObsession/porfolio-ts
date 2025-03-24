@@ -37,7 +37,6 @@ const StyledLandingPage = styled.section<ScreenWidthType>`
 `;
 
 const PhotoBox = styled.article<ScreenWidthType>`
-  /* background-color: red; */
   border-radius: var(--border-radius-md);
 
   ${(props) =>
@@ -150,7 +149,6 @@ function LandingPage() {
         />
       </UtilityDiv>
       <DropdownMenu
-        screenWidth={screenWidth}
         isDropdownOpen={isDropdownOpen}
         setIsDropdownOpen={setIsDropdownOpen}
       />
