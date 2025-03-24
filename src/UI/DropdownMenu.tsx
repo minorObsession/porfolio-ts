@@ -4,13 +4,13 @@ import { useDisableScrollBasedOnCondition } from "../hooks/useDisableScrollingWh
 import { useEffect } from "react";
 
 const StyledDropdownMenu = styled(motion.menu)`
-  position: fixed; // Prevents layout shifts
+  position: stickyq; // Prevents layout shifts
   left: 0;
   right: 0;
   width: 100%;
   max-height: 100vh; // Consistent max height
   overflow: hidden;
-  z-index: 999;
+  z-index: 1;
 
   ${({ theme }) =>
     theme &&

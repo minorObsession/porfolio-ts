@@ -15,10 +15,10 @@ import { useFadeInAllSections } from "./hooks/useFadeInAllSections";
 
 // TODO:
 
-// ! SPLIT WEB SKILLS INTO MULTIPLE PARTS
+// !
 // ! CERTIFICATES SECITON to contain more info
-// ! MAKE PROJECTS GRID A BIT MORE INTERESTING
 // ! useKeyPress (left-right) to change photos
+// !
 
 function App() {
   const { isDarkMode, setIsDarkMode } = useDarkMode();
