@@ -111,25 +111,33 @@ function ImageSlider({ images, isCardHovered }: ImagesType) {
         alt={`Slide image ${currImageIndex + 1}`}
         $isCardHovered={isCardHovered}
         initial={{
-          x: slideDirection === "right" ? "100%" : "-100%",
           opacity: 0,
-          scale: 0.8,
+          transform: `translateX(${
+            slideDirection === "right" ? "100%" : "-100%"
+          }) scale(0.9)`,
         }}
         animate={{
-          x: 0,
           opacity: 1,
-          scale: 1,
+          transform: "translateX(0) scale(1)",
         }}
         exit={{
-          x: slideDirection === "right" ? "100%" : "-100%",
           opacity: 0,
-          scale: 1.1,
+          transform: `translateX(${
+            slideDirection === "right" ? "100%" : "-100%"
+          }) scale(1.05)`,
         }}
         transition={{
-          type: "spring",
-          stiffness: 150,
-          damping: 25,
-          duration: 0.8,
+          type: "tween", // More predictable for mobile
+          duration: 0.3, // Shorter duration
+          ease: "easeInOut", // Smoother transition
+        }}
+        style={{
+          position: "absolute", // Prevent layout shifts
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
         }}
       />
       <SliderButton
