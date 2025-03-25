@@ -99,7 +99,7 @@ function Experience({ id, screenWidth }: ExperienceProps) {
     <StyledExperience id={id}>
       <Heading as="h1">Work Experience</Heading>
       <ChinguContainer $screenWidth={screenWidth}>
-        <RoleBox>
+        <RoleBox $screenWidth={screenWidth}>
           <Heading as="h2">Chingu</Heading>
           <Heading style={{ fontStyle: "italic" }} as="h3">
             software developer
