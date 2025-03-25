@@ -4,7 +4,7 @@ import { hexToRgba } from "../config/helpers";
 import { useDarkMode } from "../contexts/DarkModeContext";
 import { useScreenWidthRem } from "../hooks/useScreenWidthRem";
 import { breakpoints } from "../styles/breakpoints";
-import { motion } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 import { useKeyPress } from "../hooks/useKeyPress";
 
 type ImagesType = {
@@ -17,6 +17,7 @@ type SlideImageProps = {
   src: string;
   alt?: string;
   $isCardHovered: boolean;
+  $screenWidth: number;
   // $$direction: 'left" | "right"';
 };
 
@@ -29,35 +30,31 @@ type SliderButtonProps = {
 
 const SlideContainer = styled.div<{ $screenWidth: number }>`
   overflow: hidden;
-
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-
   width: 100%;
-  height: 100%;
+  height: ${({ $screenWidth }) =>
+    $screenWidth < breakpoints.tabletBreakpoint
+      ? "250px"
+      : "100%"}; /* Set a fixed height or dynamically calculate */
 
   border-radius: var(--border-radius-md);
   transition: all 0.8s ease-in-out;
-
-  ${({ $screenWidth }) =>
-    $screenWidth >= breakpoints.tabletLandscapeBreakpoint &&
-    css`
-      /* max-width: 50%; */
-    `}
 `;
 
 const SlideImage = styled(motion.img)<SlideImageProps>`
   width: 100%;
   height: 100%;
-
   object-fit: cover;
+  position: absolute; /* Ensures that images stack properly */
+  top: 0;
+  left: 0;
 
   filter: blur(${({ $isCardHovered }) => ($isCardHovered ? "0" : "1rem")})
     grayscale(${({ $isCardHovered }) => ($isCardHovered ? "0" : "80%")});
-  transition: filter 0.7s ease-in-out, opacity 0.7s ease-in-out,
-    visibility 0s linear
-      ${({ $isCardHovered }) => ($isCardHovered ? "0s" : "0.3s")};
+  transition: filter 0.7s ease-in-out, opacity 0.7s ease-in-out;
 `;
 
 const SliderButton = styled.button<SliderButtonProps>`
@@ -87,6 +84,13 @@ const SliderButton = styled.button<SliderButtonProps>`
       ${({ $isCardHovered }) => ($isCardHovered ? "0s" : "0.7s")};
 `;
 
+// const ImageDiv = styled.div`
+//   position: relative;
+//   width: 100%;
+//   height: 100%;
+//   overflow: hidden;
+// `;
+
 function ImageSlider({ images, isCardHovered }: ImagesType) {
   const { currImageIndex, nextSlide, prevSlide, slideDirection } =
     useImageSlider(images);
@@ -105,41 +109,35 @@ function ImageSlider({ images, isCardHovered }: ImagesType) {
       >
         &larr;
       </SliderButton>
-      <SlideImage
-        key={currImageIndex}
-        src={images[currImageIndex]}
-        alt={`Slide image ${currImageIndex + 1}`}
-        $isCardHovered={isCardHovered}
-        initial={{
-          opacity: 0,
-          transform: `translateX(${
-            slideDirection === "right" ? "100%" : "-100%"
-          }) scale(0.9)`,
-        }}
-        animate={{
-          opacity: 1,
-          transform: "translateX(0) scale(1)",
-        }}
-        exit={{
-          opacity: 0,
-          transform: `translateX(${
-            slideDirection === "right" ? "100%" : "-100%"
-          }) scale(1.05)`,
-        }}
-        transition={{
-          type: "tween", // More predictable for mobile
-          duration: 0.3, // Shorter duration
-          ease: "easeInOut", // Smoother transition
-        }}
-        style={{
-          position: "absolute", // Prevent layout shifts
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          objectFit: "cover",
-        }}
-      />
+      <AnimatePresence mode="popLayout">
+        <SlideImage
+          key={currImageIndex}
+          src={images[currImageIndex]}
+          alt={`Slide image ${currImageIndex + 1}`}
+          $isCardHovered={isCardHovered}
+          $screenWidth={screenWidth}
+          initial={{
+            opacity: 0,
+            x: slideDirection === "right" ? "100%" : "-100%",
+            scale: 0.95,
+          }}
+          animate={{
+            opacity: 1,
+            x: "0%",
+            scale: 1,
+          }}
+          exit={{
+            opacity: 1 /* Keep the old image visible while transitioning */,
+            x: slideDirection === "right" ? "-10%" : "10%" /* Subtle motion */,
+            scale: 0.98,
+          }}
+          transition={{
+            type: "tween",
+            duration: 0.3,
+            ease: "easeInOut",
+          }}
+        />
+      </AnimatePresence>
       <SliderButton
         onClick={nextSlide}
         $isCardHovered={isCardHovered}

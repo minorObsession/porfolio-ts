@@ -15,8 +15,9 @@ import { useFadeInAllSections } from "./hooks/useFadeInAllSections";
 import Header from "./UI/Header";
 
 // TODO:
-// !
-// !
+
+// ! layout shift on load
+// ! problem with images and transitions
 // !
 
 function App() {
