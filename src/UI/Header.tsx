@@ -15,7 +15,7 @@ const StyledIcon = styled.div<{
   z-index: 505;
   position: absolute; // or fixed, depending on your layout
   top: 0;
-  ${({ $side }) => ($side === "left" ? "left: 0" : "right: 0")};
+  ${({ $side }) => ($side === "left" ? "left: 0.7em" : "right: 0.7rem")};
 
   cursor: pointer;
   padding: 1rem;
@@ -57,11 +57,7 @@ function Header() {
   const { isDarkMode, setIsDarkMode } = useDarkMode();
 
   const handleOpenDropdown = () => {
-    console.log("handler");
-    if (window.screenY === 0) setIsDropdownOpen((s) => !s);
-
     window.scrollTo({ top: 0 });
-
     setIsDropdownOpen((s) => !s);
   };
 
