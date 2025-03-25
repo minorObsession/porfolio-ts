@@ -15,11 +15,9 @@ import { useFadeInAllSections } from "./hooks/useFadeInAllSections";
 import Header from "./UI/Header";
 
 // TODO:
-
 // !
-// ! CERTIFICATES SECITON to contain more info
-// ! useKeyPress (left-right) to change photos
-// ! hovering the card OR it's info box to make photo visible!!!
+// !
+// !
 
 function App() {
   const { isDarkMode, setIsDarkMode } = useDarkMode();

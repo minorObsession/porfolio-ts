@@ -5,6 +5,7 @@ import { useDarkMode } from "../contexts/DarkModeContext";
 import { useScreenWidthRem } from "../hooks/useScreenWidthRem";
 import { breakpoints } from "../styles/breakpoints";
 import { motion } from "motion/react";
+import { useKeyPress } from "../hooks/useKeyPress";
 
 type ImagesType = {
   images: string[];
@@ -91,6 +92,8 @@ function ImageSlider({ images, isCardHovered }: ImagesType) {
     useImageSlider(images);
   const { isDarkMode } = useDarkMode();
   const screenWidth = useScreenWidthRem();
+  useKeyPress("arrowRight", nextSlide);
+  useKeyPress("arrowLeft", prevSlide);
 
   return (
     <SlideContainer $screenWidth={screenWidth}>
@@ -103,7 +106,7 @@ function ImageSlider({ images, isCardHovered }: ImagesType) {
         &larr;
       </SliderButton>
       <SlideImage
-        key={currImageIndex} // Key ensures re-render when image changes
+        key={currImageIndex}
         src={images[currImageIndex]}
         alt={`Slide image ${currImageIndex + 1}`}
         $isCardHovered={isCardHovered}

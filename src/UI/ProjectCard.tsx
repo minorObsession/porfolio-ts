@@ -7,6 +7,7 @@ import { useDarkMode } from "../contexts/DarkModeContext";
 import { OverlayImageBox } from "../styles/GlobalStyles";
 import { useState } from "react";
 import ProjectInfo from "./ProjectInfo";
+import { useDisplayCurrentlyVisibleCard } from "../hooks/useShowCurrentProject";
 
 type Project = {
   title: string;
@@ -28,8 +29,6 @@ type StyledProjectCard = {
   $isCardHovered?: boolean;
 };
 
-// ! max-height to prevent layout shifts
-// ! min-height to spread element full height
 const StyledProjectCard = styled.article<StyledProjectCard>`
   position: relative;
   border-radius: var(--border-radius-md);
@@ -38,18 +37,14 @@ const StyledProjectCard = styled.article<StyledProjectCard>`
   ${({ $screenWidth }) =>
     $screenWidth <= breakpoints.mobileLargeBreakpoint
       ? css`
-          /* max-height: 25rem; */
           min-height: auto;
         `
       : css`
-          /* max-height: 40rem; */
-          /* min-height: 100%; */
+          ${$screenWidth >= breakpoints.tabletLandscapeBreakpoint &&
+          css`
+            min-height: 100%;
+          `}
         `}
-  ${({ $screenWidth }) =>
-    $screenWidth >= breakpoints.tabletLandscapeBreakpoint &&
-    css`
-      min-height: 100%;
-    `}
 `;
 
 const ProjectInfoBox = styled.div<StyledProjectCard>`
@@ -90,14 +85,38 @@ const ProjectCardContainer = styled.div`
 `;
 
 function ProjectCard({ project }: ProjectCardProps) {
-  // ! PASS THESE 2 WITH PROPS!!!
   const screenWidth = useScreenWidthRem();
   const { isDarkMode } = useDarkMode();
-  const [isCardHovered, setIsCardHovered] = useState(true);
+  const [isCardHovered, setIsCardHovered] = useState(false);
 
-  // ! small screens
+  useDisplayCurrentlyVisibleCard(setIsCardHovered, `project-${project.index}`);
 
-  return screenWidth < breakpoints.tabletBreakpoint ? (
+  const renderProjectContent = () => (
+    <>
+      <ProjectInfoBox $isCardHovered={isCardHovered} $screenWidth={screenWidth}>
+        <NameAndDescription
+          $isCardHovered={isCardHovered}
+          $screenWidth={screenWidth}
+          $isDarkMode={isDarkMode}
+        >
+          <span>{project.title}</span>
+        </NameAndDescription>
+        <GitAndDeploy
+          screenWidth={screenWidth}
+          gitHubLink={project.gitHub}
+          deployedLink={project.deploy}
+          isDarkMode={isDarkMode}
+        />
+      </ProjectInfoBox>
+      <ImageSlider
+        images={project.previewImages}
+        isCardHovered={isCardHovered}
+        setIsCardHovered={setIsCardHovered}
+      />
+    </>
+  );
+
+  const renderMobileLayout = () => (
     <ProjectCardContainer>
       <ProjectInfo
         project={project}
@@ -105,115 +124,55 @@ function ProjectCard({ project }: ProjectCardProps) {
         screenWidth={screenWidth}
       />
       <StyledProjectCard
-        onClick={() => setIsCardHovered(true)}
-        onMouseLeave={() => setIsCardHovered(false)}
+        id={`project-${project.index}`}
         $screenWidth={screenWidth}
       >
-        <ProjectInfoBox
-          $isCardHovered={isCardHovered}
-          $screenWidth={screenWidth}
-        >
-          <NameAndDescription
-            $isCardHovered={isCardHovered}
-            $screenWidth={screenWidth}
-            $isDarkMode={isDarkMode}
-          >
-            <span>{project.title}</span>
-          </NameAndDescription>
-          <GitAndDeploy
-            screenWidth={screenWidth}
-            gitHubLink={project.gitHub}
-            deployedLink={project.deploy}
-            isDarkMode={isDarkMode}
-          />
-        </ProjectInfoBox>
-        <ImageSlider
-          images={project.previewImages}
-          isCardHovered={isCardHovered}
-          setIsCardHovered={setIsCardHovered}
-        />
+        {renderProjectContent()}
       </StyledProjectCard>
     </ProjectCardContainer>
-  ) : (
-    // ! large screens
-    <>
-      {project.index % 2 === 0 ? (
-        <>
-          <ProjectInfo
-            project={project}
-            isDarkMode={isDarkMode}
-            screenWidth={screenWidth}
-          />
-          <StyledProjectCard
-            onClick={() => setIsCardHovered(true)}
-            onMouseLeave={() => setIsCardHovered(false)}
-            $screenWidth={screenWidth}
-          >
-            <ProjectInfoBox
-              $isCardHovered={isCardHovered}
-              $screenWidth={screenWidth}
-            >
-              <NameAndDescription
-                $isCardHovered={isCardHovered}
-                $screenWidth={screenWidth}
-                $isDarkMode={isDarkMode}
-              >
-                <span>{project.title}</span>
-              </NameAndDescription>
-              <GitAndDeploy
-                screenWidth={screenWidth}
-                gitHubLink={project.gitHub}
-                deployedLink={project.deploy}
-                isDarkMode={isDarkMode}
-              />
-            </ProjectInfoBox>
-            <ImageSlider
-              images={project.previewImages}
-              isCardHovered={isCardHovered}
-              setIsCardHovered={setIsCardHovered}
-            />
-          </StyledProjectCard>
-        </>
-      ) : (
-        <>
-          <StyledProjectCard
-            onClick={() => setIsCardHovered(true)}
-            onMouseLeave={() => setIsCardHovered(false)}
-            $screenWidth={screenWidth}
-          >
-            <ProjectInfoBox
-              $isCardHovered={isCardHovered}
-              $screenWidth={screenWidth}
-            >
-              <NameAndDescription
-                $isCardHovered={isCardHovered}
-                $screenWidth={screenWidth}
-                $isDarkMode={isDarkMode}
-              >
-                <span>{project.title}</span>
-              </NameAndDescription>
-              <GitAndDeploy
-                screenWidth={screenWidth}
-                gitHubLink={project.gitHub}
-                deployedLink={project.deploy}
-                isDarkMode={isDarkMode}
-              />
-            </ProjectInfoBox>
-            <ImageSlider
-              images={project.previewImages}
-              isCardHovered={isCardHovered}
-              setIsCardHovered={setIsCardHovered}
-            />
-          </StyledProjectCard>
-          <ProjectInfo
-            project={project}
-            isDarkMode={isDarkMode}
-            screenWidth={screenWidth}
-          />
-        </>
-      )}
-    </>
   );
+
+  const renderDesktopLayout = () => {
+    const isEvenIndex = project.index % 2 === 0;
+
+    return (
+      <>
+        {isEvenIndex ? (
+          <>
+            <ProjectInfo
+              project={project}
+              isDarkMode={isDarkMode}
+              screenWidth={screenWidth}
+            />
+            <StyledProjectCard
+              id={`project-${project.index}`}
+              $screenWidth={screenWidth}
+            >
+              {renderProjectContent()}
+            </StyledProjectCard>
+          </>
+        ) : (
+          <>
+            <StyledProjectCard
+              id={`project-${project.index}`}
+              $screenWidth={screenWidth}
+            >
+              {renderProjectContent()}
+            </StyledProjectCard>
+            <ProjectInfo
+              project={project}
+              isDarkMode={isDarkMode}
+              screenWidth={screenWidth}
+            />
+          </>
+        )}
+      </>
+    );
+  };
+
+  return screenWidth < breakpoints.tabletBreakpoint
+    ? renderMobileLayout()
+    : renderDesktopLayout();
 }
 
 export default ProjectCard;

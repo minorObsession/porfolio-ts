@@ -7,10 +7,10 @@ export function useKeyPress(
   useEffect(
     function () {
       function callback(e: KeyboardEvent) {
+        console.log(e);
         // if the key pressed is the same as keyPressed
         if (e.code.toLowerCase() === keyPressed.toLowerCase()) {
           e.preventDefault();
-          console.log("we are here");
           functionToRun(e);
         }
       }
