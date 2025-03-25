@@ -7,8 +7,8 @@ import { breakpoints } from "../styles/breakpoints";
 import bogdan from "../../public/bogdan-p.jpg";
 
 const StyledLandingPage = styled.section<ScreenWidthType>`
-  width: 100vw;
-  max-height: 100vh;
+  width: 100lvw;
+  max-height: 100lvh;
 
   /* max-height: clamp(85vh, 100vh, 100vh); */
   padding: 0.8rem 1.5rem;

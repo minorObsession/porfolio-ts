@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { useImageSlider } from "../hooks/useImageSlider";
 import { hexToRgba } from "../config/helpers";
 import { useDarkMode } from "../contexts/DarkModeContext";

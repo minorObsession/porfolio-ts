@@ -1,23 +1,18 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { motion, LayoutGroup } from "framer-motion";
 import { useDisableScrollBasedOnCondition } from "../hooks/useDisableScrollingWhenElementActive";
 import { useEffect } from "react";
 
 const StyledDropdownMenu = styled(motion.menu)`
-  position: stickyq; // Prevents layout shifts
-  left: 0;
-  right: 0;
-  width: 100%;
-  max-height: 100vh; // Consistent max height
+  /* // ! DON'T CHANGE absolute SCROLLING WILL GET MESSED UP */
+  position: absolute;
+
+  width: 100vw;
+  max-height: 100vh;
   overflow: hidden;
   z-index: 1;
-
-  ${({ theme }) =>
-    theme &&
-    css`
-      background-color: ${theme.background};
-      color: ${theme.text};
-    `}
+  background-color: ${({ theme }) => theme.background};
+  color: ${({ theme }) => theme.text};
 
   display: flex;
   justify-content: center;
@@ -30,7 +25,7 @@ const SectionsList = styled(motion.ul)`
   display: flex;
   flex-direction: column;
   margin-left: 20%;
-  width: 100%; // Ensures consistent width
+  width: 100%;
 `;
 
 const SectionListItem = styled(motion.li)`
@@ -78,11 +73,19 @@ function DropdownMenu({
 
   useDisableScrollBasedOnCondition(isDropdownOpen);
 
+  // useEffect(() => {
+  //   if (isDropdownOpen) {
+  //     document.body.style.overflow = "hidden";
+  //   } else {
+  //     document.body.style.overflow = "auto";
+  //   }
+  // }, [isDropdownOpen]);
+
   useEffect(() => {
     if (isDropdownOpen) {
-      document.body.style.overflow = "hidden";
+      document.body.classList.add("no-scroll");
     } else {
-      document.body.style.overflow = "auto";
+      document.body.classList.remove("no-scroll");
     }
   }, [isDropdownOpen]);
 

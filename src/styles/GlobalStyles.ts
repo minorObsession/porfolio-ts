@@ -51,6 +51,10 @@ const GlobalStyles = createGlobalStyle`
   --box-shadow: var(--box-shadow-light);
 }
 
+.no-scroll {
+  overflow: hidden;
+}
+
 .light-theme {
   --box-shadow: var(--box-shadow-light);
   --box-shadow-sm: var(--box-shadow-sm-light)

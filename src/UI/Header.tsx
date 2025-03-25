@@ -47,8 +47,8 @@ const StyledHeader = styled.header`
   display: flex;
   justify-content: space-between;
   padding: 2rem;
-  width: 100%; // Changed from 100vw
-  z-index: 10; // Ensure it's above other elements
+  width: 100%;
+  z-index: 10;
   background-color: transparent;
 `;
 
