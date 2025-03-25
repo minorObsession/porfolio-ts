@@ -48,7 +48,7 @@ const SlideImage = styled(motion.img)<SlideImageProps>`
   width: 100%;
   height: 100%;
   object-fit: cover;
-  position: absolute; /* Ensures that images stack properly */
+  position: absolute;
   top: 0;
   left: 0;
 
@@ -117,17 +117,17 @@ function ImageSlider({ images, isCardHovered }: ImagesType) {
           $isCardHovered={isCardHovered}
           $screenWidth={screenWidth}
           initial={{
-            opacity: 0,
+            // opacity: 0,
             x: slideDirection === "right" ? "100%" : "-100%",
             scale: 0.95,
           }}
           animate={{
-            opacity: 1,
+            // opacity: 1,
             x: "0%",
             scale: 1,
           }}
           exit={{
-            opacity: 1 /* Keep the old image visible while transitioning */,
+            // opacity: 1 /* Keep the old image visible while transitioning */,
             x: slideDirection === "right" ? "-10%" : "10%" /* Subtle motion */,
             scale: 0.98,
           }}
