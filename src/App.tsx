@@ -12,13 +12,14 @@ import { useScreenWidthRem } from "./hooks/useScreenWidthRem";
 import Experience from "./UI/Experience";
 import Certificates from "./UI/Certificates";
 import { useFadeInAllSections } from "./hooks/useFadeInAllSections";
+import Header from "./UI/Header";
 
 // TODO:
 
 // !
 // ! CERTIFICATES SECITON to contain more info
 // ! useKeyPress (left-right) to change photos
-// !
+// ! hovering the card OR it's info box to make photo visible!!!
 
 function App() {
   const { isDarkMode, setIsDarkMode } = useDarkMode();
@@ -31,6 +32,7 @@ function App() {
     <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
       <GlobalStyles />
       <>
+        <Header />
         {/* // ! landing page */}
         <LandingPage />
         <Projects id="projects" />

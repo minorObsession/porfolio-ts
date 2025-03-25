@@ -86,6 +86,8 @@ function DropdownMenu({
     }
   }, [isDropdownOpen]);
 
+  // ! this line fucks up negative part of transition
+  // if (!isDropdownOpen) return null;
   return (
     <LayoutGroup>
       <StyledDropdownMenu
