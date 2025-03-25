@@ -106,7 +106,11 @@ border-bottom: var(--border-b-1)
 
 }
 
-
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
+}
 section, footer {
   padding: 3rem 1.5rem;
     opacity: 0;

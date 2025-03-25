@@ -52,7 +52,10 @@ const scrollToSection = (sectionId: string) => {
   const section = document.getElementById(sectionId);
   if (!section) return;
 
-  section.scrollIntoView({ block: "start", behavior: "smooth" });
+  const yOffset = -10; // Adjust this value for precision
+  const y = section.getBoundingClientRect().top + window.scrollY + yOffset;
+
+  window.scrollTo({ top: y, behavior: "smooth" });
 };
 
 function DropdownMenu({

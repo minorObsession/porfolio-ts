@@ -84,13 +84,6 @@ const SliderButton = styled.button<SliderButtonProps>`
       ${({ $isCardHovered }) => ($isCardHovered ? "0s" : "0.7s")};
 `;
 
-// const ImageDiv = styled.div`
-//   position: relative;
-//   width: 100%;
-//   height: 100%;
-//   overflow: hidden;
-// `;
-
 function ImageSlider({ images, isCardHovered }: ImagesType) {
   const { currImageIndex, nextSlide, prevSlide, slideDirection } =
     useImageSlider(images);

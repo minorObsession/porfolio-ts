@@ -16,9 +16,8 @@ import Header from "./UI/Header";
 
 // TODO:
 
-// ! layout shift on load
-// ! problem with images and transitions
-// ! layout shifts!!!!!!!
+// ! layout shift on load (shake)
+// ! change icon for deployed
 
 function App() {
   const { isDarkMode, setIsDarkMode } = useDarkMode();
