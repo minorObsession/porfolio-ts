@@ -18,7 +18,7 @@ import Header from "./UI/Header";
 
 // ! layout shift on load
 // ! problem with images and transitions
-// !
+// ! layout shifts!!!!!!!
 
 function App() {
   const { isDarkMode, setIsDarkMode } = useDarkMode();
