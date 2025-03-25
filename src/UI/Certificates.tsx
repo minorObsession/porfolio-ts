@@ -53,7 +53,7 @@ const chinguCertificates = [
 const StyledCertificates = styled.section<{ $screenWidth: number }>`
   display: flex;
   flex-direction: column;
-  align-items: center;
+  /* align-items: center; */
   justify-content: center;
   gap: 2rem;
   margin: 0 auto;
@@ -61,26 +61,51 @@ const StyledCertificates = styled.section<{ $screenWidth: number }>`
   ${({ $screenWidth }) => $screenWidth > breakpoints.tabletBreakpoint && css``}
 `;
 
-const CertificateList = styled.ul<{ $screenWidth: number }>`
-  width: 90vw;
+const CertificateList = styled.ul<{ $screenWidth: number; $chingu?: boolean }>`
+  /* max-width: 85%; */
+  width: 85%;
+  padding-left: 2rem;
   display: flex;
   gap: 0.5rem;
-  flex-direction: column;
-  /* padding: 1rem 4rem; */
-  padding: 1rem 1rem 1rem 5rem;
+  /* flex-direction: column; */
+  flex-direction: ${({ $chingu }) => ($chingu ? "column" : "row")};
 
+  ${({ $screenWidth }) =>
+    $screenWidth > breakpoints.mobileLargeBreakpoint &&
+    css`
+      padding-left: 10rem;
+    `}
+
+  ${({ $screenWidth }) =>
+    $screenWidth > breakpoints.betweenMobAndTabBreakpoint &&
+    css`
+      width: 100%;
+      flex-wrap: wrap;
+      max-height: 25vh;
+      padding-left: 5rem;
+
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    `}
   ${({ $screenWidth }) =>
     $screenWidth > breakpoints.tabletBreakpoint &&
     css`
-      width: 70vw;
-      /* padding: 1rem 1rem 1rem 5rem; */
+      /* This ensures a max of 2 columns */
+      flex-wrap: wrap;
+      
+      gap: 1rem; Adjust the gap between items
+      /* width: 100%; */
     `}
-  ${({ $screenWidth }) =>
-    $screenWidth > breakpoints.tabletLandscapeBreakpoint &&
-    css`
-      width: 80vw;
-      /* padding: 1rem 5rem; */
-    `}
+
+    li {
+    flex-basis: 50%;
+    /* max-width: 50%; */
+    ${({ $screenWidth }) =>
+      $screenWidth > breakpoints.tabletBreakpoint &&
+      css`
+        max-width: 100%;
+      `}
+  }
 `;
 
 const CertificateLink = styled.a<{ $screenWidth: number }>`
@@ -100,12 +125,24 @@ const CertificateLink = styled.a<{ $screenWidth: number }>`
     `}
 `;
 
-const CertTitleAndIcon = styled.div<{ $screenWidth: number }>`
+const StyledCertContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+
+  gap: 2rem;
   width: 100%;
+
+  margin-top: 2rem;
+`;
+// ! TITLE TO BREAK LINES ON LARGE SCREENS
+
+const CertTitleAndIcon = styled.div<{ $screenWidth: number }>`
   display: flex;
   align-items: center;
   gap: 1.5rem;
-  /* justify-content: space-between; */
+  /* justify-content: space-around; */
 
   ${({ $screenWidth }) =>
     $screenWidth > breakpoints.tabletBreakpoint &&
@@ -119,14 +156,28 @@ const CertTitleAndIcon = styled.div<{ $screenWidth: number }>`
     `}
 `;
 
-const CertificateIcon = styled.img<{ $screenWidth: number }>`
-  justify-self: end;
-  width: 3rem;
+const CertTitle = styled(Heading)<{ $screenWidth: number }>`
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: wrap;
+  flex-basis: 100%;
 
   ${({ $screenWidth }) =>
     $screenWidth > breakpoints.mobileLargeBreakpoint &&
     css`
-      width: 3.5rem;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    `}
+`;
+const CertificateIcon = styled.img<{ $screenWidth: number }>`
+  justify-self: end;
+  width: 4rem;
+
+  /* flex-basis: ; */
+  ${({ $screenWidth }) =>
+    $screenWidth > breakpoints.mobileLargeBreakpoint &&
+    css`
+      /* width: 3.5rem; */
     `}
 
   ${({ $screenWidth }) =>
@@ -140,31 +191,6 @@ const CertificateIcon = styled.img<{ $screenWidth: number }>`
       width: 5rem;
     `}
 `;
-
-const StyledCertContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  gap: 2rem;
-  width: 100%;
-
-  margin-top: 2rem;
-`;
-
-const CertTitle = styled(Heading)<{ $screenWidth: number }>`
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: wrap;
-
-  ${({ $screenWidth }) =>
-    $screenWidth > breakpoints.mobileLargeBreakpoint &&
-    css`
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    `}
-`;
-
 // Component Props
 type CertificatesProps = {
   screenWidth: number;
@@ -172,9 +198,8 @@ type CertificatesProps = {
 };
 
 function Certificates({ screenWidth, id }: CertificatesProps) {
-  const screenWiderThan620px =
-    screenWidth > breakpoints.betweenMobAndTabBreakpoint;
-  const headingSize = screenWiderThan620px ? "h2" : "h3";
+  const screenWiderThan768px = screenWidth > breakpoints.tabletBreakpoint;
+  const headingSize = screenWiderThan768px ? "h2" : "h3";
 
   const renderCertificates = (
     title: string,
@@ -193,7 +218,7 @@ function Certificates({ screenWidth, id }: CertificatesProps) {
         </CertTitle>
       </CertTitleAndIcon>
 
-      <CertificateList $screenWidth={screenWidth}>
+      <CertificateList $chingu={true} $screenWidth={screenWidth}>
         {certificates.map((cert) => (
           <li key={cert.name}>
             <CertificateLink
@@ -217,7 +242,11 @@ function Certificates({ screenWidth, id }: CertificatesProps) {
         "Meta Front-End Developer Certificate",
         metaCertificates
       )}
-      {renderCertificates("Chingu Certificates", chinguCertificates, chinguSVG)}
+      {renderCertificates(
+        "Chingu Collaborative Voyage Certificates",
+        chinguCertificates,
+        chinguSVG
+      )}
     </StyledCertificates>
   );
 }

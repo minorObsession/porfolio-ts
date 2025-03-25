@@ -16,7 +16,7 @@ import Header from "./UI/Header";
 
 // TODO:
 
-// ! first row-gap in projects grid to be less!
+// ! first row-gap in projects grid to be less! SAME THING for projects top padding (mobile)
 // ! dark-light based on browser/system settings
 // ! image background...
 // ! Certifications section - to split in 2 parts on LARGE SCREEN (1024px)
