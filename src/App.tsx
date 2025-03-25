@@ -16,8 +16,13 @@ import Header from "./UI/Header";
 
 // TODO:
 
-// ! layout shift on load (shake)
+// ! first row-gap in projects grid to be less!
+// ! dark-light based on browser/system settings
+// ! image background...
+// ! Certifications section - to split in 2 parts on LARGE SCREEN (1024px)
+// ! observer for header to have transparent background
 // ! change icon for deployed
+// * keypress issue.. unsolved (attempted)
 
 function App() {
   const { isDarkMode, setIsDarkMode } = useDarkMode();

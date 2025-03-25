@@ -12,13 +12,14 @@ const StyledExperience = styled.section`
 
 const ChinguContainer = styled.div<{ $screenWidth: number }>`
   display: grid;
+  column-gap: 2rem;
   align-items: center;
 
   /* flex-direction: column; */
   /* gap: 0.5rem; */
 
   ${({ $screenWidth }) =>
-    $screenWidth > breakpoints.tabletBreakpoint &&
+    $screenWidth > breakpoints.mobileLargeBreakpoint &&
     css`
       /* // ! change layout ; */
       display: grid;
@@ -30,7 +31,7 @@ const ChinguContainer = styled.div<{ $screenWidth: number }>`
 
 const ChinguHeading = styled(Heading)<{ $screenWidth: number }>`
   ${({ $screenWidth }) =>
-    $screenWidth > breakpoints.tabletBreakpoint &&
+    $screenWidth > breakpoints.mobileLargeBreakpoint &&
     css`
       /* // ! change layout ; */
       grid-row: 1 / span 2;
@@ -46,7 +47,7 @@ const RoleAndDuration = styled.div<{ $screenWidth: number }>`
   gap: 0.5rem;
 
   ${({ $screenWidth }) =>
-    $screenWidth > breakpoints.tabletBreakpoint &&
+    $screenWidth > breakpoints.mobileLargeBreakpoint &&
     css`
       flex-direction: row;
       gap: 1rem;
@@ -60,7 +61,7 @@ const ChinguDescription = styled.p<{ $screenWidth: number }>`
   font-size: 1.3rem;
 
   ${({ $screenWidth }) =>
-    $screenWidth > breakpoints.tabletBreakpoint &&
+    $screenWidth > breakpoints.mobileLargeBreakpoint &&
     css`
       /* // ! change layout ; */
       grid-row: 2;
@@ -69,6 +70,22 @@ const ChinguDescription = styled.p<{ $screenWidth: number }>`
       align-self: flex-start;
 
       font-size: 1.8rem;
+    `}
+`;
+const RoleBox = styled.div<{ $screenWidth: number }>`
+  display: flex;
+  flex-direction: column;
+  grid-row: span 2;
+
+  ${({ $screenWidth }) =>
+    $screenWidth > breakpoints.mobileLargeBreakpoint &&
+    css`
+      align-self: center;
+    `}
+  ${({ $screenWidth }) =>
+    $screenWidth > breakpoints.tabletBreakpoint &&
+    css`
+      align-self: flex-start;
     `}
 `;
 
@@ -82,27 +99,24 @@ function Experience({ id, screenWidth }: ExperienceProps) {
     <StyledExperience id={id}>
       <Heading as="h1">Work Experience</Heading>
       <ChinguContainer $screenWidth={screenWidth}>
-        <Heading as="h2">Chingu</Heading>
+        <RoleBox>
+          <Heading as="h2">Chingu</Heading>
+          <Heading style={{ fontStyle: "italic" }} as="h3">
+            software developer
+          </Heading>
+        </RoleBox>
         <RoleAndDuration $screenWidth={screenWidth}>
-          {/* // ! ADD CHINGU ICON */}
-
           <ChinguHeading
             as={screenWiderThan620px ? "h3" : "h4"}
             $screenWidth={screenWidth}
           >
-            software developer {screenWiderThan620px && "→"}
-          </ChinguHeading>
-          <ChinguHeading
-            as={screenWiderThan620px ? "h3" : "h4"}
-            $screenWidth={screenWidth}
-          >
-            Jan 2024 - Jan 2025
+            Jan 2024 - present
           </ChinguHeading>
         </RoleAndDuration>
         <ChinguDescription $screenWidth={screenWidth}>
-          Online volunteering collaborative program - developing apps in an
-          Agile environment in a team of designers, developers, product managers
-          and scrum masters
+          Creating applications within an Agile framework, working closely with
+          designers, other developers, product managers, and scrum masters to
+          deliver successful solutions.
         </ChinguDescription>
       </ChinguContainer>
     </StyledExperience>

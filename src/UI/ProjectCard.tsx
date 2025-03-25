@@ -76,8 +76,8 @@ const NameAndDescription = styled(OverlayImageBox)``;
 const ProjectCardContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 2rem;
-  padding-bottom: 6rem;
+  gap: 3rem;
+  padding: 6rem 0;
 
   &:not(:last-child) {
     border-bottom: 1px solid white;

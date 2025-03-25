@@ -4,7 +4,7 @@ import { Heading } from "../styles/GlobalStyles";
 import { useScreenWidthRem } from "../hooks/useScreenWidthRem";
 import { ScreenWidthType } from "../types/types";
 import { breakpoints } from "../styles/breakpoints";
-import bogdan from "../../public/bogdan-hq.jpg";
+import bogdan from "../../public/b-edited.png";
 
 const StyledLandingPage = styled.section<ScreenWidthType>`
   width: 100lvw;

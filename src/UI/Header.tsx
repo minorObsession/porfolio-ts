@@ -14,11 +14,11 @@ const StyledIcon = styled.div<{
 }>`
   z-index: 505;
   position: absolute; // or fixed, depending on your layout
-  top: 1rem;
-  ${({ $side }) => ($side === "left" ? "left: 0.8rem" : "right: 0.8rem")};
+  top: 0;
+  ${({ $side }) => ($side === "left" ? "left: 1rem" : "right: 1rem")};
 
   cursor: pointer;
-  padding: 1rem;
+  padding: 0.7rem;
   width: 5rem;
   height: 4rem;
   display: flex;

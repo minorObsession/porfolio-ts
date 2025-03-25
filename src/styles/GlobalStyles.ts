@@ -39,8 +39,8 @@ const GlobalStyles = createGlobalStyle`
 
 
 
-  --box-shadow-sm-light: 1px 5px 6px rgba(0, 0, 0, 0.15);  /* Light theme shadow */
-  --box-shadow-sm-dark: 1px 5px 6px rgba(255, 255, 255, 0.3);  /* Dark theme shadow */
+  --box-shadow-sm-light: 1px 5px 6px 3px rgba(0, 0, 0, 0.15);  /* Light theme shadow */
+  --box-shadow-sm-dark: 1px 5px 6px 3px rgba(255, 255, 255, 0.3);  /* Dark theme shadow */
 
 
 
@@ -91,7 +91,8 @@ body, #root{
   min-width: 100vw;
   overflow-x: hidden;
 
-  transition: all 0.3s ease-in-out;
+  /* // ! causes the "shaking" */
+  /* transition: all 0.3s ease-in-out; */
 
 }
 
@@ -112,18 +113,28 @@ border-bottom: var(--border-b-1)
   display: none;
 }
 section, footer {
-  padding: 3rem 1.5rem;
+  padding: 3rem 0.5rem;
     opacity: 0;
   transition: opacity 0.8s ease-in-out, transform 0.6s ease-in-out;
 
 }
 
-section:not(:first-of-type):not(#projects) {
+section:not(:first-of-type) {
     transform: translateY(10rem);
       margin: 0 auto;
-      scroll-margin-top: 10rem; 
-  max-width: 85%;
+      /* // ! unecessary */
+      /* scroll-margin-top: 10rem;  */
+  max-width: 90%;
+
+@media (min-width: 768px) {
+    max-width: 85%;
+  }
 }
+
+#projects {
+  max-width: 100%;
+}
+
 
 @media (min-width: 900px) {
 section {

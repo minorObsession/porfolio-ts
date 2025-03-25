@@ -5,7 +5,6 @@ import { useDarkMode } from "../contexts/DarkModeContext";
 import { useScreenWidthRem } from "../hooks/useScreenWidthRem";
 import { breakpoints } from "../styles/breakpoints";
 import { AnimatePresence, motion } from "motion/react";
-import { useKeyPress } from "../hooks/useKeyPress";
 
 type ImagesType = {
   images: string[];
@@ -89,8 +88,6 @@ function ImageSlider({ images, isCardHovered }: ImagesType) {
     useImageSlider(images);
   const { isDarkMode } = useDarkMode();
   const screenWidth = useScreenWidthRem();
-  useKeyPress("arrowRight", nextSlide);
-  useKeyPress("arrowLeft", prevSlide);
 
   return (
     <SlideContainer $screenWidth={screenWidth}>
@@ -110,18 +107,15 @@ function ImageSlider({ images, isCardHovered }: ImagesType) {
           $isCardHovered={isCardHovered}
           $screenWidth={screenWidth}
           initial={{
-            // opacity: 0,
             x: slideDirection === "right" ? "100%" : "-100%",
             scale: 0.95,
           }}
           animate={{
-            // opacity: 1,
             x: "0%",
             scale: 1,
           }}
           exit={{
-            // opacity: 1 /* Keep the old image visible while transitioning */,
-            x: slideDirection === "right" ? "-10%" : "10%" /* Subtle motion */,
+            x: slideDirection === "right" ? "-10%" : "10%",
             scale: 0.98,
           }}
           transition={{

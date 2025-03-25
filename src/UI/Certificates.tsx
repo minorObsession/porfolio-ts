@@ -62,21 +62,24 @@ const StyledCertificates = styled.section<{ $screenWidth: number }>`
 `;
 
 const CertificateList = styled.ul<{ $screenWidth: number }>`
-  width: 80vw;
+  width: 90vw;
   display: flex;
-  gap: 0.6rem;
+  gap: 0.5rem;
   flex-direction: column;
-  padding: 1rem 3rem;
+  /* padding: 1rem 4rem; */
+  padding: 1rem 1rem 1rem 5rem;
 
   ${({ $screenWidth }) =>
     $screenWidth > breakpoints.tabletBreakpoint &&
     css`
       width: 70vw;
+      /* padding: 1rem 1rem 1rem 5rem; */
     `}
   ${({ $screenWidth }) =>
     $screenWidth > breakpoints.tabletLandscapeBreakpoint &&
     css`
       width: 80vw;
+      /* padding: 1rem 5rem; */
     `}
 `;
 
@@ -101,8 +104,8 @@ const CertTitleAndIcon = styled.div<{ $screenWidth: number }>`
   width: 100%;
   display: flex;
   align-items: center;
-  gap: 1rem;
-  justify-content: center;
+  gap: 1.5rem;
+  /* justify-content: space-between; */
 
   ${({ $screenWidth }) =>
     $screenWidth > breakpoints.tabletBreakpoint &&
@@ -116,9 +119,26 @@ const CertTitleAndIcon = styled.div<{ $screenWidth: number }>`
     `}
 `;
 
-const CertificateIcon = styled.img`
+const CertificateIcon = styled.img<{ $screenWidth: number }>`
   justify-self: end;
-  width: 4rem;
+  width: 3rem;
+
+  ${({ $screenWidth }) =>
+    $screenWidth > breakpoints.mobileLargeBreakpoint &&
+    css`
+      width: 3.5rem;
+    `}
+
+  ${({ $screenWidth }) =>
+    $screenWidth > breakpoints.tabletBreakpoint &&
+    css`
+      width: 4rem;
+    `}
+  ${({ $screenWidth }) =>
+    $screenWidth > breakpoints.smallDesktopBreakpoint &&
+    css`
+      width: 5rem;
+    `}
 `;
 
 const StyledCertContainer = styled.div`
@@ -132,10 +152,17 @@ const StyledCertContainer = styled.div`
   margin-top: 2rem;
 `;
 
-const CertTitle = styled(Heading)`
+const CertTitle = styled(Heading)<{ $screenWidth: number }>`
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
+  white-space: wrap;
+
+  ${({ $screenWidth }) =>
+    $screenWidth > breakpoints.mobileLargeBreakpoint &&
+    css`
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    `}
 `;
 
 // Component Props
@@ -157,11 +184,13 @@ function Certificates({ screenWidth, id }: CertificatesProps) {
     <StyledCertContainer>
       <CertTitleAndIcon $screenWidth={screenWidth}>
         {iconImg ? (
-          <CertificateIcon src={iconImg} />
+          <CertificateIcon src={iconImg} $screenWidth={screenWidth} />
         ) : (
           <BsMeta size="4rem" fill="#0082fb" />
         )}
-        <CertTitle as={headingSize}>{title}</CertTitle>
+        <CertTitle $screenWidth={screenWidth} as={headingSize}>
+          {title}
+        </CertTitle>
       </CertTitleAndIcon>
 
       <CertificateList $screenWidth={screenWidth}>
