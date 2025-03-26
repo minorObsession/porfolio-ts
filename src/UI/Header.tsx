@@ -7,7 +7,7 @@ import { FaMoon, FaSun } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
 import DropdownMenu from "./DropdownMenu";
 import { useDropdown } from "../contexts/DropdownContext";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { useStickyHeader } from "../hooks/useStickyHeader";
 
 const StyledIcon = styled.div<{
@@ -16,23 +16,22 @@ const StyledIcon = styled.div<{
   $isLandingInView: boolean;
 }>`
   z-index: 505;
-  position: absolute; // or fixed, depending on your layout
+  position: absolute;
   top: 0;
   ${({ $side }) => ($side === "left" ? "left: 1rem" : "right: 1rem")};
 
   cursor: pointer;
-  padding: 0.7rem;
+  padding: 1.2rem;
   width: 5rem;
-  height: 4rem;
+  height: 4.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
 
-  ${({ theme }) =>
-    css`
-      color: ${theme.text};
-      background-color: ${theme.background};
-    `}
+  background-color: ${({ $isLandingInView, theme }) =>
+    $isLandingInView ? `${theme.background}` : "transparent"};
+
+  color: ${({ theme }) => theme.text};
 
   ${({ as }) =>
     as === RiCloseLargeFill &&
@@ -44,58 +43,38 @@ const StyledIcon = styled.div<{
 
 const StyledHeader = styled.header<{ $isLandingInView: boolean }>`
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+
   display: flex;
   justify-content: space-between;
   padding: 2rem;
   width: 100%;
   z-index: 10;
-
-  ${({ $isLandingInView, theme }) =>
-    $isLandingInView
-      ? css`
-          background-color: transparent;
-        `
-      : css`
-          background-color: ${theme.background};
-        `}
+  background-color: ${({ $isLandingInView, theme }) =>
+    $isLandingInView ? "transparent" : `${theme.background}60`};
 `;
 
 // ! observe wiewport pos
 // ! when bellow start of projects - add bck color to hearder
 
+// const Container = styled.div`
+//   position: relative;
+// `;
 function Header() {
   const { isDropdownOpen, setIsDropdownOpen } = useDropdown();
   const { isDarkMode, setIsDarkMode } = useDarkMode();
   const [isLandingInView, setIsLandingInView] = useState(true);
-  // ! cannot
-  const landingRef = useRef<HTMLElement | null>(null);
 
   const handleOpenDropdown = () => {
-    window.scrollTo({ top: 0 });
+    // window.scrollTo({ top: 0 });
     setIsDropdownOpen((s) => !s);
   };
 
-  // ! sync ref with
-  useEffect(() => {
-    landingRef.current = document.getElementById("landing");
-  }, []);
-
-  useStickyHeader({
-    elementToObserve: landingRef.current,
-    setStateFn: setIsLandingInView,
-  });
+  useStickyHeader(setIsLandingInView);
 
   useKeyPress("KeyQ", handleOpenDropdown);
   return (
     <>
-      <DropdownMenu
-        isDropdownOpen={isDropdownOpen}
-        setIsDropdownOpen={setIsDropdownOpen}
-      />
-      <StyledHeader $isLandingInView={isLandingInView} ref={landingRef}>
+      <StyledHeader $isLandingInView={isLandingInView}>
         <StyledIcon
           $isLandingInView={isLandingInView}
           $side="left"
@@ -110,6 +89,12 @@ function Header() {
           onClick={() => setIsDarkMode((s) => !s)}
         />
       </StyledHeader>
+      {/* <Container> */}
+      <DropdownMenu
+        isDropdownOpen={isDropdownOpen}
+        setIsDropdownOpen={setIsDropdownOpen}
+      />
+      {/* </Container> */}
     </>
   );
 }

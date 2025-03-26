@@ -1,12 +1,11 @@
 import styled from "styled-components";
 import { motion, LayoutGroup } from "framer-motion";
 import { useDisableScrollBasedOnCondition } from "../hooks/useDisableScrollingWhenElementActive";
-import { useEffect } from "react";
 
 const StyledDropdownMenu = styled(motion.menu)`
   /* // ! DON'T CHANGE absolute SCROLLING WILL GET MESSED UP */
-  position: absolute;
-
+  position: fixed;
+  /* top: 4rem; */
   width: 100vw;
   max-height: 100vh;
   overflow: hidden;
@@ -75,22 +74,6 @@ function DropdownMenu({
   };
 
   useDisableScrollBasedOnCondition(isDropdownOpen);
-
-  // useEffect(() => {
-  //   if (isDropdownOpen) {
-  //     document.body.style.overflow = "hidden";
-  //   } else {
-  //     document.body.style.overflow = "auto";
-  //   }
-  // }, [isDropdownOpen]);
-
-  useEffect(() => {
-    if (isDropdownOpen) {
-      document.body.classList.add("no-scroll");
-    } else {
-      document.body.classList.remove("no-scroll");
-    }
-  }, [isDropdownOpen]);
 
   // ! this line fucks up negative part of transition
   // if (!isDropdownOpen) return null;

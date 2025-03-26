@@ -17,6 +17,7 @@ import Header from "./UI/Header";
 // TODO:
 
 // ! first row-gap in projects grid to be less! SAME THING for projects top padding (mobile)
+// ! dropdown to not be always on top! dynamic insert
 // ! image background...
 // * keypress issue.. unsolved (attempted)
 

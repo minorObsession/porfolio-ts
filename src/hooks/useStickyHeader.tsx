@@ -1,47 +1,40 @@
 import { useEffect } from "react";
-interface stickyHeaderProps {
-  elementToObserve: HTMLElement | null;
-  setStateFn?: React.Dispatch<React.SetStateAction<boolean>>;
-}
-export function useStickyHeader({
-  elementToObserve,
-  setStateFn,
-}: stickyHeaderProps) {
+
+export function useStickyHeader(
+  setIsLandingInView: React.Dispatch<React.SetStateAction<boolean>>
+) {
   useEffect(() => {
-    if (!elementToObserve) {
-      console.log("exiting observer...");
-      return;
-    }
+    // ! change element if needed
+    const landingPageEl = document.getElementById("landing");
 
-    const options = {
-      root: null,
-      rootMargin: "20px",
-      threshold: 0,
-    };
+    if (!landingPageEl) return;
 
-    const callback: IntersectionObserverCallback = (entries) => {
-      entries.forEach((entry) => {
-        console.log(entry.isIntersecting);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            setIsLandingInView(false);
+          } else {
+            setIsLandingInView(true);
+          }
+        });
+      },
+      {
+        root: null,
+        rootMargin: "20px",
+        threshold: 0,
+      }
+    );
 
-        // ! if target is NOT in view
-        if (!entry.isIntersecting && setStateFn) {
-          // ! change state for target in view
-          setStateFn(false);
-        }
-        // ! if landing page is in view
-        else if (entry.isIntersecting && setStateFn) {
-          setStateFn(true);
-        }
-      });
-    };
-
-    const observer = new IntersectionObserver(callback, options);
-
-    observer.observe(elementToObserve);
+    observer.observe(landingPageEl);
 
     return () => {
-      observer.unobserve(elementToObserve);
       observer.disconnect();
     };
-  }, [elementToObserve, setStateFn]);
+  }, [setIsLandingInView]);
 }
+
+// usage:
+// ! in component
+// const [isLandingInView, setIsLandingInView] = useState(true);
+//   useStickyHeader(setIsLandingInView);
