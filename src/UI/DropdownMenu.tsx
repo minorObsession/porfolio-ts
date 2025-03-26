@@ -3,9 +3,9 @@ import { motion, LayoutGroup } from "framer-motion";
 import { useDisableScrollBasedOnCondition } from "../hooks/useDisableScrollingWhenElementActive";
 
 const StyledDropdownMenu = styled(motion.menu)`
-  /* // ! DON'T CHANGE absolute SCROLLING WILL GET MESSED UP */
+  /* // ! DON'T CHANGE absolute/fixed - SCROLLING WILL GET MESSED UP */
   position: fixed;
-  /* top: 4rem; */
+
   width: 100vw;
   max-height: 100vh;
   overflow: hidden;

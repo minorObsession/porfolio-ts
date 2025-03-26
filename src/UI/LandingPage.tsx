@@ -45,7 +45,8 @@ const Image = styled.img<ScreenWidthType>`
   max-height: clamp(30vh, 50vh, 100vh);
 
   object-fit: cover;
-  object-position: 15%;
+
+  /* object-position: top; */
 
   ${(props) =>
     props.$screenWidth > breakpoints.tabletBreakpoint &&
