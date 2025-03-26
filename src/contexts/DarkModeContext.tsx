@@ -15,7 +15,9 @@ type DarkModeProviderProps = {
 };
 
 export function DarkModeProvider({ children }: DarkModeProviderProps) {
-  const [isDarkMode, setIsDarkMode] = useState(true);
+  const [isDarkMode, setIsDarkMode] = useState(
+    window.matchMedia("(prefers-color-scheme: dark)").matches ? true : false
+  );
 
   useEffect(() => {
     if (isDarkMode) {

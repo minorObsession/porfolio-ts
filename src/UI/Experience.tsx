@@ -115,8 +115,8 @@ function Experience({ id, screenWidth }: ExperienceProps) {
         </RoleAndDuration>
         <ChinguDescription $screenWidth={screenWidth}>
           Creating applications within an Agile framework, working closely with
-          designers, other developers, product managers, and scrum masters to
-          deliver successful solutions.
+          designers, other developers, product managers and scrum masters to
+          deliver successful and appealing solutions
         </ChinguDescription>
       </ChinguContainer>
     </StyledExperience>

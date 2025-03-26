@@ -83,11 +83,11 @@ const HeadingBox = styled.article<ScreenWidthType>`
     `}
 `;
 
-function LandingPage() {
+function LandingPage({ id }: { id: string }) {
   const screenWidth = useScreenWidthRem();
 
   return (
-    <StyledLandingPage $screenWidth={screenWidth}>
+    <StyledLandingPage $screenWidth={screenWidth} id={id}>
       <PhotoBox $screenWidth={screenWidth}>
         <Image $screenWidth={screenWidth} src={bogdan} />
       </PhotoBox>

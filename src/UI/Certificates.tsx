@@ -62,49 +62,42 @@ const StyledCertificates = styled.section<{ $screenWidth: number }>`
 `;
 
 const CertificateList = styled.ul<{ $screenWidth: number; $chingu?: boolean }>`
-  /* max-width: 85%; */
   width: 85%;
-  padding-left: 2rem;
-  display: flex;
+  display: grid;
   gap: 0.5rem;
-  /* flex-direction: column; */
-  flex-direction: ${({ $chingu }) => ($chingu ? "column" : "row")};
+
+  grid-template-columns: 1fr;
+  list-style-position: inside;
 
   ${({ $screenWidth }) =>
     $screenWidth > breakpoints.mobileLargeBreakpoint &&
     css`
-      padding-left: 10rem;
+      padding-left: 5rem;
     `}
 
   ${({ $screenWidth }) =>
     $screenWidth > breakpoints.betweenMobAndTabBreakpoint &&
     css`
       width: 100%;
-      flex-wrap: wrap;
-      max-height: 25vh;
-      padding-left: 5rem;
+      grid-template-columns: repeat(2, 1fr);
 
-      text-overflow: ellipsis;
-      white-space: nowrap;
+      /* padding-left: 5rem; */
     `}
+
   ${({ $screenWidth }) =>
     $screenWidth > breakpoints.tabletBreakpoint &&
     css`
-      /* This ensures a max of 2 columns */
-      flex-wrap: wrap;
-      
-      gap: 1rem; Adjust the gap between items
-      /* width: 100%; */
+      gap: 1rem;
+      /* padding-left: 10rem; */
+
+      max-width: 100%;
     `}
 
-    li {
-    flex-basis: 50%;
-    /* max-width: 50%; */
-    ${({ $screenWidth }) =>
-      $screenWidth > breakpoints.tabletBreakpoint &&
-      css`
-        max-width: 100%;
-      `}
+
+  li {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 `;
 
@@ -131,18 +124,16 @@ const StyledCertContainer = styled.div`
 
   align-items: center;
 
-  gap: 2rem;
+  gap: 3rem;
   width: 100%;
 
   margin-top: 2rem;
 `;
 // ! TITLE TO BREAK LINES ON LARGE SCREENS
-
 const CertTitleAndIcon = styled.div<{ $screenWidth: number }>`
   display: flex;
   align-items: center;
   gap: 1.5rem;
-  /* justify-content: space-around; */
 
   ${({ $screenWidth }) =>
     $screenWidth > breakpoints.tabletBreakpoint &&
@@ -188,7 +179,7 @@ const CertificateIcon = styled.img<{ $screenWidth: number }>`
   ${({ $screenWidth }) =>
     $screenWidth > breakpoints.smallDesktopBreakpoint &&
     css`
-      width: 5rem;
+      width: 4.5rem;
     `}
 `;
 // Component Props

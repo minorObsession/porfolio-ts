@@ -1,5 +1,4 @@
-import { FaGithub } from "react-icons/fa";
-import { MdWeb } from "react-icons/md";
+import { FaGithub, FaGlobe } from "react-icons/fa";
 import { useState } from "react";
 import styled from "styled-components";
 import { IconType } from "react-icons";
@@ -94,7 +93,7 @@ const GitAndDeploy = ({
         <HoverIcon
           screenWidth={screenWidth}
           isDarkMode={isDarkMode}
-          icon={MdWeb}
+          icon={FaGlobe}
           text="Deployed Website"
           link={deployedLink}
         />

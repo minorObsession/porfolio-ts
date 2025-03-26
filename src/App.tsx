@@ -17,11 +17,7 @@ import Header from "./UI/Header";
 // TODO:
 
 // ! first row-gap in projects grid to be less! SAME THING for projects top padding (mobile)
-// ! dark-light based on browser/system settings
 // ! image background...
-// ! Certifications section - to split in 2 parts on LARGE SCREEN (1024px)
-// ! observer for header to have transparent background
-// ! change icon for deployed
 // * keypress issue.. unsolved (attempted)
 
 function App() {
@@ -36,14 +32,11 @@ function App() {
       <GlobalStyles />
       <>
         <Header />
-        {/* // ! landing page */}
-        <LandingPage />
+        <LandingPage id="landing" />
         <Projects id="projects" />
-        {/* // ! skills section */}
         <Experience screenWidth={screenWidth} id="experience" />
         <Certificates screenWidth={screenWidth} id="certificates" />
         <WebSkills isDarkMode={isDarkMode} id="web-skills" />
-        {/* // ! contact-me section - Footer */}
         <ContactMe
           isDarkMode={isDarkMode}
           screenWidth={screenWidth}

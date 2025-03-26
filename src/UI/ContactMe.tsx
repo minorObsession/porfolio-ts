@@ -48,7 +48,7 @@ const HeadingAndSidebarBox = styled.div<{ $screenWidth: number }>`
 
   ${({ $screenWidth }) =>
     $screenWidth !== undefined &&
-    $screenWidth >= breakpoints.mobileLargeBreakpoint &&
+    $screenWidth >= breakpoints.betweenMobAndTabBreakpoint &&
     css`
       align-items: flex-end;
     `}

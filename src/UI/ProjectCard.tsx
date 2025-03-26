@@ -77,7 +77,7 @@ const ProjectCardContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 3rem;
-  padding: 6rem 0;
+  padding: 4rem 0;
 
   &:not(:last-child) {
     border-bottom: 1px solid white;
