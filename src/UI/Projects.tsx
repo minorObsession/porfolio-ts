@@ -147,7 +147,7 @@ const StyledProjectsPage = styled.section<ScreenWidthType>`
       grid-template-rows: auto 1fr 1fr;
 
       column-gap: 4rem;
-      row-gap: 10rem;
+      row-gap: 7rem;
     `};
 `;
 
