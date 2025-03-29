@@ -212,7 +212,8 @@ export const Heading = styled.h1<HeadingProps>`
       white-space: nowrap;
       margin-inline: auto;
       border-right: 1px solid;
-      animation: ${typing} 2s steps(22) forwards,
+      padding-right: 5px;
+      animation: ${typing} 3s steps(50) forwards,
         ${blink} 0.75s step-end infinite;
     `}
 `;

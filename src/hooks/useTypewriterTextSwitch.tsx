@@ -24,10 +24,10 @@ export const useTypewriterTextSwitch = (
     const mainTimeout = setTimeout(() => {
       if (!typewriterElement) return;
 
-      typewriterElement.style.border = "none";
+      typewriterElement.style.borderColor = "transparent";
 
       if (sentenceNum === lastSentenceIndex && !loopSentences) {
-        typewriterElement.style.border = "none";
+        typewriterElement.style.borderColor = "transparent";
         return;
       }
       // ! Disappear the text for 1s
@@ -47,9 +47,9 @@ export const useTypewriterTextSwitch = (
             setSentenceNum(0);
             return;
           } else setSentenceNum((prev) => prev + 1);
-        }, 1000); // to re-apppear text + reset animation
-      }, 1000); // to dissapear text
-    }, 2000); // to start after mount
+        }, 1000); // how long between
+      }, 3000); // how long each sentance will stay visible
+    }, 1500); // start after mount
 
     return () => {
       clearTimeout(mainTimeout);
