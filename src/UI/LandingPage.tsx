@@ -1,12 +1,12 @@
 import styled, { css } from "styled-components";
 import Sidebar from "./Sidebar";
-import { blink, Heading, typing } from "../styles/GlobalStyles";
+import { Heading } from "../styles/GlobalStyles";
 import { useScreenWidthRem } from "../hooks/useScreenWidthRem";
 import { ScreenWidthType } from "../types/types";
 import { breakpoints } from "../styles/breakpoints";
 import bogdan from "../../public/b-edited.png";
-import { useEffect, useRef, useState } from "react";
-import { animate } from "motion";
+
+import { useTypewriterTextSwitch } from "../hooks/useTypewriterTextSwitch";
 
 const StyledLandingPage = styled.section<ScreenWidthType>`
   width: 100lvw;
@@ -88,60 +88,15 @@ const HeadingBox = styled.article<ScreenWidthType>`
     `}
 `;
 
+const switchingDescriptions = [
+  "Coding ideas into apps",
+  "Learning by building",
+  "third sss sentance",
+];
+
 function LandingPage({ id }: { id: string }) {
   const screenWidth = useScreenWidthRem();
-
-  const [sentence, setSentence] = useState(0);
-
-  useEffect(() => {
-    if (sentence > 2) return;
-
-    const switchingDescriptions = [
-      "Coding ideas into apps",
-      "Learning by building",
-      "third sss sentance",
-    ];
-
-    const typewriterElement = document.querySelector(
-      "[data-typewriter]"
-    ) as HTMLElement | null;
-
-    if (!typewriterElement) return;
-
-    typewriterElement.textContent = switchingDescriptions[sentence];
-
-    // ! After 1st transition - after 2s of mount
-    const firstTimeout = setTimeout(() => {
-      if (!typewriterElement) return;
-
-      typewriterElement.style.border = "none";
-
-      // ! Disappear the text for 1s
-      setTimeout(() => {
-        if (sentence === 2) return;
-        typewriterElement.style.opacity = "0";
-
-        // ! Reset text and trigger animation
-        setTimeout(() => {
-          if (sentence === 2) return;
-          setSentence((prev) => prev + 1); // increment state correctly
-          typewriterElement.style.opacity = "1";
-          typewriterElement.style.borderRight = "1px solid";
-
-          // Reset animation to re-trigger
-          typewriterElement.style.animation = "none";
-          // Give a brief moment for the animation reset
-          setTimeout(() => {
-            typewriterElement.style.animation = "";
-          }, 50);
-        }, 1000);
-      }, 1000);
-    }, 2000);
-
-    return () => {
-      clearTimeout(firstTimeout);
-    };
-  }, [sentence]);
+  useTypewriterTextSwitch(switchingDescriptions, true);
 
   return (
     <StyledLandingPage $screenWidth={screenWidth} id={id}>
