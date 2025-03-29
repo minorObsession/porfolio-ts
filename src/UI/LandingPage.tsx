@@ -5,6 +5,7 @@ import { useScreenWidthRem } from "../hooks/useScreenWidthRem";
 import { ScreenWidthType } from "../types/types";
 import { breakpoints } from "../styles/breakpoints";
 import bogdan from "../../public/b-edited.png";
+import { useEffect } from "react";
 
 const StyledLandingPage = styled.section<ScreenWidthType>`
   width: 100lvw;
@@ -70,6 +71,8 @@ const Image = styled.img<ScreenWidthType>`
 
 const HeadingBox = styled.article<ScreenWidthType>`
   /* position: relative; */
+  display: flex;
+  flex-direction: column;
 
   grid-row: 2/3;
   text-align: center;
@@ -87,14 +90,34 @@ const HeadingBox = styled.article<ScreenWidthType>`
 function LandingPage({ id }: { id: string }) {
   const screenWidth = useScreenWidthRem();
 
+  useEffect(() => {
+    setTimeout(() => {
+      const typewriterElement =
+        (document.querySelector("[data-typewriter]") as HTMLElement) || null;
+
+      if (typewriterElement) typewriterElement.style.border = "none";
+    }, 2000);
+  }, []);
+
   return (
     <StyledLandingPage $screenWidth={screenWidth} id={id}>
       <PhotoBox $screenWidth={screenWidth}>
         <Image $screenWidth={screenWidth} src={bogdan} />
       </PhotoBox>
       <HeadingBox $screenWidth={screenWidth}>
-        <Heading as="h1">I&apos;m a React developer</Heading>
-        <Heading as="h2">I love crafting UIs </Heading>
+        <Heading
+          $screenWidth={screenWidth}
+          as={screenWidth > breakpoints.tabletBreakpoint ? "h1" : "h2"}
+        >
+          I&apos;m Bogdan - a React Developer
+        </Heading>
+        <Heading
+          $typewriter
+          data-typewriter
+          as={screenWidth > breakpoints.tabletBreakpoint ? "h2" : "h3"}
+        >
+          Coding ideas into apps
+        </Heading>
       </HeadingBox>
       <Sidebar rotated={screenWidth > breakpoints.tabletBreakpoint && true} />
     </StyledLandingPage>

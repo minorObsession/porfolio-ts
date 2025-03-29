@@ -1,4 +1,4 @@
-import styled, { createGlobalStyle, css } from "styled-components";
+import styled, { createGlobalStyle, css, keyframes } from "styled-components";
 import { breakpoints } from "./breakpoints";
 import { hexToRgba } from "../config/helpers";
 
@@ -119,7 +119,7 @@ section, footer {
 
 }
 
-section:not(:first-of-type) {
+footer,section:not(:first-of-type) {
     transform: translateY(10rem);
       margin: 0 auto;
       /* // ! unecessary */
@@ -166,31 +166,50 @@ button:focus {
 }
 `;
 
-export const Heading = styled.h1<{ $screenWidth?: number; children: string }>`
+// Typewriter animation
+const typing = keyframes`
+  from { width: 0; }
+  to { width: 100%; }
+`;
+// Typewriter animation
+const blink = keyframes`
+50% {
+  border-color: transparent;
+}
+`;
+
+// Font sizes mapping
+const headingFontSizes = {
+  h1: "3.5rem",
+  h2: "3rem",
+  h3: "2rem",
+  h4: "1.5rem",
+} as const; // `as const` makes values
+// Type definitions
+interface HeadingProps {
+  $screenWidth?: number;
+  as?: keyof typeof headingFontSizes; // Ensures `as` is a valid key
+  $typewriter?: boolean;
+}
+
+// Styled Heading component
+export const Heading = styled.h1<HeadingProps>`
   text-align: center;
-
   transition: all 0.5s ease-in-out;
+  font-size: ${({ as = "h1" }) =>
+    headingFontSizes[
+      as as keyof typeof headingFontSizes
+    ]}; /* Ensure proper indexing */
 
-  ${(props) =>
-    props.as === "h1" &&
+  ${({ $typewriter }) =>
+    $typewriter &&
     css`
-      font-size: 3.5rem;
-      font-weight: 800;
-    `}
-  ${(props) =>
-    props.as === "h2" &&
-    css`
-      font-size: 3rem;
-    `}
-  ${(props) =>
-    props.as === "h3" &&
-    css`
-      font-size: 2rem;
-    `}
-  ${(props) =>
-    props.as === "h4" &&
-    css`
-      font-size: 1.5rem;
+      overflow: hidden;
+      white-space: nowrap;
+      margin-inline: auto;
+      border-right: 2px solid;
+      animation: ${typing} 3s steps(28) forwards,
+        ${blink} 0.75s step-end infinite;
     `}
 `;
 

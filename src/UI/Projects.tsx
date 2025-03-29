@@ -157,7 +157,7 @@ function Projects({ id }: { id: string }) {
   return (
     <StyledProjectsPage $screenWidth={screenWidth} id={id}>
       <Heading
-        as="h1"
+        as={screenWidth > breakpoints.tabletBreakpoint ? "h1" : "h2"}
         style={{
           gridColumn: "1 / -1",
         }}
