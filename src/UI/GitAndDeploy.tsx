@@ -35,6 +35,11 @@ const Wrapper = styled.div`
 `;
 
 const StyledTooltip = styled(Tooltip)``;
+const IconContainer = styled.div`
+  &:hover {
+    filter: contrast(0.7);
+  }
+`;
 
 const HoverIcon = ({
   icon: Icon,
@@ -58,11 +63,13 @@ const HoverIcon = ({
         }, 150)
       }
     >
-      <Icon
-        stroke={isDarkMode ? darkTheme.text : lightTheme.text}
-        fill={isDarkMode ? darkTheme.text : lightTheme.text}
-        size={size}
-      />
+      <IconContainer>
+        <Icon
+          stroke={isDarkMode ? darkTheme.text : lightTheme.text}
+          fill={isDarkMode ? darkTheme.text : lightTheme.text}
+          size={size}
+        />
+      </IconContainer>
       {isHovered && (
         <StyledTooltip $screenWidth={screenWidth} $isDarkMode={isDarkMode}>
           {text}
