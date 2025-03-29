@@ -167,12 +167,12 @@ button:focus {
 `;
 
 // Typewriter animation
-const typing = keyframes`
+export const typing = keyframes`
   from { width: 0; }
   to { width: 100%; }
 `;
 // Typewriter animation
-const blink = keyframes`
+export const blink = keyframes`
 50% {
   border-color: transparent;
 }
@@ -207,8 +207,8 @@ export const Heading = styled.h1<HeadingProps>`
       overflow: hidden;
       white-space: nowrap;
       margin-inline: auto;
-      border-right: 2px solid;
-      animation: ${typing} 3s steps(28) forwards,
+      border-right: 1px solid;
+      animation: ${typing} 2s steps(22) forwards,
         ${blink} 0.75s step-end infinite;
     `}
 `;
