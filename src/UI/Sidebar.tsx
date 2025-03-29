@@ -27,7 +27,7 @@ const StyledSidebar = styled.aside<SidebarType>`
       grid-column: 1/2;
       max-width: 5rem;
       flex-direction: column;
-      padding-left: 0rem;
+
       /* transform: translateX(-1rem); */
     `}
 
@@ -44,7 +44,8 @@ const P = styled.p<SidebarType>`
     props.$screenWidth > breakpoints.tabletBreakpoint &&
     props.$rotated === true &&
     css`
-      padding: 6rem;
+      /* // ! to seperate the p from icons */
+      margin: 6rem;
       transform: rotate(-90deg);
     `}
 `;

@@ -172,7 +172,7 @@ button:focus {
 // Typewriter animation
 export const typing = keyframes`
   from { width: 0; }
-  to { width: 80%; }
+  to { width: 100%; }
 `;
 // Typewriter animation
 export const blink = keyframes`
