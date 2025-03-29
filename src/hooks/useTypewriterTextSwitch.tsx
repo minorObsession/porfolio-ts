@@ -27,7 +27,6 @@ export const useTypewriterTextSwitch = (
       typewriterElement.style.border = "none";
 
       if (sentenceNum === lastSentenceIndex && !loopSentences) {
-        console.log("not gonna loop back anymore");
         typewriterElement.style.border = "none";
         return;
       }

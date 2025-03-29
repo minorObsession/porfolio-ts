@@ -106,14 +106,18 @@ function LandingPage({ id }: { id: string }) {
       <HeadingBox $screenWidth={screenWidth}>
         <Heading
           $screenWidth={screenWidth}
-          as={screenWidth > breakpoints.tabletBreakpoint ? "h1" : "h2"}
+          as={
+            screenWidth > breakpoints.betweenMobAndTabBreakpoint ? "h1" : "h2"
+          }
         >
           I&apos;m Bogdan - a React Developer
         </Heading>
         <Heading
           $typewriter
           data-typewriter
-          as={screenWidth > breakpoints.tabletBreakpoint ? "h2" : "h3"}
+          as={
+            screenWidth > breakpoints.betweenMobAndTabBreakpoint ? "h2" : "h3"
+          }
         ></Heading>
       </HeadingBox>
       <Sidebar rotated={screenWidth > breakpoints.tabletBreakpoint && true} />

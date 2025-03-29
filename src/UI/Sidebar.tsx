@@ -36,6 +36,7 @@ const StyledSidebar = styled.aside<SidebarType>`
 `;
 
 const P = styled.p<SidebarType>`
+  z-index: 100000;
   pointer-events: none;
   white-space: nowrap;
 

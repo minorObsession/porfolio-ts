@@ -90,6 +90,9 @@ body, #root{
   min-height: 100vh;
   min-width: 100vw;
   overflow-x: hidden;
+  /* font-family: 'Oxanium', sans-serif; */
+  font-family: 'Saira', sans-serif;
+  /* font-family: 'Orbitron', sans-serif; */
 
   /* // ! causes the "shaking" */
   /* transition: all 0.3s ease-in-out; */
@@ -169,7 +172,7 @@ button:focus {
 // Typewriter animation
 export const typing = keyframes`
   from { width: 0; }
-  to { width: 100%; }
+  to { width: 80%; }
 `;
 // Typewriter animation
 export const blink = keyframes`
@@ -205,6 +208,7 @@ export const Heading = styled.h1<HeadingProps>`
     $typewriter &&
     css`
       overflow: hidden;
+      max-width: fit-content;
       white-space: nowrap;
       margin-inline: auto;
       border-right: 1px solid;
