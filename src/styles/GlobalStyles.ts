@@ -3,13 +3,13 @@ import { breakpoints } from "./breakpoints";
 import { hexToRgba } from "../config/helpers";
 
 export const lightTheme = {
-  text: "#354E8E", //  --color-main-300:
-  background: "#F8F9FC",
+  text: "#2B2F36",
+  background: "#F4F7FB",
 };
 
 export const darkTheme = {
-  text: "#A1B6F0", //  --color-main-600:
-  background: "#0E121B",
+  text: "#E3E6EC",
+  background: "#101417",
 };
 // export const lightTheme = {
 //   text: "#1A1A1A",
@@ -73,14 +73,13 @@ const GlobalStyles = createGlobalStyle`
 .light-theme {
   --box-shadow: var(--box-shadow-light);
   --box-shadow-sm: var(--box-shadow-sm-light);
-  --color-text: var(--color-main-600);
+  --highlight-text: var(--color-main-700);
 }
 
 .dark-theme {
   --box-shadow: var(--box-shadow-dark);
   --box-shadow-sm: var(--box-shadow-sm-dark);
-  --color-text: var(--color-main-300);
-
+  --highlight-text: var(--color-main-400);
 }
 
 
@@ -98,6 +97,13 @@ html {
   font-size: 62.5%;
 }
 
+a:hover,svg:hover {
+color: var(--highlight-text);
+transition: color 0.2s ease-in-out;
+}
+
+
+
 body, #root{
   will-change: background-color, color;
 
@@ -107,7 +113,8 @@ body, #root{
   
   min-height: 100vh;
   min-width: 100vw;
-  overflow-x: hidden;
+  
+  /* overflow-x: hidden; */
   /* font-family: 'Oxanium', sans-serif; */
   font-family: 'Saira', sans-serif;
   /* font-family: 'Orbitron', sans-serif; */
@@ -225,6 +232,7 @@ export const Heading = styled.h1<HeadingProps>`
   ${({ $typewriter }) =>
     $typewriter &&
     css`
+      color: var(--highlight-text);
       overflow: hidden;
       max-width: fit-content;
       white-space: nowrap;

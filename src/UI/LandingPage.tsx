@@ -9,8 +9,8 @@ import bogdan from "../../public/b-edited.png";
 import { useTypewriterTextSwitch } from "../hooks/useTypewriterTextSwitch";
 
 const StyledLandingPage = styled.section<ScreenWidthType>`
-  width: 100lvw;
-  max-height: 100lvh;
+  width: 100vw;
+  height: 100vh;
 
   /* max-height: clamp(85vh, 100vh, 100vh); */
   padding: 0.8rem 1.5rem;
@@ -75,7 +75,7 @@ const HeadingBox = styled.article<ScreenWidthType>`
   display: flex;
   flex-direction: column;
 
-  color: var(--color-text);
+  /* color: var(--color-text); */
 
   grid-row: 2/3;
   text-align: center;

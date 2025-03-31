@@ -17,9 +17,11 @@ import Header from "./UI/Header";
 // TODO:
 
 // ! hover effects - sidebar, header icons, dropdown...
-// ! Cert - very large screen over 1200px
+// ! Cert - very large screen over 1200px (maybe make it flex - space-between instead of grid)
 // ! dropdown to close on Esc press
-// ! ENLARGE - everything in the image slider divs (maybe info divs too)
+// ! ENLARGE - everything in the image slider divs (hover too) (maybe info divs too)
+// ! CLICKING ON PROJECT INFO TITLE TAKES YOU TO DEPLOYED WEBSITE
+// ! bacground of the footer 'contact me' form - DARK MODE AND LIGHT MODE
 
 function App() {
   const { isDarkMode, setIsDarkMode } = useDarkMode();

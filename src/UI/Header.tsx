@@ -41,7 +41,8 @@ const StyledIcon = styled.div<{
     `}
 
   &:hover {
-    color: var(--color-main-600);
+    color: var(--highlight-text);
+    transition: color 0.2s ease-in;
   }
 `;
 
