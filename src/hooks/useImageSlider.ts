@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useKeyPress } from "./useKeyPress";
+// import { useKeyPress } from "./useKeyPress";
 
 export function useImageSlider(imagesArray: string[]) {
   const [currImageIndex, setCurrImageIndex] = useState(0);
@@ -24,7 +24,7 @@ export function useImageSlider(imagesArray: string[]) {
     setSlideDirection("left");
   };
 
-  useKeyPress("arrowRight", nextSlide);
+  // useKeyPress("arrowRight", nextSlide);
   // useKeyPress("arrowLeft", prevSlide);
 
   return { currImageIndex, nextSlide, prevSlide, slideDirection };

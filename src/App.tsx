@@ -16,8 +16,10 @@ import Header from "./UI/Header";
 
 // TODO:
 
-// ! image background...
-// * keypress issue.. unsolved (attempted)
+// ! hover effects - sidebar, header icons, dropdown...
+// ! Cert - very large screen over 1200px
+// ! dropdown to close on Esc press
+// ! ENLARGE - everything in the image slider divs (maybe info divs too)
 
 function App() {
   const { isDarkMode, setIsDarkMode } = useDarkMode();

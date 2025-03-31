@@ -75,6 +75,8 @@ const HeadingBox = styled.article<ScreenWidthType>`
   display: flex;
   flex-direction: column;
 
+  color: var(--color-text);
+
   grid-row: 2/3;
   text-align: center;
   align-self: center;

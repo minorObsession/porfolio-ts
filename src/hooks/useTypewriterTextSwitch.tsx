@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 
-// ! loopSentences HAS A BUG!! WHEN SET TO TRUE
 export const useTypewriterTextSwitch = (
   sentenceNumsArray: string[],
   loopSentences = false
@@ -60,6 +59,18 @@ export const useTypewriterTextSwitch = (
 // ! USAGE EXAMPLE
 
 // * CSS
+
+// // Typewriter animation
+// export const typing = keyframes`
+//   from { width: 0; }
+//   to { width: 100%; }
+// `;
+// // Typewriter animation
+// export const blink = keyframes`
+// 50% {
+//   border-color: transparent;
+// }
+// `;
 // const headingFontSizes = {
 //   h1: "3.5rem",
 //   h2: "3rem",

@@ -3,18 +3,35 @@ import { breakpoints } from "./breakpoints";
 import { hexToRgba } from "../config/helpers";
 
 export const lightTheme = {
-  text: "#1A1A1A",
-  background: "#FFFFFF",
+  text: "#354E8E", //  --color-main-300:
+  background: "#F8F9FC",
 };
 
 export const darkTheme = {
-  text: "#F5F5F5",
-  background: "#000000",
+  text: "#A1B6F0", //  --color-main-600:
+  background: "#0E121B",
 };
+// export const lightTheme = {
+//   text: "#1A1A1A",
+//   background: "#FFFFFF",
+// };
+
+// export const darkTheme = {
+//   text: "#F5F5F5",
+//   background: "#000000",
+// };
 
 const GlobalStyles = createGlobalStyle`
 
 :root {
+
+
+  /* Main color */
+--color-main-300: #A1B6F0; /* Soft pastel blue */
+--color-main-400: #8297E0; /* Light blue */
+--color-main-500: #4A6EC3; /* Main color */
+--color-main-600: #3F5DA8; /* Deeper contrast */
+--color-main-700: #354E8E; /* Darkest shade */
 
     /* Gray */
   --color-gray-0: #fff;
@@ -42,8 +59,6 @@ const GlobalStyles = createGlobalStyle`
   --box-shadow-sm-light: 1px 5px 6px 3px rgba(0, 0, 0, 0.15);  /* Light theme shadow */
   --box-shadow-sm-dark: 1px 5px 6px 3px rgba(255, 255, 255, 0.3);  /* Dark theme shadow */
 
-
-
   --box-shadow-light: 6px 8px 35px rgba(0, 0, 0, 0.2);
   --box-shadow-dark: 6px 8px 15px rgba(255, 255, 255, 0.3);
 
@@ -57,12 +72,15 @@ const GlobalStyles = createGlobalStyle`
 
 .light-theme {
   --box-shadow: var(--box-shadow-light);
-  --box-shadow-sm: var(--box-shadow-sm-light)
+  --box-shadow-sm: var(--box-shadow-sm-light);
+  --color-text: var(--color-main-600);
 }
 
 .dark-theme {
   --box-shadow: var(--box-shadow-dark);
-  --box-shadow-sm: var(--box-shadow-sm-dark)
+  --box-shadow-sm: var(--box-shadow-sm-dark);
+  --color-text: var(--color-main-300);
+
 }
 
 

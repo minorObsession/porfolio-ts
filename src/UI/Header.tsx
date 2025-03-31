@@ -31,7 +31,7 @@ const StyledIcon = styled.div<{
   background-color: ${({ $isLandingInView, theme }) =>
     $isLandingInView ? `${theme.background}` : "transparent"};
 
-  color: ${({ theme }) => theme.text};
+  /* color: ${({ theme }) => theme.text}; */
 
   ${({ as }) =>
     as === RiCloseLargeFill &&
@@ -39,6 +39,10 @@ const StyledIcon = styled.div<{
       scale: 1.2;
       font-weight: bolder;
     `}
+
+  &:hover {
+    color: var(--color-main-600);
+  }
 `;
 
 const StyledHeader = styled.header<{ $isLandingInView: boolean }>`
