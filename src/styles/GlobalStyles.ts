@@ -200,7 +200,7 @@ button:focus {
   display: inline-block;
   white-space: pre;  /* Forces the line break only where you want */
 }
-@media (min-width: 767px) and (max-width: 1024px),
+@media (min-width: 767px) and (max-width: 1200px),
        (max-width: 500px) {
   .line-break {
     display: block;  /* Force a line break in the specified ranges */
