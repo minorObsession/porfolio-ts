@@ -3,6 +3,7 @@ import { Heading } from "../styles/GlobalStyles";
 import { ProjectCardProps } from "./ProjectCard";
 import ProjectFeatures from "./ProjectFeatures";
 import TechIcons from "./TechIcons";
+import { breakpoints } from "../styles/breakpoints";
 
 const StyledProjectInfo = styled.div`
   display: flex;
@@ -10,7 +11,7 @@ const StyledProjectInfo = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  padding: 1.6rem;
+  padding: 2rem;
   /* margin-top: 2rem; */
 
   box-shadow: var(--box-shadow-sm);
@@ -26,6 +27,7 @@ const ProjectInfoTitle = styled(Heading)`
 const ProjectInfoDescription = styled(Heading)`
   flex-grow: 0;
   font-style: italic;
+  color: var(--highlight-text);
 `;
 
 const IconsBox = styled.div`
@@ -42,8 +44,14 @@ function ProjectInfo({
   return (
     <StyledProjectInfo>
       <div>
-        <ProjectInfoTitle as="h2">{project.title}</ProjectInfoTitle>
-        <ProjectInfoDescription as="h4">
+        <ProjectInfoTitle
+          as={screenWidth > breakpoints.tabletBreakpoint ? "h2" : "h3"}
+        >
+          {project.title}
+        </ProjectInfoTitle>
+        <ProjectInfoDescription
+          as={screenWidth > breakpoints.tabletBreakpoint ? "h3" : "h4"}
+        >
           {project.description}
         </ProjectInfoDescription>
       </div>
@@ -52,7 +60,9 @@ function ProjectInfo({
       <ProjectFeatures features={project.features} />
 
       <IconsBox>
-        <Heading as="h4">Core technologies</Heading>
+        <Heading as={screenWidth > breakpoints.tabletBreakpoint ? "h3" : "h4"}>
+          Core technologies
+        </Heading>
 
         {/* Tech Icons with Tooltip */}
         <TechIcons

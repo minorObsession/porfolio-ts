@@ -56,8 +56,8 @@ const GlobalStyles = createGlobalStyle`
 
 
 
-  --box-shadow-sm-light: 1px 5px 6px 3px rgba(0, 0, 0, 0.15);  /* Light theme shadow */
-  --box-shadow-sm-dark: 1px 5px 6px 3px rgba(255, 255, 255, 0.3);  /* Dark theme shadow */
+  --box-shadow-sm-light: 1px 3px 10px 3px rgba(0, 0, 0, 0.15);  /* Light theme shadow */
+  --box-shadow-sm-dark: 1px 3px 10px 3px rgba(255, 255, 255, 0.3);  /* Dark theme shadow */
 
   --box-shadow-light: 6px 8px 35px rgba(0, 0, 0, 0.2);
   --box-shadow-dark: 6px 8px 15px rgba(255, 255, 255, 0.3);
@@ -114,7 +114,7 @@ body, #root{
   min-height: 100vh;
   min-width: 100vw;
   
-  /* overflow-x: hidden; */
+
   /* font-family: 'Oxanium', sans-serif; */
   font-family: 'Saira', sans-serif;
   /* font-family: 'Orbitron', sans-serif; */
@@ -123,6 +123,7 @@ body, #root{
   /* transition: all 0.3s ease-in-out; */
 
 }
+
 
 section:not(#projects) {
 /* margin-bottom: 3rem; */
@@ -140,6 +141,7 @@ border-bottom: var(--border-b-1)
   height: 0;
   display: none;
 }
+
 section, footer {
   padding: 3rem 0.5rem;
     opacity: 0;
@@ -176,12 +178,17 @@ section {
   }
 }
 
+
+
+
+/* here */
 input:focus,
 textarea:focus,
 button:focus {
-  outline: 2px solid #3178c6;
-  border-color: #3178c6;
-  box-shadow: 0 0 4px rgba(49, 120, 198, 0.5);
+  outline: 2px solid #4A6EC3;
+  border-color: #4A6EC3;
+  box-shadow: 0 0 4px rgba(53, 78, 142, 0.5)  /* 50% opacity */
+ ;
 }
 
 
@@ -268,12 +275,10 @@ export const OverlayImageBox = styled.div<{
   }
 
   ${({ $screenWidth }) =>
-    $screenWidth !== undefined &&
-    $screenWidth >= breakpoints.mobileLargeBreakpoint &&
+    $screenWidth >= breakpoints.tabletLandscapeBreakpoint &&
     css`
       margin: 0.5rem auto;
-      padding: 0.6rem 1.5rem;
-      /* font-size: 1rem; */
+      font-size: 1.8rem;
       letter-spacing: 1.2px;
     `}
 
@@ -293,7 +298,7 @@ export const Tooltip = styled.span<{
   position: absolute;
 
   padding: 0.3rem 0.6rem;
-  font-size: 1rem;
+  font-size: 1.2rem;
   white-space: nowrap;
   border-radius: var(--border-radius-xl);
   box-shadow: var(--box-shadow-sm);
@@ -313,15 +318,15 @@ export const Tooltip = styled.span<{
     `}
 
   ${({ $screenWidth }) =>
-    $screenWidth <= breakpoints.mobileLargeBreakpoint
+    $screenWidth <= breakpoints.tabletBreakpoint
       ? css`
           padding: 0.5rem;
-          top: -3.2rem;
+          top: -4rem;
           left: -1.5rem;
         `
       : css`
           padding: 0.7rem;
-          top: -4rem;
+          top: -4.5rem;
           left: -1rem;
         `}
 `;

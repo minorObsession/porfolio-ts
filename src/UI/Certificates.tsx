@@ -72,7 +72,7 @@ const CertificateList = styled.ul<{ $screenWidth: number; $chingu?: boolean }>`
   ${({ $screenWidth }) =>
     $screenWidth > breakpoints.mobileLargeBreakpoint &&
     css`
-      padding-left: 5rem;
+      padding-left: 10%;
     `}
 
   ${({ $screenWidth }) =>
@@ -80,17 +80,23 @@ const CertificateList = styled.ul<{ $screenWidth: number; $chingu?: boolean }>`
     css`
       width: 100%;
       grid-template-columns: repeat(2, 1fr);
-
-      /* padding-left: 5rem; */
     `}
 
   ${({ $screenWidth }) =>
     $screenWidth > breakpoints.tabletBreakpoint &&
     css`
       gap: 1rem;
-      /* padding-left: 10rem; */
-
+      padding-left: 8%;
       max-width: 100%;
+    `}
+
+  ${({ $screenWidth }) =>
+    $screenWidth > breakpoints.tabletLandscapeBreakpoint && css``}
+
+  ${({ $screenWidth }) =>
+    $screenWidth > breakpoints.smallDesktopBreakpoint &&
+    css`
+      padding-left: 15%;
     `}
 
 

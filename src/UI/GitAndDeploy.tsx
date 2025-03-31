@@ -9,6 +9,7 @@ import {
   OverlayImageBox,
   Tooltip,
 } from "../styles/GlobalStyles";
+import { breakpoints } from "../styles/breakpoints";
 
 type GitAndDeployProps = {
   gitHubLink: string;
@@ -21,7 +22,7 @@ type HoverIconProps = {
   icon: IconType;
   text: string;
   link: string;
-  size?: number; // Make size optional with a default value
+  size?: number;
   isDarkMode: boolean;
   screenWidth: number;
 };
@@ -67,7 +68,11 @@ const HoverIcon = ({
         <Icon
           stroke={isDarkMode ? darkTheme.text : lightTheme.text}
           fill={isDarkMode ? darkTheme.text : lightTheme.text}
-          size={size}
+          size={
+            screenWidth > breakpoints.tabletLandscapeBreakpoint
+              ? size * 1.2
+              : size
+          }
         />
       </IconContainer>
       {isHovered && (

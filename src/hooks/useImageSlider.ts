@@ -16,12 +16,14 @@ export function useImageSlider(imagesArray: string[]) {
     if (currImageIndex === maxSlide) goToImageNum(0);
     else goToImageNum(currImageIndex + 1);
     setSlideDirection("right");
+    // unfocus clicked element
   };
 
   const prevSlide = () => {
     if (currImageIndex === 0) goToImageNum(maxSlide);
     else goToImageNum(currImageIndex - 1);
     setSlideDirection("left");
+    // unfocus clicked element
   };
 
   // useKeyPress("arrowRight", nextSlide);

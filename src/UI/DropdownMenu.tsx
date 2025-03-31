@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { motion, LayoutGroup } from "framer-motion";
 import { useDisableScrollBasedOnCondition } from "../hooks/useDisableScrollingWhenElementActive";
+import { useKeyPress } from "../hooks/useKeyPress";
 
 const StyledDropdownMenu = styled(motion.menu)`
   /* // ! DON'T CHANGE absolute/fixed - SCROLLING WILL GET MESSED UP */
@@ -54,9 +55,16 @@ const scrollToSection = (sectionId: string) => {
   // ! check if section is visible (then set yOffset)
   const sectionVisible = section.style.opacity === "1";
 
-  console.log(sectionVisible);
+  // ! if scrolling to bottom of page - disable transitions for all possible visible elements
+  if (section.id === "web-skills" || section.id === "contact-me") {
+    [
+      document.getElementById("web-skills"),
+      document.getElementById("contact-me"),
+      document.getElementById("certificates"),
+    ].forEach((section) => (section!.style.transform = "translateY(0)"));
+  }
+  // ! to offset the transition
   const yOffset = sectionVisible ? -20 : -120;
-
   const y = section.getBoundingClientRect().top + window.scrollY + yOffset;
 
   window.scrollTo({ top: y, behavior: "smooth" });
@@ -77,7 +85,7 @@ function DropdownMenu({
 
     setIsDropdownOpen(false);
   };
-
+  useKeyPress("Escape", () => setIsDropdownOpen(false));
   useDisableScrollBasedOnCondition(isDropdownOpen);
 
   // ! this line fucks up negative part of transition

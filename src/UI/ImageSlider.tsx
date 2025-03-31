@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { useImageSlider } from "../hooks/useImageSlider";
 import { hexToRgba } from "../config/helpers";
 import { useDarkMode } from "../contexts/DarkModeContext";
@@ -23,8 +23,9 @@ type SlideImageProps = {
 type SliderButtonProps = {
   $direction: "left" | "right";
   $isCardHovered: boolean;
-  onClick: () => void;
+  onClick: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   $isDarkMode: boolean;
+  $screenWidth: number;
 };
 
 const SlideContainer = styled.div<{ $screenWidth: number }>`
@@ -81,6 +82,14 @@ const SliderButton = styled.button<SliderButtonProps>`
   transition: filter 0.7s ease-in-out, opacity 0.7s ease-in-out,
     visibility 0s linear
       ${({ $isCardHovered }) => ($isCardHovered ? "0s" : "0.7s")};
+
+  ${({ $screenWidth }) =>
+    $screenWidth >= breakpoints.tabletLandscapeBreakpoint &&
+    css`
+      width: 6rem;
+      height: 6rem;
+      font-size: 2rem;
+    `}
 `;
 
 function ImageSlider({ images, isCardHovered }: ImagesType) {
@@ -92,7 +101,11 @@ function ImageSlider({ images, isCardHovered }: ImagesType) {
   return (
     <SlideContainer $screenWidth={screenWidth}>
       <SliderButton
-        onClick={prevSlide}
+        $screenWidth={screenWidth}
+        onClick={(event) => {
+          prevSlide();
+          event.currentTarget.blur();
+        }}
         $isCardHovered={isCardHovered}
         $direction="left"
         $isDarkMode={isDarkMode}
@@ -126,7 +139,11 @@ function ImageSlider({ images, isCardHovered }: ImagesType) {
         />
       </AnimatePresence>
       <SliderButton
-        onClick={nextSlide}
+        $screenWidth={screenWidth}
+        onClick={(event) => {
+          nextSlide();
+          event.currentTarget.blur();
+        }}
         $isCardHovered={isCardHovered}
         $direction="right"
         $isDarkMode={isDarkMode}

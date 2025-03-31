@@ -54,6 +54,7 @@ const Image = styled.img<ScreenWidthType>`
     props.$screenWidth > breakpoints.tabletBreakpoint &&
     css`
       max-height: 100%;
+      min-height: 100%;
       object-position: top;
     `}
   ${(props) =>
