@@ -76,8 +76,6 @@ const HeadingBox = styled.article<ScreenWidthType>`
   display: flex;
   flex-direction: column;
 
-  /* color: var(--color-text); */
-
   grid-row: 2/3;
   text-align: center;
   align-self: center;
@@ -91,10 +89,17 @@ const HeadingBox = styled.article<ScreenWidthType>`
     `}
 `;
 
+const MainHeading = styled(Heading)`
+  white-space: nowrap; /* Prevents the text from wrapping unless forced */
+`;
+
 const switchingDescriptions = [
+  "A React Developer",
   "Coding ideas into apps",
   "Learning by building",
-  "third sss sentance",
+  "Focused on UX/UI",
+  "A music producer and DJ",
+  "Trillingual",
 ];
 
 function LandingPage({ id }: { id: string }) {
@@ -107,14 +112,14 @@ function LandingPage({ id }: { id: string }) {
         <Image $screenWidth={screenWidth} src={bogdan} />
       </PhotoBox>
       <HeadingBox $screenWidth={screenWidth}>
-        <Heading
+        <MainHeading
           $screenWidth={screenWidth}
           as={
             screenWidth > breakpoints.betweenMobAndTabBreakpoint ? "h1" : "h2"
           }
         >
-          I&apos;m Bogdan - a React Developer
-        </Heading>
+          My name is Bogdan <span className="line-break"></span>and I am
+        </MainHeading>
         <Heading
           $typewriter
           data-typewriter

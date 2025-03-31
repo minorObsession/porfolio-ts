@@ -92,7 +92,10 @@ const GlobalStyles = createGlobalStyle`
   margin: 0;
 }
 
-
+::selection {
+  background-color: #B3A9E3;  /* Set the desired background color */
+  /* color: white;  Optional: Set text color for selected text */
+}
 html {
   font-size: 62.5%;
 }
@@ -191,6 +194,17 @@ button:focus {
  ;
 }
 
+/* // ! forcing exact line break */
+.line-break {
+  display: inline-block;
+  white-space: pre;  /* Forces the line break only where you want */
+}
+
+@media (min-width: 767px) and (max-width: 1024px) {
+  .line-break {
+    display: block;  /* On smaller screens, force a line break */
+  }
+}
 
 /* Hide scrollbar */
 ::-webkit-scrollbar {
@@ -245,8 +259,7 @@ export const Heading = styled.h1<HeadingProps>`
       margin-inline: auto;
       border-right: 1px solid;
       padding-right: 5px;
-      animation: ${typing} 3s steps(50) forwards,
-        ${blink} 0.75s step-end infinite;
+      animation: ${typing} 2s steps(28) forwards, ${blink} 1s step-end infinite;
     `}
 `;
 

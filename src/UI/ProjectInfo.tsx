@@ -22,6 +22,7 @@ const StyledProjectInfo = styled.div`
 const ProjectInfoTitle = styled(Heading)`
   line-height: 1.8;
   font-weight: 800;
+  margin-bottom: 2rem;
 `;
 
 const ProjectInfoDescription = styled(Heading)`
