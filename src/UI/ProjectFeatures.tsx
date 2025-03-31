@@ -4,18 +4,27 @@ import { useScreenWidthRem } from "../hooks/useScreenWidthRem";
 import { breakpoints } from "../styles/breakpoints";
 
 const FeaturesContainer = styled.ul<{ $screenWidth: number }>`
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  /* padding-left: 2rem; */
 
+  gap: 0.5rem;
   ${({ $screenWidth }) =>
     $screenWidth >= breakpoints.tabletLandscapeBreakpoint &&
     css`
       width: 80%;
-    `}
+      gap: 0.8rem;
+    `};
+`;
+const ProjectFeaturesHeading = styled(Heading)`
+  grid-column: 1 / -1;
+
+  text-decoration-thickness: 2px;
+  margin-bottom: 1.5rem;
 `;
 
 const FeatureItem = styled.li`
+  grid-column: span 2;
   list-style-type: disc;
   padding-left: 0.5rem;
   line-height: 1.6;
@@ -44,11 +53,6 @@ const FeatureDescription = styled.p<{ $screenWidth: number }>`
     css`
       font-size: 1.5rem;
     `}
-`;
-
-const ProjectFeaturesHeading = styled(Heading)`
-  text-decoration-thickness: 2px;
-  margin-bottom: 1.5rem;
 `;
 
 type FeaturesProps = {

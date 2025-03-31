@@ -90,7 +90,8 @@ const HeadingBox = styled.article<ScreenWidthType>`
 `;
 
 const MainHeading = styled(Heading)`
-  white-space: nowrap; /* Prevents the text from wrapping unless forced */
+  white-space: nowrap;
+  line-height: 1.1;
 `;
 
 const switchingDescriptions = [
