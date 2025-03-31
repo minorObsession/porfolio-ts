@@ -109,6 +109,7 @@ transition: color 0.2s ease-in-out;
 
 body, #root{
   will-change: background-color, color;
+  margin: 0 auto;
 
   color: ${(props) => props.theme.text};
   background-color: ${(props) => props.theme.background};
@@ -117,7 +118,7 @@ body, #root{
   min-height: 100vh;
   min-width: 100vw;
   
-
+  overflow-x: hidden;
   /* font-family: 'Oxanium', sans-serif; */
   font-family: 'Saira', sans-serif;
   /* font-family: 'Orbitron', sans-serif; */
@@ -199,10 +200,10 @@ button:focus {
   display: inline-block;
   white-space: pre;  /* Forces the line break only where you want */
 }
-
-@media (min-width: 767px) and (max-width: 1024px) {
+@media (min-width: 767px) and (max-width: 1024px),
+       (max-width: 500px) {
   .line-break {
-    display: block;  /* On smaller screens, force a line break */
+    display: block;  /* Force a line break in the specified ranges */
   }
 }
 
