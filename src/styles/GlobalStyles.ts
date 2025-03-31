@@ -150,8 +150,7 @@ section, footer {
 footer,section:not(:first-of-type) {
     transform: translateY(10rem);
       margin: 0 auto;
-      /* // ! unecessary */
-      /* scroll-margin-top: 10rem;  */
+
   max-width: 90%;
 
 @media (min-width: 768px) {

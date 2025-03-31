@@ -16,7 +16,7 @@ import Header from "./UI/Header";
 
 // TODO:
 
-// ! hover effects - sidebar, header icons, dropdown...
+// ! FIRST SCROLL ISSUE
 // ! Cert - very large screen over 1200px (maybe make it flex - space-between instead of grid)
 // ! dropdown to close on Esc press
 // ! ENLARGE - everything in the image slider divs (hover too) (maybe info divs too)

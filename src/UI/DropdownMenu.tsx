@@ -30,7 +30,7 @@ const SectionsList = styled(motion.ul)`
 const SectionListItem = styled(motion.li)`
   &:hover {
     cursor: pointer;
-    color: red;
+    color: var(--highlight-text);
   }
 `;
 
@@ -51,7 +51,12 @@ const scrollToSection = (sectionId: string) => {
   const section = document.getElementById(sectionId);
   if (!section) return;
 
-  const yOffset = -10; // Adjust this value for precision
+  // ! check if section is visible (then set yOffset)
+  const sectionVisible = section.style.opacity === "1";
+
+  console.log(sectionVisible);
+  const yOffset = sectionVisible ? -20 : -120;
+
   const y = section.getBoundingClientRect().top + window.scrollY + yOffset;
 
   window.scrollTo({ top: y, behavior: "smooth" });

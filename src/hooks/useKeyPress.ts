@@ -7,7 +7,6 @@ export function useKeyPress(
   useEffect(() => {
     function callback(e: KeyboardEvent) {
       if (e.code.toLowerCase() === keyPressed.toLowerCase()) {
-        console.log(e);
         e.preventDefault();
         functionToRun(e);
       }
