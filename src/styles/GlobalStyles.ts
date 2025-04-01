@@ -57,6 +57,15 @@ const GlobalStyles = createGlobalStyle`
   --box-shadow: var(--box-shadow-light);
 }
 
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
 .no-scroll {
   overflow: hidden;
 }
@@ -74,19 +83,10 @@ const GlobalStyles = createGlobalStyle`
 }
 
 
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
-
 ::selection {
-  background-color: #B3A9E3;  /* Set the desired background color */
-  /* color: white;  Optional: Set text color for selected text */
+  /* background-color: #B3A9E3;   */
 }
+
 html {
   font-size: 62.5%;
 }
@@ -105,17 +105,10 @@ body, #root{
   color: ${(props) => props.theme.text};
   background-color: ${(props) => props.theme.background};
   --border-b-1: 1px solid ${(props) => props.theme.text}; 
-  
 
-
-  
-
-  /* font-family: 'Oxanium', sans-serif; */
   font-family: 'Saira', sans-serif;
+  /* font-family: 'Oxanium', sans-serif; */
   /* font-family: 'Orbitron', sans-serif; */
-
-  /* // ! causes the "shaking" */
-  /* transition: all 0.3s ease-in-out; */
 
 }
 
@@ -124,17 +117,6 @@ section:not(#projects) {
 /* margin-bottom: 3rem; */
 border-bottom: var(--border-b-1)
 
-}
-
-#experience {
-  border-top: var(--border-b-1)
-
-}
-
-::-webkit-scrollbar {
-  width: 0;
-  height: 0;
-  display: none;
 }
 
 section, footer {
@@ -158,6 +140,58 @@ footer,section:not(:first-of-type) {
   }
 }
 
+a {
+  font-weight: 500;
+  /* color: #646cff; */
+  text-decoration: inherit;
+}
+
+
+ button {
+  border-radius: 8px;
+  border: 1px solid var(--color-main-500);
+  padding: 0.6rem 1.2rem;
+  font-size: 1.4rem;
+  font-weight: 600;
+  font-family: inherit;
+  /* background-color: #1a1a1a; */
+  cursor: pointer;
+    color: ${({ theme }) => theme.text};
+
+  /* transition: border-color 0.25s; */
+    transition: all 0.2s ease;
+
+}
+button:hover {
+  border-color: var(--highlight-text);
+}
+
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+} 
+
+input:focus,
+textarea:focus,
+button:focus {
+  outline: 2px solid #4A6EC3;
+  border-color: #4A6EC3;
+  box-shadow: 3px 2px 10px #354E8E 
+ }
+
+ 
+#experience {
+  border-top: var(--border-b-1)
+
+}
+
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
+}
+
+
 #projects {
   max-width: 90%;
 
@@ -177,15 +211,7 @@ section {
 }
 
 
-/* here */
-input:focus,
-textarea:focus,
-button:focus {
-  outline: 2px solid #4A6EC3;
-  border-color: #4A6EC3;
-  box-shadow: 0 0 4px rgba(53, 78, 142, 0.5)  /* 50% opacity */
- ;
-}
+
 
 /* // ! forcing exact line break */
 .line-break {

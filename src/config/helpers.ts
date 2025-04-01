@@ -28,6 +28,14 @@ export function isDefined<T>(value?: T): value is T {
   return value !== null && value !== undefined;
 }
 
+export const downloadPDF = (url: string, filename = "Bogdan Terzic resume") => {
+  const anchor = document.createElement("a");
+  anchor.href = url;
+  anchor.download = filename;
+  document.body.appendChild(anchor);
+  anchor.click();
+  document.body.removeChild(anchor);
+};
 // It's very useful when I have a list of items where some of those items might be undefined:
 
 // ! usage

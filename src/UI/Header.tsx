@@ -52,20 +52,20 @@ const StyledHeader = styled.header<{ $isLandingInView: boolean }>`
   position: fixed;
   display: flex;
   justify-content: center;
-  padding: 2rem;
-  width: 100%; /* Use width instead of max-width */
+  padding: 1.5rem;
+  width: 100%;
   z-index: 10;
   background-color: ${({ $isLandingInView, theme }) =>
     $isLandingInView ? "transparent" : `${theme.background}80`};
 `;
 const DownloadResume = styled.a`
   font-size: 1.5rem;
-  /* background-color: ; */
+
+  &:hover {
+    filter: contrast(1.2);
+  }
 `;
 
-// const Container = styled.div`
-//   position: relative;
-// `;
 function Header({
   screenWidth,
   isLandingInView,
@@ -97,10 +97,14 @@ function Header({
           as={isDarkMode ? FaSun : FaMoon}
           onClick={() => setIsDarkMode((s) => !s)}
         />
-        <DownloadResume href="/restaurantResume.pdf" download>
-          {screenWidth < breakpoints.tabletBreakpoint ? "" : "Download"} PDF
-          Resume
-        </DownloadResume>
+        {screenWidth > breakpoints.tabletBreakpoint && (
+          <DownloadResume
+            href="/restaurantResume.pdf"
+            download="Bogdan Terzic resume"
+          >
+            PDF Resume
+          </DownloadResume>
+        )}
       </StyledHeader>
       {/* <Container> */}
       <DropdownMenu

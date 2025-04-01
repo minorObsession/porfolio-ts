@@ -10,6 +10,7 @@ import bogdan from "../../public/b-edited.png";
 
 import { useTypewriterTextSwitch } from "../hooks/useTypewriterTextSwitch";
 import { StyledIcon } from "./Header";
+import { downloadPDF } from "../config/helpers";
 
 const StyledLandingPage = styled.section<ScreenWidthType>`
   max-width: 100%;
@@ -144,7 +145,8 @@ function LandingPage({
         as={FaFilePdf}
         $isLandingInView={isLandingInView}
         $bottom={true}
-        $side="left"
+        $side="right"
+        onClick={() => downloadPDF("/restaurantResume")}
       />
     </StyledLandingPage>
   );

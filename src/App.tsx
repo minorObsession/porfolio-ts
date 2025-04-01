@@ -21,6 +21,7 @@ import { useStickyHeader } from "./hooks/useStickyHeader";
 // PDF
 // ! CLICKING ON PROJECT INFO TITLE TAKES YOU TO DEPLOYED WEBSITE
 // ! SLIDER BTN HOVER AND TITLE HOVER
+// ! FOOTER - WHEN ERROR LAYOUT MESSED UP
 
 function App() {
   const [isLandingInView, setIsLandingInView] = useState(true);

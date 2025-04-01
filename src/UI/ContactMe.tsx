@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import emailjs from "emailjs-com";
 import FormRow from "./FormRow";
 import { Heading } from "../styles/GlobalStyles";
+import { style } from "motion/react-client";
 
 type ContactMeProps = {
   isDarkMode: boolean;
@@ -51,6 +52,32 @@ const HeadingAndSidebarBox = styled.div<{ $screenWidth: number }>`
     $screenWidth >= breakpoints.betweenMobAndTabBreakpoint &&
     css`
       align-items: flex-end;
+    `}
+`;
+
+const ContactMeHeading = styled(Heading)<{ $isMessage?: boolean }>`
+  white-space: nowrap;
+  padding-right: 1rem;
+
+  ${({ $screenWidth }) =>
+    $screenWidth !== undefined &&
+    $screenWidth >= breakpoints.mobileLargeBreakpoint &&
+    css`
+      text-align: right;
+    `}
+
+  ${({ as }) =>
+    as === "h4" &&
+    css`
+      text-align: right;
+      margin-right: 1.5rem;
+    `}
+
+      ${({ $isMessage }) =>
+    $isMessage &&
+    css`
+      align-self: flex-start;
+      margin-top: 0.5rem;
     `}
 `;
 
@@ -107,43 +134,23 @@ const ContactForm = styled.form<{ $screenWidth: number }>`
 
 const SubmitBtn = styled.button`
   /* max-width: 70%; */
-  justify-self: right;
-  padding: 0.8rem 1.9rem;
-`;
+  background-color: transparent;
+  justify-self: flex-end;
 
-const StatusDiv = styled.div`
-  justify-self: center;
-  grid-column: 2;
+  border-radius: var(--border-radius-sm);
+  &:hover {
+    background-color: var(--highlight-text);
+    box-shadow: var(--box-shadow-sm);
+    /* scale: 1.05; */
+
+    color: ${({ theme }) => theme.background};
+  }
 `;
 
 const Status = styled.p<{ isError: boolean }>`
   color: ${({ isError }) => (isError ? "red" : "green")};
-`;
-
-const ContactMeHeading = styled(Heading)<{ $isMessage?: boolean }>`
-  white-space: nowrap;
-  padding-right: 1rem;
-
-  ${({ $screenWidth }) =>
-    $screenWidth !== undefined &&
-    $screenWidth >= breakpoints.mobileLargeBreakpoint &&
-    css`
-      text-align: right;
-    `}
-
-  ${({ as }) =>
-    as === "h4" &&
-    css`
-      text-align: right;
-      margin-right: 1.5rem;
-    `}
-
-      ${({ $isMessage }) =>
-    $isMessage &&
-    css`
-      align-self: flex-start;
-      margin-top: 0.5rem;
-    `}
+  grid-column: 1;
+  text-align: right;
 `;
 
 function ContactMe({ isDarkMode, screenWidth, id }: ContactMeProps) {
@@ -223,12 +230,8 @@ function ContactMe({ isDarkMode, screenWidth, id }: ContactMeProps) {
           onChange={handleInputChange}
         />
         <br />
-        <SubmitBtn type="submit">Send Message</SubmitBtn>
-        {status && (
-          <StatusDiv>
-            <Status isError={isError}>{status}</Status>
-          </StatusDiv>
-        )}
+        <Status isError={isError}>{status || ""}</Status>
+        <SubmitBtn type="subit">Send Message</SubmitBtn>
       </ContactForm>
     </StyledContactMe>
   );
