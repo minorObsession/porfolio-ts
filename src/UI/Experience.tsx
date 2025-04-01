@@ -30,6 +30,8 @@ const ChinguContainer = styled.div<{ $screenWidth: number }>`
 `;
 
 const ChinguHeading = styled(Heading)<{ $screenWidth: number }>`
+  /* line-height: 0.5; */
+
   ${({ $screenWidth }) =>
     $screenWidth > breakpoints.mobileLargeBreakpoint &&
     css`
@@ -69,11 +71,12 @@ const ChinguDescription = styled.p<{ $screenWidth: number }>`
       text-align: left;
       align-self: flex-start;
 
-      font-size: 1.8rem;
+      font-size: 1.5rem;
     `}
 `;
 const RoleBox = styled.div<{ $screenWidth: number }>`
   display: flex;
+  gap: 0.6rem;
   flex-direction: column;
   grid-row: span 2;
 
@@ -101,7 +104,7 @@ function Experience({ id, screenWidth }: ExperienceProps) {
       <ChinguContainer $screenWidth={screenWidth}>
         <RoleBox $screenWidth={screenWidth}>
           <Heading as="h2">Chingu</Heading>
-          <Heading style={{ fontStyle: "italic" }} as="h3">
+          <Heading style={{ fontStyle: "italic", lineHeight: "1.2" }} as="h3">
             software developer
           </Heading>
         </RoleBox>

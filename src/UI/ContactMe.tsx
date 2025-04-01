@@ -131,10 +131,14 @@ const ContactForm = styled.form<{ $screenWidth: number }>`
     `}
 `;
 
+const BtnAndStatusDiv = styled.div`
+  position: relative;
+  justify-self: flex-end;
+`;
+
 const SubmitBtn = styled.button`
   /* max-width: 70%; */
   background-color: transparent;
-  justify-self: flex-end;
 
   border-radius: var(--border-radius-sm);
   &:hover {
@@ -147,9 +151,13 @@ const SubmitBtn = styled.button`
 `;
 
 const Status = styled.p<{ $isError: boolean }>`
+  font-size: 1.2em;
+  white-space: nowrap;
+  position: absolute;
+  top: 4rem;
+  left: 0.2rem;
+
   color: ${({ $isError }) => ($isError ? "red" : "green")};
-  grid-column: 1;
-  text-align: right;
 `;
 
 function ContactMe({ isDarkMode, screenWidth, id }: ContactMeProps) {
@@ -172,6 +180,7 @@ function ContactMe({ isDarkMode, screenWidth, id }: ContactMeProps) {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    // e.currentTarget.querySelector("button")?.blur();
 
     // Check if all fields are filled
     if (!formData.name || !formData.email || !formData.message) {
@@ -229,8 +238,10 @@ function ContactMe({ isDarkMode, screenWidth, id }: ContactMeProps) {
           onChange={handleInputChange}
         />
         <br />
-        <Status $isError={isError}>{status || ""}</Status>
-        <SubmitBtn type="submit">Send Message</SubmitBtn>
+        <BtnAndStatusDiv>
+          <SubmitBtn type="submit">Send Message</SubmitBtn>
+          <Status $isError={isError}>{status || ""}</Status>
+        </BtnAndStatusDiv>
       </ContactForm>
     </StyledContactMe>
   );

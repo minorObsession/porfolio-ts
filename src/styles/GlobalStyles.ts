@@ -122,9 +122,9 @@ border-bottom: var(--border-b-1)
 
 section, footer {
     /* max-width: 100%; */
-    /* // ! this prevents horizontal scrolling!!! */
+// ! this prevents horizontal scrolling!!! */
   overflow-x: hidden;
-  padding: 3rem 0.5rem;
+  padding: 3rem 1.5rem;
     opacity: 0;
   transition: opacity 0.8s ease-in-out, transform 0.6s ease-in-out;
 
