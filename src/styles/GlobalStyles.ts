@@ -102,6 +102,7 @@ body, #root{
   will-change: background-color, color;
   margin: 0 auto;
 
+  height: auto !important;
   color: ${(props) => props.theme.text};
   background-color: ${(props) => props.theme.background};
   --border-b-1: 1px solid ${(props) => props.theme.text}; 

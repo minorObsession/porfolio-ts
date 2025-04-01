@@ -5,7 +5,6 @@ import React, { useState } from "react";
 import emailjs from "emailjs-com";
 import FormRow from "./FormRow";
 import { Heading } from "../styles/GlobalStyles";
-import { style } from "motion/react-client";
 
 type ContactMeProps = {
   isDarkMode: boolean;
@@ -147,8 +146,8 @@ const SubmitBtn = styled.button`
   }
 `;
 
-const Status = styled.p<{ isError: boolean }>`
-  color: ${({ isError }) => (isError ? "red" : "green")};
+const Status = styled.p<{ $isError: boolean }>`
+  color: ${({ $isError }) => ($isError ? "red" : "green")};
   grid-column: 1;
   text-align: right;
 `;
@@ -230,8 +229,8 @@ function ContactMe({ isDarkMode, screenWidth, id }: ContactMeProps) {
           onChange={handleInputChange}
         />
         <br />
-        <Status isError={isError}>{status || ""}</Status>
-        <SubmitBtn type="subit">Send Message</SubmitBtn>
+        <Status $isError={isError}>{status || ""}</Status>
+        <SubmitBtn type="submit">Send Message</SubmitBtn>
       </ContactForm>
     </StyledContactMe>
   );
