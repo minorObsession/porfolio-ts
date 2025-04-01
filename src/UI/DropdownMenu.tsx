@@ -7,7 +7,7 @@ const StyledDropdownMenu = styled(motion.menu)`
   /* // ! DON'T CHANGE absolute/fixed - SCROLLING WILL GET MESSED UP */
   position: fixed;
 
-  width: 100vw;
+  width: 100%;
   max-height: 100vh;
   overflow: hidden;
   z-index: 1;

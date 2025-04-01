@@ -11,15 +11,6 @@ export const darkTheme = {
   text: "#E3E6EC",
   background: "#101417",
 };
-// export const lightTheme = {
-//   text: "#1A1A1A",
-//   background: "#FFFFFF",
-// };
-
-// export const darkTheme = {
-//   text: "#F5F5F5",
-//   background: "#000000",
-// };
 
 const GlobalStyles = createGlobalStyle`
 
@@ -115,8 +106,8 @@ body, #root{
   background-color: ${(props) => props.theme.background};
   --border-b-1: 1px solid ${(props) => props.theme.text}; 
   
-  /* min-height: 100vh; */
-  min-width: 100%; /* 🚀 FIX THIS! Replaces 100vw */
+
+
   
 
   /* font-family: 'Oxanium', sans-serif; */
@@ -147,6 +138,9 @@ border-bottom: var(--border-b-1)
 }
 
 section, footer {
+    /* max-width: 100%; */
+    /* // ! this prevents horizontal scrolling!!! */
+  overflow-x: hidden;
   padding: 3rem 0.5rem;
     opacity: 0;
   transition: opacity 0.8s ease-in-out, transform 0.6s ease-in-out;
