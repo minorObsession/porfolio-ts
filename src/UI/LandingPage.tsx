@@ -1,4 +1,6 @@
 import styled, { css } from "styled-components";
+import { FaFilePdf } from "react-icons/fa";
+
 import Sidebar from "./Sidebar";
 import { Heading } from "../styles/GlobalStyles";
 import { useScreenWidthRem } from "../hooks/useScreenWidthRem";
@@ -7,10 +9,11 @@ import { breakpoints } from "../styles/breakpoints";
 import bogdan from "../../public/b-edited.png";
 
 import { useTypewriterTextSwitch } from "../hooks/useTypewriterTextSwitch";
+import { StyledIcon } from "./Header";
 
 const StyledLandingPage = styled.section<ScreenWidthType>`
-  width: 100vw;
-  height: 100vh;
+  max-width: 100%;
+  max-height: 100vh;
 
   /* max-height: clamp(85vh, 100vh, 100vh); */
   padding: 0.8rem 1.5rem;
@@ -22,7 +25,7 @@ const StyledLandingPage = styled.section<ScreenWidthType>`
   ${(props) =>
     props.$screenWidth > breakpoints.tabletBreakpoint &&
     css`
-      grid-template-columns: 0.1fr 1fr 1fr 0.1fr 1fr 1fr;
+      grid-template-columns: 0.1fr 1fr 1.5fr 0.1fr 1fr 1fr;
       grid-template-rows: 1fr;
       /* padding: 0.5rem 1.5rem; */
       padding: 1.5rem;
@@ -38,16 +41,16 @@ const PhotoBox = styled.article<ScreenWidthType>`
       width: 100%;
 
       grid-row: span 2;
-      grid-column: 4 / 7;
+      grid-column: 5 / 7;
     `}
 `;
 
 const Image = styled.img<ScreenWidthType>`
   width: 100%;
+
   max-height: clamp(30vh, 50vh, 100vh);
 
   object-fit: cover;
-
   /* object-position: top; */
 
   ${(props) =>
@@ -56,18 +59,20 @@ const Image = styled.img<ScreenWidthType>`
       max-height: 100%;
       min-height: 100%;
       object-position: top;
+      clip-path: polygon(0% 55px, 100% 0%, 100% 100%, 0% 100%);
     `}
   ${(props) =>
     props.$screenWidth > breakpoints.tabletLandscapeBreakpoint &&
     css`
       /* max-height: 100%; */
+      /* object-position: right; */
       /* object-position: middle; */
     `}
   ${(props) =>
     props.$screenWidth > breakpoints.desktopBreakpoint &&
     css`
       /* image to zoom out */
-      object-position: middle;
+      /* object-position: ; */
     `}
 `;
 
@@ -98,12 +103,17 @@ const switchingDescriptions = [
   "A React Developer",
   "Coding ideas into apps",
   "Learning by building",
-  "Focused on UX/UI",
   "A music producer and DJ",
-  "Trillingual",
+  "Multilingual - love traveling",
 ];
 
-function LandingPage({ id }: { id: string }) {
+function LandingPage({
+  id,
+  isLandingInView,
+}: {
+  id: string;
+  isLandingInView: boolean;
+}) {
   const screenWidth = useScreenWidthRem();
   useTypewriterTextSwitch(switchingDescriptions, true);
 
@@ -130,6 +140,12 @@ function LandingPage({ id }: { id: string }) {
         ></Heading>
       </HeadingBox>
       <Sidebar rotated={screenWidth > breakpoints.tabletBreakpoint && true} />
+      <StyledIcon
+        as={FaFilePdf}
+        $isLandingInView={isLandingInView}
+        $bottom={true}
+        $side="left"
+      />
     </StyledLandingPage>
   );
 }

@@ -7,22 +7,24 @@ import { FaMoon, FaSun } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
 import DropdownMenu from "./DropdownMenu";
 import { useDropdown } from "../contexts/DropdownContext";
-import { useState } from "react";
-import { useStickyHeader } from "../hooks/useStickyHeader";
 
-const StyledIcon = styled.div<{
+import { breakpoints } from "../styles/breakpoints";
+
+export const StyledIcon = styled.div<{
   as: IconType;
-  $side: "left" | "right";
+  $side?: "left" | "right";
+  $bottom?: boolean;
   $isLandingInView: boolean;
 }>`
   z-index: 505;
   position: absolute;
-  top: 0;
-  ${({ $side }) => ($side === "left" ? "left: 1rem" : "right: 1rem")};
+  top: ${({ $bottom }) => ($bottom ? "" : "0")};
+  bottom: ${({ $bottom }) => ($bottom ? "0" : "")};
+  ${({ $side }) => ($side === "left" ? "left: 0rem" : "right: 0rem")};
 
   cursor: pointer;
   padding: 1.2rem;
-  width: 5rem;
+  width: 4.5rem;
   height: 4.5rem;
   display: flex;
   align-items: center;
@@ -48,33 +50,36 @@ const StyledIcon = styled.div<{
 
 const StyledHeader = styled.header<{ $isLandingInView: boolean }>`
   position: fixed;
-
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   padding: 2rem;
-  width: 100%;
+  width: 100%; /* Use width instead of max-width */
   z-index: 10;
   background-color: ${({ $isLandingInView, theme }) =>
-    $isLandingInView ? "transparent" : `${theme.background}60`};
+    $isLandingInView ? "transparent" : `${theme.background}80`};
 `;
-
-// ! observe wiewport pos
-// ! when bellow start of projects - add bck color to hearder
+const DownloadResume = styled.a`
+  font-size: 1.5rem;
+  /* background-color: ; */
+`;
 
 // const Container = styled.div`
 //   position: relative;
 // `;
-function Header() {
+function Header({
+  screenWidth,
+  isLandingInView,
+}: {
+  screenWidth: number;
+  isLandingInView: boolean;
+}) {
   const { isDropdownOpen, setIsDropdownOpen } = useDropdown();
   const { isDarkMode, setIsDarkMode } = useDarkMode();
-  const [isLandingInView, setIsLandingInView] = useState(true);
 
   const handleOpenDropdown = () => {
     // window.scrollTo({ top: 0 });
     setIsDropdownOpen((s) => !s);
   };
-
-  useStickyHeader(setIsLandingInView);
 
   useKeyPress("KeyQ", handleOpenDropdown);
   return (
@@ -86,13 +91,16 @@ function Header() {
           as={isDropdownOpen ? RiCloseLargeFill : GiHamburgerMenu}
           onClick={handleOpenDropdown}
         />
-
         <StyledIcon
           $isLandingInView={isLandingInView}
           $side="right"
           as={isDarkMode ? FaSun : FaMoon}
           onClick={() => setIsDarkMode((s) => !s)}
         />
+        <DownloadResume href="/restaurantResume.pdf" download>
+          {screenWidth < breakpoints.tabletBreakpoint ? "" : "Download"} PDF
+          Resume
+        </DownloadResume>
       </StyledHeader>
       {/* <Container> */}
       <DropdownMenu

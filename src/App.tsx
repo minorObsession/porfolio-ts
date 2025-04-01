@@ -13,26 +13,38 @@ import Experience from "./UI/Experience";
 import Certificates from "./UI/Certificates";
 import { useFadeInAllSections } from "./hooks/useFadeInAllSections";
 import Header from "./UI/Header";
+import { useEffect, useState } from "react";
+import { useStickyHeader } from "./hooks/useStickyHeader";
 
 // TODO:
 
+// PDF
 // ! CLICKING ON PROJECT INFO TITLE TAKES YOU TO DEPLOYED WEBSITE
 // ! SLIDER BTN HOVER AND TITLE HOVER
-// ! bacground of the footer 'contact me' form - DARK MODE AND LIGHT MODE
 
 function App() {
+  const [isLandingInView, setIsLandingInView] = useState(true);
   const { isDarkMode, setIsDarkMode } = useDarkMode();
   const screenWidth = useScreenWidthRem();
+
+  useStickyHeader(setIsLandingInView);
 
   useFadeInAllSections();
   useKeyPress("KeyD", () => setIsDarkMode((s) => !s));
 
+  useEffect(() => {
+    document.querySelectorAll("*").forEach((el) => {
+      if (el.scrollWidth > document.documentElement.clientWidth) {
+        console.log(el, "is causing overflow!");
+      }
+    });
+  }, []);
   return (
     <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
       <GlobalStyles />
       <>
-        <Header />
-        <LandingPage id="landing" />
+        <Header isLandingInView={isLandingInView} screenWidth={screenWidth} />
+        <LandingPage isLandingInView={isLandingInView} id="landing" />
         <Projects id="projects" />
         <Experience screenWidth={screenWidth} id="experience" />
         <Certificates screenWidth={screenWidth} id="certificates" />

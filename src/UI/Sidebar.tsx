@@ -53,6 +53,15 @@ const P = styled.p<SidebarType>`
 const openLink = (url: string) => {
   window.open(url, "_blank", "noopener,noreferrer");
 };
+// const downloadLink = (url: string, filename = "download") => {
+//   console.log("calling downl");
+//   const anchor = document.createElement("a");
+//   anchor.href = url;
+//   anchor.download = filename; // Suggests a filename for the download
+//   document.body.appendChild(anchor);
+//   anchor.click();
+//   document.body.removeChild(anchor); // Clean up after click
+// };
 
 type SidebarProps = {
   rotated?: boolean;
@@ -99,7 +108,10 @@ function Sidebar({
           link: "https://www.linkedin.com/in/bogdanterzic95/",
         },
         { icon: FaGithub, link: "https://github.com/minorObsession" },
-        { icon: FaFacebook, link: "https://www.facebook.com/terzinjoo" },
+        {
+          icon: FaFacebook,
+          link: "https://www.facebook.com/terzinjoo",
+        },
       ].map(({ icon: Icon, link }, index) => (
         <Icon
           key={index}

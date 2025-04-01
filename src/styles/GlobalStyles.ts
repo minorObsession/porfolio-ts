@@ -115,10 +115,10 @@ body, #root{
   background-color: ${(props) => props.theme.background};
   --border-b-1: 1px solid ${(props) => props.theme.text}; 
   
-  min-height: 100vh;
-  min-width: 100vw;
+  /* min-height: 100vh; */
+  min-width: 100%; /* 🚀 FIX THIS! Replaces 100vw */
   
-  /* overflow-x: hidden; */
+
   /* font-family: 'Oxanium', sans-serif; */
   font-family: 'Saira', sans-serif;
   /* font-family: 'Orbitron', sans-serif; */
@@ -228,9 +228,9 @@ export const blink = keyframes`
 
 // Font sizes mapping
 const headingFontSizes = {
-  h1: "3.5rem",
+  h1: "4rem",
   h2: "3rem",
-  h3: "2rem",
+  h3: "2.5rem",
   h4: "1.5rem",
 } as const; // `as const` makes values
 // Type definitions
