@@ -17,7 +17,6 @@ type SlideImageProps = {
   alt?: string;
   $isCardHovered: boolean;
   $screenWidth: number;
-  // $$direction: 'left" | "right"';
 };
 
 type SliderButtonProps = {
@@ -90,6 +89,10 @@ const SliderButton = styled.button<SliderButtonProps>`
       height: 6rem;
       font-size: 2rem;
     `}
+
+  &:hover {
+    filter: contrast(1.4);
+  }
 `;
 
 function ImageSlider({ images, isCardHovered }: ImagesType) {

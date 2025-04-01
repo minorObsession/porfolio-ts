@@ -99,7 +99,13 @@ function ProjectCard({ project }: ProjectCardProps) {
           $screenWidth={screenWidth}
           $isDarkMode={isDarkMode}
         >
-          <span>{project.title}</span>
+          <span
+            onClick={() => {
+              window.open(project.deploy);
+            }}
+          >
+            {project.title}
+          </span>
         </NameAndDescription>
         <GitAndDeploy
           screenWidth={screenWidth}

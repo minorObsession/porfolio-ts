@@ -73,6 +73,11 @@ const ChinguDescription = styled.p<{ $screenWidth: number }>`
 
       font-size: 1.5rem;
     `}
+  ${({ $screenWidth }) =>
+    $screenWidth > breakpoints.mobileLargeBreakpoint &&
+    css`
+      font-size: 2rem;
+    `}
 `;
 const RoleBox = styled.div<{ $screenWidth: number }>`
   display: flex;
@@ -110,7 +115,7 @@ function Experience({ id, screenWidth }: ExperienceProps) {
         </RoleBox>
         <RoleAndDuration $screenWidth={screenWidth}>
           <ChinguHeading
-            as={screenWiderThan620px ? "h3" : "h4"}
+            as={screenWiderThan620px ? "h2" : "h3"}
             $screenWidth={screenWidth}
           >
             Jan 2024 - present

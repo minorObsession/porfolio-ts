@@ -13,14 +13,14 @@ import Experience from "./UI/Experience";
 import Certificates from "./UI/Certificates";
 import { useFadeInAllSections } from "./hooks/useFadeInAllSections";
 import Header from "./UI/Header";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useStickyHeader } from "./hooks/useStickyHeader";
 
 // TODO:
-
-// PDF
-// ! CLICKING ON PROJECT INFO TITLE TAKES YOU TO DEPLOYED WEBSITE
-// ! SLIDER BTN HOVER AND TITLE HOVER
+// ! WHY IN RESPNSIVE VIEW CAN'T SCROLL EXCEPT WITH TOUCH
+// ! low height landing image to go to object-top!!
+// ! scrolling shake bottom of page
+// ! refreshing looks shitty almost everywhere
 
 function App() {
   const [isLandingInView, setIsLandingInView] = useState(true);
@@ -31,14 +31,6 @@ function App() {
 
   useFadeInAllSections();
   useKeyPress("KeyD", () => setIsDarkMode((s) => !s));
-
-  useEffect(() => {
-    document.querySelectorAll("*").forEach((el) => {
-      if (el.scrollWidth > document.documentElement.clientWidth) {
-        console.log(el, "is causing overflow!");
-      }
-    });
-  }, []);
 
   return (
     <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>

@@ -264,7 +264,7 @@ interface HeadingProps {
 // Styled Heading component
 export const Heading = styled.h1<HeadingProps>`
   text-align: center;
-  transition: all 0.5s ease-in-out;
+  /* transition: all 0.5s ease-in-out; */
   font-size: ${({ as = "h1" }) =>
     headingFontSizes[
       as as keyof typeof headingFontSizes
@@ -306,6 +306,10 @@ export const OverlayImageBox = styled.div<{
   & span {
     flex-grow: 1;
     justify-self: center;
+    cursor: pointer;
+  }
+  & span:hover {
+    filter: contrast(1.4);
   }
 
   ${({ $screenWidth }) =>
