@@ -280,7 +280,7 @@ interface HeadingProps {
 // Styled Heading component
 export const Heading = styled.h1<HeadingProps>`
   text-align: center;
-  /* transition: all 0.5s ease-in-out; */
+  transition: all 0.5s ease-in-out;
   font-size: ${({ as = "h1" }) =>
     headingFontSizes[
       as as keyof typeof headingFontSizes
