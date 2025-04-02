@@ -5,11 +5,13 @@ import { hexToRgba } from "../config/helpers";
 export const lightTheme = {
   text: "#2B2F36",
   background: "#F4F7FB",
+  name: "light",
 };
 
 export const darkTheme = {
   text: "#E3E6EC",
   background: "#101417",
+  name: "dark",
 };
 
 const GlobalStyles = createGlobalStyle`
@@ -47,8 +49,13 @@ const GlobalStyles = createGlobalStyle`
 
 
 
-  --box-shadow-sm-light: 1px 3px 10px 3px rgba(0, 0, 0, 0.15);  /* Light theme shadow */
-  --box-shadow-sm-dark: 1px 3px 10px 3px rgba(255, 255, 255, 0.3);  /* Dark theme shadow */
+  --box-shadow-sm-light: 3px 3px 3px  drgba(0, 0, 0, 0.15);  /* Light theme shadow */
+  --box-shadow-sm-hover-light: 9px 14px 9px 9px rgba(0, 0, 0, 0.15), 9px 14px 9px 9px white;
+  --box-shadow-sm-dark: 3px 3px 3px   rgba(255, 255, 255, 0.2);  /* Dark theme shadow */
+  --box-shadow-sm-hover-dark: 5px 8px 5px 5px rgba(255, 255, 255, 0.2), 5px 8px 5px 5px black;
+
+  --box-shadow-tooltip-light: 6px 6px 6px rgba(0, 0, 0, 0.15);
+  --box-shadow-tooltip-dark: 4px 4px 4px rgba(255, 255, 255, 0.2);
 
   --box-shadow-light: 6px 8px 35px rgba(0, 0, 0, 0.2);
   --box-shadow-dark: 6px 8px 15px rgba(255, 255, 255, 0.3);
@@ -57,6 +64,20 @@ const GlobalStyles = createGlobalStyle`
   --box-shadow: var(--box-shadow-light);
 }
 
+.light-theme {
+  --box-shadow: var(--box-shadow-light);
+  --box-shadow-sm: var(--box-shadow-sm-light);
+  --highlight-text: var(--color-main-700);
+  --box-shadow-sm-hover:var(--box-shadow-sm-hover-light)
+}
+
+.dark-theme {
+  --box-shadow: var(--box-shadow-dark);
+  --box-shadow-sm: var(--box-shadow-sm-dark);
+  --highlight-text: var(--color-main-400);
+    --box-shadow-sm-hover:var(--box-shadow-sm-hover-dark)
+
+}
 
 *,
 *::before,
@@ -70,17 +91,7 @@ const GlobalStyles = createGlobalStyle`
   overflow: hidden;
 }
 
-.light-theme {
-  --box-shadow: var(--box-shadow-light);
-  --box-shadow-sm: var(--box-shadow-sm-light);
-  --highlight-text: var(--color-main-700);
-}
 
-.dark-theme {
-  --box-shadow: var(--box-shadow-dark);
-  --box-shadow-sm: var(--box-shadow-sm-dark);
-  --highlight-text: var(--color-main-400);
-}
 
 
 ::selection {
@@ -129,11 +140,13 @@ section, footer {
   transition: opacity 0.8s ease-in-out, transform 0.6s ease-in-out;
 
 }
+section:not(:first-of-type){ 
+transform: translateY(10rem);
+}
 
 footer,section:not(:first-of-type) {
-    transform: translateY(10rem);
+    
       margin: 0 auto;
-
   max-width: 90%;
 
 @media (min-width: 768px) {
@@ -337,9 +350,11 @@ export const Tooltip = styled.span<{
 
   padding: 0.3rem 0.6rem;
   font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 1.1px;
   white-space: nowrap;
   border-radius: var(--border-radius-xl);
-  box-shadow: var(--box-shadow-sm);
+  box-shadow: ${({ theme }) => `var(--box-shadow-tooltip-${theme.name})`};
 
   ${({ theme, $isDarkMode }) =>
     theme &&

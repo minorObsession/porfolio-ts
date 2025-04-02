@@ -75,6 +75,11 @@ const Image = styled.img<ScreenWidthType>`
       /* image to zoom out */
       /* object-position: ; */
     `}
+
+    @media (max-height: 6000px) {
+    /* // ! trick to use percentages */
+    object-position: center 20%;
+  }
 `;
 
 const HeadingBox = styled.article<ScreenWidthType>`

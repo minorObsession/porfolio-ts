@@ -5,6 +5,7 @@ import { useDarkMode } from "../contexts/DarkModeContext";
 import { useScreenWidthRem } from "../hooks/useScreenWidthRem";
 import { breakpoints } from "../styles/breakpoints";
 import { AnimatePresence, motion } from "motion/react";
+import { useEffect, useState } from "react";
 
 type ImagesType = {
   images: string[];
@@ -40,7 +41,7 @@ const SlideContainer = styled.div<{ $screenWidth: number }>`
       : "100%"}; /* Set a fixed height or dynamically calculate */
 
   border-radius: var(--border-radius-md);
-  transition: all 0.8s ease-in-out;
+  /* transition: all 0.8s ease-in-out; */
 `;
 
 const SlideImage = styled(motion.img)<SlideImageProps>`
@@ -100,6 +101,11 @@ function ImageSlider({ images, isCardHovered }: ImagesType) {
     useImageSlider(images);
   const { isDarkMode } = useDarkMode();
   const screenWidth = useScreenWidthRem();
+  const [hasMounted, setHasMounted] = useState(false);
+
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
 
   return (
     <SlideContainer $screenWidth={screenWidth}>
@@ -122,10 +128,14 @@ function ImageSlider({ images, isCardHovered }: ImagesType) {
           alt={`Slide image ${currImageIndex + 1}`}
           $isCardHovered={isCardHovered}
           $screenWidth={screenWidth}
-          initial={{
-            x: slideDirection === "right" ? "100%" : "-100%",
-            scale: 0.95,
-          }}
+          initial={
+            hasMounted
+              ? {
+                  x: slideDirection === "right" ? "100%" : "-100%",
+                  scale: 0.95,
+                }
+              : false
+          } // Disable initial animation on first render
           animate={{
             x: "0%",
             scale: 1,

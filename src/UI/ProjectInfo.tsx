@@ -14,9 +14,15 @@ const StyledProjectInfo = styled.div`
   padding: 2rem;
   /* margin-top: 2rem; */
 
-  box-shadow: var(--box-shadow-sm);
+  transition: box-shadow 0.2s ease-in;
+  /* box-shadow: var(--box-shadow-sm); */
   border-radius: var(--border-radius-md);
   border: none; /* Remove any existing border */
+  box-shadow: ${({ theme }) => `var(--box-shadow-sm-${theme.name})`};
+
+  &:hover {
+    box-shadow: ${({ theme }) => `var(--box-shadow-sm-hover-${theme.name})`};
+  }
 `;
 
 const ProjectInfoTitle = styled(Heading)`

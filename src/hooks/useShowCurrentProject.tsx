@@ -9,11 +9,13 @@ export function useDisplayCurrentlyVisibleCard(
       (entries) => {
         const isCardInViewport = entries.some((entry) => entry.isIntersecting);
         setHoveredCard(isCardInViewport);
+
+        // ! select corresponding info div!!
       },
       {
         root: null,
         rootMargin: "0px",
-        threshold: 0.6,
+        threshold: 0.8,
       }
     );
 
