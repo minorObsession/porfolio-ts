@@ -20,7 +20,8 @@ const StyledProjectInfo = styled.div`
   border: none; /* Remove any existing border */
   box-shadow: ${({ theme }) => `var(--box-shadow-sm-${theme.name})`};
 
-  &:hover {
+  &:hover,
+  &:active {
     box-shadow: ${({ theme }) => `var(--box-shadow-sm-hover-${theme.name})`};
   }
 `;
