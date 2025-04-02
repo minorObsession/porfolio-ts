@@ -17,10 +17,9 @@ import { useState } from "react";
 import { useStickyHeader } from "./hooks/useStickyHeader";
 
 // TODO:
-// ! WHY IN RESPNSIVE VIEW CAN'T SCROLL EXCEPT WITH TOUCH
-// ! low height landing image to go to object-top!!
+// ! MOBILE-SHADOWS TOO BIG!!!
+// ! (light mode) LINE BETWEEN PROJECTS
 // ! scrolling shake bottom of page
-// ! refreshing looks shitty almost everywhere
 
 function App() {
   const [isLandingInView, setIsLandingInView] = useState(true);

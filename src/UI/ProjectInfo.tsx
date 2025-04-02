@@ -23,6 +23,10 @@ const StyledProjectInfo = styled.div`
   &:hover,
   &:active {
     box-shadow: ${({ theme }) => `var(--box-shadow-sm-hover-${theme.name})`};
+
+    @media (min-width: 1024px) {
+      box-shadow: ${({ theme }) => `var(--box-shadow-lg-hover-${theme.name})`};
+    }
   }
 `;
 

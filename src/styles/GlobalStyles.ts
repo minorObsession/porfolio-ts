@@ -48,11 +48,14 @@ const GlobalStyles = createGlobalStyle`
   --border-radius-pill: 42%;
 
 
-
-  --box-shadow-sm-light: 3px 3px 3px  drgba(0, 0, 0, 0.15);  /* Light theme shadow */
-  --box-shadow-sm-hover-light: 9px 14px 9px 9px rgba(0, 0, 0, 0.15), 9px 14px 9px 9px white;
-  --box-shadow-sm-dark: 3px 3px 3px   rgba(255, 255, 255, 0.2);  /* Dark theme shadow */
-  --box-shadow-sm-hover-dark: 5px 8px 5px 5px rgba(255, 255, 255, 0.2), 5px 8px 5px 5px black;
+  /* // ! light mode shadows */
+  --box-shadow-sm-light: 3px 3px 3px rgba(0, 0, 0, 0.15); 
+  --box-shadow-sm-hover-light: 4px 6px 4px 4px rgba(0, 0, 0, 0.15), 4px 6px 4px 4px white;
+  --box-shadow-lg-hover-light: 9px 5px 9px 9px rgba(0, 0, 0, 0.15), 9px 5px 9px 9px white;
+  /* // ! dark mode shadows */
+  --box-shadow-sm-dark: 3px 3px 3px  rgba(255, 255, 255, 0.2); 
+  --box-shadow-sm-hover-dark: 3px 5px 3px 3px rgba(255, 255, 255, 0.2), 3px 5px 3px 3px black;
+  --box-shadow-lg-hover-dark: 5px 4px 5px 5px rgba(255, 255, 255, 0.2), 5px 4px 5px 5px black;
 
   --box-shadow-tooltip-light: 6px 6px 6px rgba(0, 0, 0, 0.15);
   --box-shadow-tooltip-dark: 4px 4px 4px rgba(255, 255, 255, 0.2);
@@ -75,7 +78,7 @@ const GlobalStyles = createGlobalStyle`
   --box-shadow: var(--box-shadow-dark);
   --box-shadow-sm: var(--box-shadow-sm-dark);
   --highlight-text: var(--color-main-400);
-    --box-shadow-sm-hover:var(--box-shadow-sm-hover-dark)
+  --box-shadow-sm-hover:var(--box-shadow-sm-hover-dark)
 
 }
 

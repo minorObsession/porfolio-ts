@@ -7,13 +7,12 @@ const FeaturesContainer = styled.ul<{ $screenWidth: number }>`
   display: grid;
   grid-template-columns: 1fr 1fr;
   /* padding-left: 2rem; */
-
-  gap: 0.5rem;
+  width: 80%;
+  gap: 0.8rem;
   ${({ $screenWidth }) =>
     $screenWidth >= breakpoints.tabletLandscapeBreakpoint &&
     css`
-      width: 80%;
-      gap: 0.8rem;
+      gap: 1rem;
     `};
 `;
 const ProjectFeaturesHeading = styled(Heading)`
@@ -33,6 +32,7 @@ const FeatureItem = styled.li`
 const FeatureTitle = styled.h4<{ $screenWidth: number }>`
   font-size: 1.5rem;
   font-weight: bold;
+  line-height: 1.2;
   flex: 0 1 10%;
 
   ${({ $screenWidth }) =>
