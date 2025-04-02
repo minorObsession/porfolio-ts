@@ -74,9 +74,9 @@ const ChinguDescription = styled.p<{ $screenWidth: number }>`
       font-size: 1.5rem;
     `}
   ${({ $screenWidth }) =>
-    $screenWidth > breakpoints.mobileLargeBreakpoint &&
+    $screenWidth > breakpoints.tabletBreakpoint &&
     css`
-      font-size: 2rem;
+      font-size: 1.8rem;
     `}
 `;
 const RoleBox = styled.div<{ $screenWidth: number }>`

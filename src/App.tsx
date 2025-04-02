@@ -17,9 +17,8 @@ import { useState } from "react";
 import { useStickyHeader } from "./hooks/useStickyHeader";
 
 // TODO:
-// ! MOBILE-SHADOWS TOO BIG!!!
-// ! (light mode) LINE BETWEEN PROJECTS
-// ! scrolling shake bottom of page
+
+// box-shadow
 
 function App() {
   const [isLandingInView, setIsLandingInView] = useState(true);

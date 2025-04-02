@@ -80,7 +80,7 @@ const ProjectCardContainer = styled.div`
   padding: 4rem 0;
 
   &:not(:last-child) {
-    border-bottom: 1px solid white;
+    border-bottom: var(--border-b-1);
   }
 `;
 

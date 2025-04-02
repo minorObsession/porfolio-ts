@@ -15,12 +15,28 @@ export const StyledIcon = styled.div<{
   $side?: "left" | "right";
   $bottom?: boolean;
   $isLandingInView: boolean;
+  $screenWidth: number;
 }>`
   z-index: 505;
   position: absolute;
-  top: ${({ $bottom }) => ($bottom ? "" : "0")};
-  bottom: ${({ $bottom }) => ($bottom ? "0" : "")};
-  ${({ $side }) => ($side === "left" ? "left: 0rem" : "right: 0rem")};
+
+  ${({ $bottom }) =>
+    $bottom
+      ? css`
+          bottom: 0;
+        `
+      : css`
+          top: 0;
+        `}
+
+  ${({ $side }) =>
+    $side === "left"
+      ? css`
+          left: 0rem;
+        `
+      : css`
+          right: 0rem;
+        `}
 
   cursor: pointer;
   padding: 1.2rem;
@@ -31,9 +47,7 @@ export const StyledIcon = styled.div<{
   justify-content: center;
 
   background-color: ${({ $isLandingInView, theme }) =>
-    $isLandingInView ? `${theme.background}` : "transparent"};
-
-  /* color: ${({ theme }) => theme.text}; */
+    $isLandingInView ? theme.background : "transparent"};
 
   ${({ as }) =>
     as === RiCloseLargeFill &&
@@ -45,6 +59,28 @@ export const StyledIcon = styled.div<{
   &:hover {
     color: var(--highlight-text);
     transition: color 0.2s ease-in;
+  }
+
+  @media (min-width: ${breakpoints.tabletLandscapeBreakpoint * 10}px) {
+    width: 5rem;
+    height: 5rem;
+
+    ${({ $bottom }) =>
+      $bottom
+        ? css`
+            bottom: 0rem;
+          `
+        : css`
+            top: 0rem;
+          `}
+    ${({ $side }) =>
+      $side === "left"
+        ? css`
+            left: 1rem;
+          `
+        : css`
+            right: 1rem;
+          `};
   }
 `;
 
@@ -77,7 +113,6 @@ function Header({
   const { isDarkMode, setIsDarkMode } = useDarkMode();
 
   const handleOpenDropdown = () => {
-    // window.scrollTo({ top: 0 });
     setIsDropdownOpen((s) => !s);
   };
 
@@ -90,12 +125,14 @@ function Header({
           $side="left"
           as={isDropdownOpen ? RiCloseLargeFill : GiHamburgerMenu}
           onClick={handleOpenDropdown}
+          $screenWidth={screenWidth}
         />
         <StyledIcon
           $isLandingInView={isLandingInView}
           $side="right"
           as={isDarkMode ? FaSun : FaMoon}
           onClick={() => setIsDarkMode((s) => !s)}
+          $screenWidth={screenWidth}
         />
         {screenWidth > breakpoints.tabletBreakpoint && (
           <DownloadResume

@@ -152,6 +152,7 @@ function LandingPage({
         $bottom={true}
         $side="right"
         onClick={() => downloadPDF("/restaurantResume")}
+        $screenWidth={screenWidth}
       />
     </StyledLandingPage>
   );
