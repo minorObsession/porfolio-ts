@@ -157,14 +157,22 @@ const CertTitleAndIcon = styled.div<{ $screenWidth: number }>`
 const CertTitle = styled(Heading)<{ $screenWidth: number }>`
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: wrap;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  white-space: normal;
   flex-basis: 100%;
+
+  /* color: var(--highlight-text); */
 
   ${({ $screenWidth }) =>
     $screenWidth > breakpoints.mobileLargeBreakpoint &&
     css`
-      text-overflow: ellipsis;
+      display: block;
+      -webkit-line-clamp: unset;
+      -webkit-box-orient: unset;
       white-space: nowrap;
+      text-overflow: ellipsis;
     `}
 `;
 const CertificateIcon = styled.img<{ $screenWidth: number }>`
@@ -237,11 +245,15 @@ function Certificates({ screenWidth, id }: CertificatesProps) {
     <StyledCertificates $screenWidth={screenWidth} id={id}>
       <Heading as="h1">Certifications</Heading>
       {renderCertificates(
-        "Meta Front-End Developer Certificate",
+        screenWiderThan768px
+          ? "Meta Front-End Developer Certificate"
+          : "Meta Front-End Certificate",
         metaCertificates
       )}
       {renderCertificates(
-        "Chingu Collaborative Voyage Certificates",
+        screenWiderThan768px
+          ? "Chingu Collaborative Voyage Certificates"
+          : "Chingu Certificates",
         chinguCertificates,
         chinguSVG
       )}

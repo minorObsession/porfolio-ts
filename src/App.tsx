@@ -18,11 +18,11 @@ import { useStickyHeader } from "./hooks/useStickyHeader";
 
 
 TODO: */
+// ! sidebar weird hover thing (hover icons)
 // animation on download resume btn..
 //  box-shadow transition light-dark switch issue!!!
 
 // ! metafronenddevelopercertificate and chingucollabvoyages... SHROTEN FOR SMALL SCREENS SO THEY TAKE UP 2 LINES MAX
-// ! (web-skills) --> tooltip with last icon hover
 
 function App() {
   const [isLandingInView, setIsLandingInView] = useState(true);

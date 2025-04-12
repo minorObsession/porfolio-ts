@@ -97,16 +97,21 @@ const GlobalStyles = createGlobalStyle`
 
 
 ::selection {
-  /* background-color: #B3A9E3;   */
+
 }
 
 html {
   font-size: 62.5%;
 }
 
-a:hover,svg:hover {
-color: var(--highlight-text);
-transition: color 0.2s ease-in-out;
+svg:hover {
+fill: var(--highlight-text);
+transition: fill 0.2s ease-in-out;
+}
+
+a:hover {
+  color: var(--highlight-text);
+  transition: all 0.3s ease-in-out, filter 0.3s ease-in-out;
 }
 
 
@@ -158,7 +163,6 @@ footer,section:not(:first-of-type, #projects) {
 
 a {
   font-weight: 500;
-  /* color: #646cff; */
   text-decoration: inherit;
 }
 
@@ -192,7 +196,7 @@ textarea:focus,
 button:focus {
   outline: 2px solid #4A6EC3;
   border-color: #4A6EC3;
-  box-shadow: 3px 2px 10px #354E8E 
+  box-shadow: 3px 2px 10px #354E8E;
  }
 
  
@@ -262,7 +266,7 @@ export const typing = keyframes`
 `;
 // Typewriter animation
 export const blink = keyframes`
-50% {
+70% {
   border-color: transparent;
 }
 `;
@@ -271,8 +275,8 @@ export const blink = keyframes`
 const headingFontSizes = {
   h1: "4rem",
   h2: "3rem",
-  h3: "2.5rem",
-  h4: "1.5rem",
+  h3: "2.6rem",
+  h4: "2rem",
 } as const; // `as const` makes values
 // Type definitions
 interface HeadingProps {

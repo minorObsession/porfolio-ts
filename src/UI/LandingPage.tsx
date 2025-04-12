@@ -82,6 +82,7 @@ const Image = styled.img<ScreenWidthType & { $loaded: boolean }>`
 const HeadingBox = styled.article<ScreenWidthType>`
   /* position: relative; */
   display: flex;
+  gap: 0.5rem;
   flex-direction: column;
 
   grid-row: 2/3;
@@ -94,6 +95,7 @@ const HeadingBox = styled.article<ScreenWidthType>`
       grid-row: 1 / span 2;
       grid-column: 2 / 4;
       width: 100%;
+      gap: 1rem;
     `}
 `;
 

@@ -5,7 +5,7 @@ import ProjectFeatures from "./ProjectFeatures";
 import TechIcons from "./TechIcons";
 import { breakpoints } from "../styles/breakpoints";
 
-const StyledProjectInfo = styled.div`
+const StyledProjectInfo = styled.article`
   display: flex;
   gap: 1.5rem;
   flex-direction: column;
@@ -46,6 +46,7 @@ const IconsBox = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  margin-top: 1rem;
 `;
 
 function ProjectInfo({
@@ -57,7 +58,7 @@ function ProjectInfo({
     <StyledProjectInfo>
       <div>
         <ProjectInfoTitle
-          as={screenWidth > breakpoints.tabletBreakpoint ? "h2" : "h3"}
+          as={screenWidth > breakpoints.tabletBreakpoint ? "h1" : "h2"}
         >
           {project.title}
         </ProjectInfoTitle>
@@ -72,7 +73,7 @@ function ProjectInfo({
       <ProjectFeatures features={project.features} />
 
       <IconsBox>
-        <Heading as={screenWidth > breakpoints.tabletBreakpoint ? "h3" : "h4"}>
+        <Heading as={screenWidth > breakpoints.tabletBreakpoint ? "h2" : "h3"}>
           Core technologies
         </Heading>
 

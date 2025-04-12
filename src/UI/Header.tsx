@@ -49,7 +49,6 @@ export const StyledIcon = styled.div<{
           right: 0rem;
         `}
 
-
   background-color: ${({ $isLandingInView, theme }) =>
     $isLandingInView ? theme.background : "transparent"};
 
@@ -59,13 +58,6 @@ export const StyledIcon = styled.div<{
       scale: 1.2;
       font-weight: bolder;
     `}
-
-  @media (hover: hover) {
-    &:hover {
-      color: var(--highlight-text);
-      transition: color 0.2s ease-in;
-    }
-  }
 
   @media (min-width: ${breakpoints.tabletLandscapeBreakpoint * 10}px) {
     width: 5rem;
@@ -105,9 +97,15 @@ const StyledHeader = styled.header<{ $isLandingInView: boolean }>`
 const DownloadResume = styled.a`
   font-size: 1.5rem;
 
+  color: var(--highlight-text);
+
   &:hover {
-    filter: contrast(1.2);
+    filter: contrast(2);
+    text-decoration: underline;
+    text-underline-offset: 2.5px;
   }
+
+  transition: all 0.3s ease-in-out;
 `;
 interface HeaderProps {
   screenWidth: number;

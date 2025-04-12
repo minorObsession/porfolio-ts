@@ -9,8 +9,7 @@ import { breakpoints } from "../styles/breakpoints";
 type SidebarType = { $screenWidth: number; $rotated?: boolean };
 
 const StyledSidebar = styled.aside<SidebarType>`
-  font-size: 1.5rem;
-  padding: 1rem;
+  font-size: 1.7rem;
 
   display: flex;
   flex-direction: row;
@@ -27,8 +26,6 @@ const StyledSidebar = styled.aside<SidebarType>`
       grid-column: 1/2;
       max-width: 3rem;
       flex-direction: column;
-
-      /* transform: translateX(-1rem); */
     `}
 
   ${({ $screenWidth, $rotated }) =>
@@ -36,32 +33,41 @@ const StyledSidebar = styled.aside<SidebarType>`
 `;
 
 const P = styled.p<SidebarType>`
-  z-index: 100000;
-  pointer-events: none;
+  display: abos;
   white-space: nowrap;
+  color: inherit; // Make sure color is explicitly defined
+  /* Isolate this element from other elements' hover effects */
+  isolation: isolate;
 
   ${(props) =>
     props.$screenWidth > breakpoints.tabletBreakpoint &&
-    props.$rotated === true &&
+    props.$rotated &&
     css`
-      /* // ! to seperate the p from icons */
-      margin: 6rem;
+      /* Use transform instead of rotate property */
       transform: rotate(-90deg);
+
+      /* Adjust positioning to prevent overlap with icons */
+      margin: 6rem;
+      position: relative; /* Create a stacking context */
+      z-index: 2; /* Make sure this is above other elements */
     `}
 `;
 
+// Style the icon links to contain their hover effects
+const IconLink = styled.a`
+  cursor: pointer;
+  color: inherit;
+  position: relative;
+  z-index: 1;
+
+  /* Contain hover effects to just this element */
+  &:hover {
+    color: inherit; /* Or your hover color */
+  }
+`;
 const openLink = (url: string) => {
   window.open(url, "_blank", "noopener,noreferrer");
 };
-// const downloadLink = (url: string, filename = "download") => {
-//   console.log("calling downl");
-//   const anchor = document.createElement("a");
-//   anchor.href = url;
-//   anchor.download = filename; // Suggests a filename for the download
-//   document.body.appendChild(anchor);
-//   anchor.click();
-//   document.body.removeChild(anchor); // Clean up after click
-// };
 
 type SidebarProps = {
   rotated?: boolean;
@@ -101,7 +107,6 @@ function Sidebar({
   return (
     <StyledSidebar $screenWidth={screenWidth} $rotated={rotated}>
       {!pContent?.props.$rotated && pContent}
-
       {[
         {
           icon: FaLinkedin,
@@ -113,11 +118,16 @@ function Sidebar({
           link: "https://www.facebook.com/terzinjoo",
         },
       ].map(({ icon: Icon, link }, index) => (
-        <Icon
+        <IconLink
           key={index}
+          href={link}
+          target="_blank"
+          rel="noopener noreferrer"
           onClick={() => openLink(link)}
-          style={{ cursor: "pointer" }}
-        />
+          style={{ cursor: "pointer", color: "inherit" }}
+        >
+          <Icon />
+        </IconLink>
       ))}
 
       {pContent?.props.$rotated && pContent}

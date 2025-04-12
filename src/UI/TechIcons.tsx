@@ -34,9 +34,7 @@ const IconWrapper = styled.span<{ $isDarkMode: boolean }>`
 const StyledTooltip = styled(Tooltip)``;
 
 function TechIcons({ screenWidth, isDarkMode, iconsArray }: TechIconsProps) {
-  const [hoveredIcon, setHoveredIcon] = useState<string | null>(
-    "Styled Components"
-  );
+  const [hoveredIcon, setHoveredIcon] = useState<string | null>(null);
   const [tooltipPosition, setTooltipPosition] = useState<"left" | "right">(
     "left"
   );

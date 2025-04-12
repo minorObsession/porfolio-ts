@@ -84,6 +84,7 @@ const RoleBox = styled.div<{ $screenWidth: number }>`
   gap: 0.6rem;
   flex-direction: column;
   grid-row: span 2;
+  padding-bottom: 0.5rem;
 
   ${({ $screenWidth }) =>
     $screenWidth > breakpoints.mobileLargeBreakpoint &&
@@ -109,13 +110,20 @@ function Experience({ id, screenWidth }: ExperienceProps) {
       <ChinguContainer $screenWidth={screenWidth}>
         <RoleBox $screenWidth={screenWidth}>
           <Heading as="h2">Chingu</Heading>
-          <Heading style={{ fontStyle: "italic", lineHeight: "1.2" }} as="h3">
+          <Heading
+            style={{
+              fontStyle: "italic",
+              lineHeight: "1.2",
+              color: "var(--highlight-text)",
+            }}
+            as={screenWiderThan620px ? "h3" : "h4"}
+          >
             software developer
           </Heading>
         </RoleBox>
         <RoleAndDuration $screenWidth={screenWidth}>
           <ChinguHeading
-            as={screenWiderThan620px ? "h2" : "h3"}
+            as={screenWiderThan620px ? "h3" : "h4"}
             $screenWidth={screenWidth}
           >
             Jan 2024 - present
