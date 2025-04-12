@@ -2,12 +2,15 @@ import { useEffect, useState } from "react";
 
 export const useTypewriterTextSwitch = (
   sentenceNumsArray: string[],
-  loopSentences = false
+  loopSentences = false,
+  enabled = true // ! this is needed if Heading that renders this is itself conditionally rendered..  true by default so it can be optional
 ) => {
   const [sentenceNum, setSentenceNum] = useState(0);
   const lastSentenceIndex = sentenceNumsArray.length - 1;
 
   useEffect(() => {
+    if (!enabled) return;
+
     if (sentenceNum > lastSentenceIndex && !loopSentences) return;
 
     const typewriterElement = document.querySelector(
@@ -53,7 +56,13 @@ export const useTypewriterTextSwitch = (
     return () => {
       clearTimeout(mainTimeout);
     };
-  }, [sentenceNumsArray, lastSentenceIndex, sentenceNum, loopSentences]);
+  }, [
+    sentenceNumsArray,
+    lastSentenceIndex,
+    sentenceNum,
+    loopSentences,
+    enabled,
+  ]);
 };
 
 // ! USAGE EXAMPLE

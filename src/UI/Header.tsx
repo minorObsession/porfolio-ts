@@ -17,9 +17,20 @@ export const StyledIcon = styled.div<{
   $isLandingInView: boolean;
   $screenWidth: number;
 }>`
-  z-index: 505;
+  z-index: 1000;
   position: absolute;
+  cursor: pointer;
+  padding: 1.2rem;
+  /* min-height: 4.5rem; */
+  width: 4.5rem;
+  height: 4.5rem;
+  /* line-height: 1.8px; */
 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  will-change: transform;
   ${({ $bottom }) =>
     $bottom
       ? css`
@@ -38,13 +49,6 @@ export const StyledIcon = styled.div<{
           right: 0rem;
         `}
 
-  cursor: pointer;
-  padding: 1.2rem;
-  width: 4.5rem;
-  height: 4.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 
   background-color: ${({ $isLandingInView, theme }) =>
     $isLandingInView ? theme.background : "transparent"};
@@ -56,9 +60,11 @@ export const StyledIcon = styled.div<{
       font-weight: bolder;
     `}
 
-  &:hover {
-    color: var(--highlight-text);
-    transition: color 0.2s ease-in;
+  @media (hover: hover) {
+    &:hover {
+      color: var(--highlight-text);
+      transition: color 0.2s ease-in;
+    }
   }
 
   @media (min-width: ${breakpoints.tabletLandscapeBreakpoint * 10}px) {
@@ -90,10 +96,12 @@ const StyledHeader = styled.header<{ $isLandingInView: boolean }>`
   justify-content: center;
   padding: 1.5rem;
   width: 100%;
+  height: 4.5rem;
   z-index: 10;
   background-color: ${({ $isLandingInView, theme }) =>
     $isLandingInView ? "transparent" : `${theme.background}80`};
 `;
+
 const DownloadResume = styled.a`
   font-size: 1.5rem;
 
@@ -101,14 +109,12 @@ const DownloadResume = styled.a`
     filter: contrast(1.2);
   }
 `;
-
-function Header({
-  screenWidth,
-  isLandingInView,
-}: {
+interface HeaderProps {
   screenWidth: number;
   isLandingInView: boolean;
-}) {
+  isImageLoaded: boolean;
+}
+function Header({ screenWidth, isLandingInView, isImageLoaded }: HeaderProps) {
   const { isDropdownOpen, setIsDropdownOpen } = useDropdown();
   const { isDarkMode, setIsDarkMode } = useDarkMode();
 
@@ -117,6 +123,9 @@ function Header({
   };
 
   useKeyPress("KeyQ", handleOpenDropdown);
+
+  if (!isImageLoaded) return null;
+
   return (
     <>
       <StyledHeader $isLandingInView={isLandingInView}>
@@ -143,12 +152,11 @@ function Header({
           </DownloadResume>
         )}
       </StyledHeader>
-      {/* <Container> */}
+
       <DropdownMenu
         isDropdownOpen={isDropdownOpen}
         setIsDropdownOpen={setIsDropdownOpen}
       />
-      {/* </Container> */}
     </>
   );
 }

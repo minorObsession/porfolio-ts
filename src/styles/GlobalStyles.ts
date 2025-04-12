@@ -96,7 +96,6 @@ const GlobalStyles = createGlobalStyle`
 
 
 
-
 ::selection {
   /* background-color: #B3A9E3;   */
 }
@@ -250,6 +249,11 @@ section {
   display: none;
 }
 `;
+// Create a custom spinner component that doesn't rely on external CSS
+export const spin = keyframes`
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+`;
 
 // Typewriter animation
 export const typing = keyframes`
@@ -280,6 +284,7 @@ interface HeadingProps {
 // Styled Heading component
 export const Heading = styled.h1<HeadingProps>`
   text-align: center;
+  line-height: ${({ as }) => (as === "h1" ? "1.1" : "1.4")};
   transition: all 0.5s ease-in-out;
   font-size: ${({ as = "h1" }) =>
     headingFontSizes[

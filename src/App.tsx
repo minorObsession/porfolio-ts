@@ -1,4 +1,3 @@
-// import styled from "styled-components";
 import GlobalStyles, { darkTheme, lightTheme } from "./styles/GlobalStyles";
 import { ThemeProvider } from "styled-components";
 import LandingPage from "./UI/LandingPage";
@@ -15,15 +14,23 @@ import { useFadeInAllSections } from "./hooks/useFadeInAllSections";
 import Header from "./UI/Header";
 import { useState } from "react";
 import { useStickyHeader } from "./hooks/useStickyHeader";
+/*
 
-// TODO:
 
-// box-shadow
+TODO: */
+// animation on download resume btn..
+
+//  box-shadow transition light-dark switch issue!!!
+// ! project cards looking a little unprofessional
+// ! project cards can be wider ON MOBILE
+// ! less than 768px - ALIGN RESUME DOWNLOAD BTN WITH 'SIDEBAR'
+// ! (web-skills) --> tooltip with last icon hover
 
 function App() {
   const [isLandingInView, setIsLandingInView] = useState(true);
   const { isDarkMode, setIsDarkMode } = useDarkMode();
   const screenWidth = useScreenWidthRem();
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
 
   useStickyHeader(setIsLandingInView);
 
@@ -34,8 +41,17 @@ function App() {
     <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
       <GlobalStyles />
       <>
-        <Header isLandingInView={isLandingInView} screenWidth={screenWidth} />
-        <LandingPage isLandingInView={isLandingInView} id="landing" />
+        <Header
+          isImageLoaded={isImageLoaded}
+          isLandingInView={isLandingInView}
+          screenWidth={screenWidth}
+        />
+        <LandingPage
+          isImageLoaded={isImageLoaded}
+          setIsImageLoaded={setIsImageLoaded}
+          isLandingInView={isLandingInView}
+          id="landing"
+        />
         <Projects id="projects" />
         <Experience screenWidth={screenWidth} id="experience" />
         <Certificates screenWidth={screenWidth} id="certificates" />
