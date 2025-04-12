@@ -17,10 +17,9 @@ import { Backdrop, Spinner } from "./CenteredLoadingSpinner";
 const StyledLandingPage = styled.section<ScreenWidthType>`
   position: relative;
 
-  max-width: 100%;
-  min-height: 100svh;
+  width: 100%;
+  height: 100svh;
 
-  /* max-height: clamp(85vh, 100vh, 100vh); */
   padding: 0.8rem 1.5rem;
 
   display: grid;
@@ -32,7 +31,6 @@ const StyledLandingPage = styled.section<ScreenWidthType>`
     css`
       grid-template-columns: 0.1fr 1fr 1.5fr 0.1fr 1fr 1fr;
       grid-template-rows: 1fr;
-      /* padding: 0.5rem 1.5rem; */
       padding: 1.5rem;
     `}
 `;

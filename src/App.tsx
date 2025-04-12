@@ -19,11 +19,9 @@ import { useStickyHeader } from "./hooks/useStickyHeader";
 
 TODO: */
 // animation on download resume btn..
-
 //  box-shadow transition light-dark switch issue!!!
-// ! project cards looking a little unprofessional
-// ! project cards can be wider ON MOBILE
-// ! less than 768px - ALIGN RESUME DOWNLOAD BTN WITH 'SIDEBAR'
+
+// ! metafronenddevelopercertificate and chingucollabvoyages... SHROTEN FOR SMALL SCREENS SO THEY TAKE UP 2 LINES MAX
 // ! (web-skills) --> tooltip with last icon hover
 
 function App() {

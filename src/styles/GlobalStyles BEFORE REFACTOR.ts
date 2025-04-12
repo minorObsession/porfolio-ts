@@ -146,10 +146,10 @@ section:not(:first-of-type){
 transform: translateY(10rem);
 }
 
-footer,section:not(:first-of-type, #projects) {
+footer,section:not(:first-of-type) {
     
       margin: 0 auto;
-  max-width: 90%;
+  /* max-width: 90%; */
 
 @media (min-width: 768px) {
     max-width: 85%;
@@ -209,11 +209,11 @@ button:focus {
 
 
 #projects {
-  /* max-width: 90%; */
-
-@media  (min-width: 480px) and (max-width: 768px) {
+  max-width: 100%;
+@media (min-width: 480px) and (max-width: 768px)
+{
   max-width: 90%;
-  }
+}
 }
 
 
@@ -353,9 +353,9 @@ export const Tooltip = styled.span<{
   $isDarkMode: boolean;
   $screenWidth: number;
   $isHoveringTechIcons?: boolean;
-  $position?: "left" | "right";
 }>`
   position: absolute;
+
   padding: 0.3rem 0.6rem;
   font-size: 1.2rem;
   font-weight: 600;
@@ -363,7 +363,6 @@ export const Tooltip = styled.span<{
   white-space: nowrap;
   border-radius: var(--border-radius-xl);
   box-shadow: ${({ theme }) => `var(--box-shadow-tooltip-${theme.name})`};
-  top: -3.5rem;
 
   ${({ theme, $isDarkMode }) =>
     theme &&
@@ -384,19 +383,12 @@ export const Tooltip = styled.span<{
       ? css`
           padding: 0.5rem;
           top: -4rem;
+          left: -1.5rem;
         `
       : css`
           padding: 0.7rem;
-        `}
-        
-  /* Position based on proximity to viewport edge */
-  ${({ $position }) =>
-    $position === "right"
-      ? css`
-          right: 0;
-        `
-      : css`
-          left: 0;
+          top: -4.5rem;
+          left: -1rem;
         `}
 `;
 

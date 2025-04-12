@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import styled from "styled-components";
 import { allIcons } from "../config/icons";
 import { Tooltip } from "../styles/GlobalStyles";
@@ -34,8 +34,31 @@ const IconWrapper = styled.span<{ $isDarkMode: boolean }>`
 const StyledTooltip = styled(Tooltip)``;
 
 function TechIcons({ screenWidth, isDarkMode, iconsArray }: TechIconsProps) {
-  const [hoveredIcon, setHoveredIcon] = useState<string | null>(null);
+  const [hoveredIcon, setHoveredIcon] = useState<string | null>(
+    "Styled Components"
+  );
+  const [tooltipPosition, setTooltipPosition] = useState<"left" | "right">(
+    "left"
+  );
+  const iconRef = useRef<HTMLSpanElement>(null);
 
+  const handleMouseEnter = (iconName: string, e: React.MouseEvent) => {
+    setHoveredIcon(iconName);
+
+    // Get the icon's position
+    const iconElement = e.currentTarget as HTMLElement;
+    const rect = iconElement.getBoundingClientRect();
+
+    // Calculate distance from right edge of viewport
+    const distanceFromRight = window.innerWidth - rect.right;
+    console.log(distanceFromRight);
+    // If icon is too close to right edge (adjust the 100px threshold as needed)
+    if (distanceFromRight < 80) {
+      setTooltipPosition("right");
+    } else {
+      setTooltipPosition("left");
+    }
+  };
   // ! If iconsArray is provided as a string array, filter matching icons from allIcons
   const filteredIcons = iconsArray
     ? allIcons.filter((icon) => iconsArray.includes(icon.name))
@@ -45,8 +68,9 @@ function TechIcons({ screenWidth, isDarkMode, iconsArray }: TechIconsProps) {
     <IconsContainer>
       {filteredIcons.map((iconObject) => (
         <IconWrapper
+          ref={iconRef}
           key={iconObject.id}
-          onMouseEnter={() => setHoveredIcon(iconObject.name)}
+          onMouseEnter={(e) => handleMouseEnter(iconObject.name, e)}
           onMouseLeave={() => setHoveredIcon(null)}
           $isDarkMode={isDarkMode}
         >
@@ -62,6 +86,7 @@ function TechIcons({ screenWidth, isDarkMode, iconsArray }: TechIconsProps) {
               $isHoveringTechIcons={true}
               $screenWidth={screenWidth}
               $isDarkMode={isDarkMode}
+              $position={tooltipPosition}
             >
               {iconObject.name}
             </StyledTooltip>

@@ -1,3 +1,4 @@
+import React from "react";
 import styled from "styled-components";
 
 const StyledIcon = styled.span<{ $color: string; $isIconGitHub: boolean }>`
@@ -15,15 +16,17 @@ type IconProps = {
   isIconGitHub?: boolean;
 };
 
-function Icon({ icon: Icon, color, isIconGitHub = false }: IconProps) {
-  return (
-    <StyledIcon $color={color} $isIconGitHub={isIconGitHub}>
-      {typeof Icon === "function" && <Icon />}
-      {typeof Icon === "string" && (
-        <img src={Icon} style={{ width: "2.5rem" }} />
-      )}
-    </StyledIcon>
-  );
-}
+const Icon = React.forwardRef<HTMLSpanElement, IconProps>(
+  ({ icon: IconElement, color, isIconGitHub = false }, ref) => {
+    return (
+      <StyledIcon ref={ref} $color={color} $isIconGitHub={isIconGitHub}>
+        {typeof IconElement === "function" && <IconElement />}
+        {typeof IconElement === "string" && (
+          <img src={IconElement} style={{ width: "2.5rem" }} />
+        )}
+      </StyledIcon>
+    );
+  }
+);
 
 export default Icon;

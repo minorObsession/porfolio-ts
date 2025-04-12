@@ -140,6 +140,7 @@ const CertTitleAndIcon = styled.div<{ $screenWidth: number }>`
   display: flex;
   align-items: center;
   gap: 1.5rem;
+  max-width: 90%;
 
   ${({ $screenWidth }) =>
     $screenWidth > breakpoints.tabletBreakpoint &&

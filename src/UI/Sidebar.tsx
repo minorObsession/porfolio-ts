@@ -20,7 +20,7 @@ const StyledSidebar = styled.aside<SidebarType>`
 
   ${({ $screenWidth, $rotated }) =>
     $screenWidth > breakpoints.tabletBreakpoint &&
-    $rotated === true &&
+    $rotated &&
     css`
       grid-row: 1;
       align-self: center;

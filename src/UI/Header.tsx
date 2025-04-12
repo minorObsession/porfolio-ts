@@ -34,7 +34,7 @@ export const StyledIcon = styled.div<{
   ${({ $bottom }) =>
     $bottom
       ? css`
-          bottom: 0;
+          bottom: 0.8rem;
         `
       : css`
           top: 0;
