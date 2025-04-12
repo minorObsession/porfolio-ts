@@ -68,6 +68,14 @@ const CertificateList = styled.ul<{ $screenWidth: number; $chingu?: boolean }>`
 
   grid-template-columns: 1fr;
   list-style-position: inside;
+  list-style-type: none;
+  padding-left: 1.5em;
+
+  li::before {
+    content: "•";
+    font-size: 1.7rem;
+    padding-right: 0.8rem;
+  }
 
   ${({ $screenWidth }) =>
     $screenWidth > breakpoints.mobileLargeBreakpoint &&
