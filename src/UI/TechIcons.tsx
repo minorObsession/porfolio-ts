@@ -45,14 +45,10 @@ function TechIcons({ screenWidth, isDarkMode, iconsArray }: TechIconsProps) {
   const handleMouseEnter = (iconName: string, e: React.MouseEvent) => {
     setHoveredIcon(iconName);
 
-    // Get the icon's position
     const iconElement = e.currentTarget as HTMLElement;
     const rect = iconElement.getBoundingClientRect();
 
-    // Calculate distance from right edge of viewport
     const distanceFromRight = window.innerWidth - rect.right;
-    console.log(distanceFromRight);
-    // If icon is too close to right edge (adjust the 100px threshold as needed)
     if (distanceFromRight < 80) {
       setTooltipPosition("right");
     } else {
