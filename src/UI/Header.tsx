@@ -143,7 +143,7 @@ function Header({ screenWidth, isLandingInView, isImageLoaded }: HeaderProps) {
         />
         {screenWidth > breakpoints.tabletBreakpoint && (
           <DownloadResume
-            href="/restaurantResume.pdf"
+            href="/bogdan-terzic-front-end-dev.pdf"
             download="Bogdan Terzic resume"
           >
             PDF Resume

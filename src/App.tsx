@@ -16,13 +16,15 @@ import { useState } from "react";
 import { useStickyHeader } from "./hooks/useStickyHeader";
 /*
 
+TODO: (general portfolio work) */
+// ! new images for all projects - double check!
+// ! PDF resume update
 
-TODO: */
+// TODO: (actual website) */
 // ! sidebar weird hover thing (hover icons)
-// animation on download resume btn..
-//  box-shadow transition light-dark switch issue!!!
-
-// ! metafronenddevelopercertificate and chingucollabvoyages... SHROTEN FOR SMALL SCREENS SO THEY TAKE UP 2 LINES MAX
+// animation on download resume btn click..
+// box-shadow transition light-dark switch issue!!!
+// animation - webskills icons sliding-in one by 1
 
 function App() {
   const [isLandingInView, setIsLandingInView] = useState(true);

@@ -143,8 +143,7 @@ const StyledCertContainer = styled.div`
 
   margin-top: 2rem;
 `;
-// ! TITLE TO BREAK LINES ON LARGE SCREENS
-const CertTitleAndIcon = styled.div<{ $screenWidth: number }>`
+const CertTitleAndIcon = styled.a<{ $screenWidth: number }>`
   display: flex;
   align-items: center;
   gap: 1.5rem;
@@ -161,8 +160,13 @@ const CertTitleAndIcon = styled.div<{ $screenWidth: number }>`
       gap: 3rem;
     `}
 `;
+// meta cert:
+//www.coursera.org/account/accomplishments/professional-cert/HBQ3AWVGOP3R
 
-const CertTitle = styled(Heading)<{ $screenWidth: number }>`
+const CertTitle = styled(Heading)<{
+  $screenWidth: number;
+  $isTitleALink?: boolean;
+}>`
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
@@ -170,6 +174,15 @@ const CertTitle = styled(Heading)<{ $screenWidth: number }>`
   -webkit-line-clamp: 2;
   white-space: normal;
   flex-basis: 100%;
+
+  ${({ $isTitleALink }) =>
+    $isTitleALink &&
+    css`
+      &:hover {
+        color: var(--highlight-text);
+        cursor: pointer;
+      }
+    `}
 
   /* color: var(--highlight-text); */
 
@@ -205,7 +218,7 @@ const CertificateIcon = styled.img<{ $screenWidth: number }>`
       width: 4.5rem;
     `}
 `;
-// Component Props
+
 type CertificatesProps = {
   screenWidth: number;
   id: string;
@@ -227,8 +240,30 @@ function Certificates({ screenWidth, id }: CertificatesProps) {
         ) : (
           <BsMeta size="4rem" fill="#0082fb" />
         )}
-        <CertTitle $screenWidth={screenWidth} as={headingSize}>
-          {title}
+        <CertTitle
+          $isTitleALink={title.includes("Meta")}
+          $screenWidth={screenWidth}
+          as={headingSize}
+        >
+          {title.includes("Meta") ? (
+            <span
+              style={{
+                color: "inherit",
+                textDecoration: "underline",
+                cursor: "pointer",
+              }}
+              onClick={() =>
+                window.open(
+                  "https://www.coursera.org/account/accomplishments/professional-cert/certificate/HBQ3AWVGOP3R",
+                  "_blank"
+                )
+              }
+            >
+              {title}
+            </span>
+          ) : (
+            title
+          )}{" "}
         </CertTitle>
       </CertTitleAndIcon>
 

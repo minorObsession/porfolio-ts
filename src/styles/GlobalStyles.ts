@@ -135,7 +135,6 @@ body, #root{
 section:not(#projects) {
 /* margin-bottom: 3rem; */
 border-bottom: var(--border-b-1)
-
 }
 
 section, footer {
