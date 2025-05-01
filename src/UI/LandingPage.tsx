@@ -190,7 +190,7 @@ function LandingPage({
             $isLandingInView={isLandingInView}
             $bottom={true}
             $side="right"
-            onClick={() => downloadPDF("/restaurantResume")}
+            onClick={() => downloadPDF("/bogdan-terzic-front-end-dev.pdf")}
             $screenWidth={screenWidth}
           />
         </>
